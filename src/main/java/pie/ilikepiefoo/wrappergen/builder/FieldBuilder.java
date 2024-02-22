@@ -1,0 +1,94 @@
+package pie.ilikepiefoo.wrappergen.builder;
+
+import pie.ilikepiefoo.wrappergen.JavaFileOutput;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FieldBuilder implements JavaFileOutput {
+    private String name;
+    private String type;
+    private String accessModifier;
+    private List<String> modifiers;
+    private List<String> annotations;
+    private List<String> generics;
+    private String value;
+
+    public FieldBuilder() {
+        this.name = "field";
+        this.type = "Object";
+        this.accessModifier = "public";
+        this.modifiers = new ArrayList<>();
+        this.annotations = new ArrayList<>();
+        this.generics = new ArrayList<>();
+        this.value = "";
+    }
+
+    public FieldBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public FieldBuilder setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public FieldBuilder setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
+        return this;
+    }
+
+    public FieldBuilder addModifiers( String... modifiers ) {
+        this.modifiers.addAll(List.of(modifiers));
+        return this;
+    }
+
+    public FieldBuilder addAnnotations( String... annotations ) {
+        this.annotations.addAll(List.of(annotations));
+        return this;
+    }
+
+    public FieldBuilder addModifier(String modifier) {
+        this.modifiers.add(modifier);
+        return this;
+    }
+
+    public FieldBuilder addAnnotation(String annotation) {
+        this.annotations.add(annotation);
+        return this;
+    }
+
+    public FieldBuilder addGenerics(String... generics) {
+        this.generics.addAll(List.of(generics));
+        return this;
+    }
+
+    public FieldBuilder setValue(String value) {
+        this.value = value;
+        return this;
+    }
+
+    public String toJavaFile(int indent) {
+        StringBuilder sb = new StringBuilder();
+        String indentStr = INDENTATION_STRING.repeat(indent);
+        sb.append(indentStr);
+        for (String annotation : annotations) {
+            sb.append(annotation).append("\n").append(indentStr);
+        }
+        if (!accessModifier.isBlank())
+            sb.append(accessModifier).append(" ");
+        for (String modifier : modifiers) {
+            sb.append(modifier).append(" ");
+        }
+        sb.append(type).append(" ").append(name);
+        for (String generic : generics) {
+            sb.append("<").append(generic).append(">");
+        }
+        if (!value.isEmpty()) {
+            sb.append(" = ").append(value);
+        }
+        sb.append(";");
+        return sb.toString();
+    }
+}
