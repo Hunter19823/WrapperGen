@@ -1,4 +1,4 @@
-package pie.ilikepiefoo.wrappergen;
+package pie.ilikepiefoo.wrappergen.builder;
 
 public interface JavaFileOutput {
     public static String INDENTATION_STRING = "    ";

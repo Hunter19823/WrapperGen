@@ -1,7 +1,5 @@
 package pie.ilikepiefoo.wrappergen.builder;
 
-import pie.ilikepiefoo.wrappergen.JavaFileOutput;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
