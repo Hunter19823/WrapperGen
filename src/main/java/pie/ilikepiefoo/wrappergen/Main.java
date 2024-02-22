@@ -1,4 +1,4 @@
-package pie.ilikepiefoo;
+package pie.ilikepiefoo.wrappergen;
 
 public class Main {
     public static void main( String[] args ) {
