@@ -129,7 +129,7 @@ public class MethodBuilder implements JavaFileOutput {
         for(String line : body) {
             method.append(indent).append(INDENTATION_STRING).append(line).append('\n');
         }
-        method.append(indent).append("}\n");
+        method.append(indent).append("}");
         return method.toString();
     }
 

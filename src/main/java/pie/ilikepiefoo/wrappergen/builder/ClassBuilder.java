@@ -113,7 +113,7 @@ public class ClassBuilder implements JavaFileOutput {
         sb.append("{\n");
         for(String line : this.body)
         {
-            sb.append(bodyIndent).append(line).append('\n');
+            sb.append(line).append('\n');
         }
         sb.append(indent).append("}\n");
         return sb.toString();
