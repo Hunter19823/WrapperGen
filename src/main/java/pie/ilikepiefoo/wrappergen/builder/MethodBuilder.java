@@ -4,20 +4,19 @@ import pie.ilikepiefoo.wrappergen.JavaFileOutput;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class MethodBuilder implements JavaFileOutput {
     private String name;
     private String returnType;
-    private List<String> args;
-    private List<String> body;
+    private final List<String> args;
+    private final List<String> body;
     private String accessModifier;
-    private List<String> modifiers;
-    private List<String> exceptions;
-    private List<String> annotations;
-    private List<String> generics;
+    private final List<String> modifiers;
+    private final List<String> exceptions;
+    private final List<String> annotations;
+    private final List<String> generics;
 
     public MethodBuilder() {
         this.name = "method";
