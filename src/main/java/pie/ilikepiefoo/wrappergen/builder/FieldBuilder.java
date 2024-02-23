@@ -7,9 +7,9 @@ public class FieldBuilder implements JavaFileOutput {
     private String name;
     private String type;
     private String accessModifier;
-    private List<String> modifiers;
-    private List<String> annotations;
-    private List<String> generics;
+    private final List<String> modifiers;
+    private final List<String> annotations;
+    private final List<String> generics;
     private String value;
 
     public FieldBuilder() {
@@ -70,10 +70,10 @@ public class FieldBuilder implements JavaFileOutput {
     public String toJavaFile(int indent) {
         StringBuilder sb = new StringBuilder();
         String indentStr = INDENTATION_STRING.repeat(indent);
-        sb.append(indentStr);
         for (String annotation : annotations) {
-            sb.append(annotation).append("\n").append(indentStr);
+            sb.append(indentStr).append(annotation).append("\n");
         }
+        sb.append(indentStr);
         if (!accessModifier.isBlank())
             sb.append(accessModifier).append(" ");
         for (String modifier : modifiers) {

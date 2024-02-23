@@ -100,7 +100,8 @@ public class MethodBuilder implements JavaFileOutput {
         for(String annotation : annotations) {
             method.append(indent).append(annotation).append('\n');
         }
-        method.append(indent).append(accessModifier).append(" ");
+        method.append(indent);
+        if (!accessModifier.isBlank()) method.append(accessModifier).append(" ");
         for(String modifier : modifiers) {
             method.append(modifier).append(" ");
         }

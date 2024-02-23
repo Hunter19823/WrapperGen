@@ -76,7 +76,6 @@ public class ClassBuilder implements JavaFileOutput {
     @Override
     public String toJavaFile( int indentLevel ) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
-        String bodyIndent = INDENTATION_STRING.repeat(indentLevel+1);
         StringBuilder sb = new StringBuilder();
         StringJoiner joiner;
         sb.append(this.imports);
@@ -84,7 +83,9 @@ public class ClassBuilder implements JavaFileOutput {
         {
             sb.append(indent).append(annotation).append('\n');
         }
-        sb.append(indent).append(this.accessModifier).append(" ");
+        if (!this.accessModifier.isBlank()) {
+            sb.append(indent).append(this.accessModifier).append(" ");
+        }
         for(String modifier : this.modifiers)
         {
             sb.append(modifier).append(" ");
