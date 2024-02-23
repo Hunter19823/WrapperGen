@@ -5,6 +5,7 @@ import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
 import pie.ilikepiefoo.wrappergen.builder.ImportBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
+import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
 
 public class Main {
     public static void main( String[] args ) {
@@ -65,6 +66,9 @@ public class Main {
             .addBody(method.toJavaFile(1))
             .addBody(getGenericField.toJavaFile(1));
         System.out.println(classBuilder.toJavaFile(0));
+
+        System.out.println(GenerationUtils.createMethodHandler(Main.class.getMethods()[ 0 ], 0)
+            .toJavaFile(0));
     }
 
 }
