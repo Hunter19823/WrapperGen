@@ -9,6 +9,7 @@ public class ClassBuilder implements JavaFileOutput {
     private final List<String> annotations;
     private String accessModifier;
     private final List<String> modifiers;
+    private final String structureType;
     private String name;
     private final List<String> generics;
     private String superClass;
@@ -17,7 +18,8 @@ public class ClassBuilder implements JavaFileOutput {
 
     public ClassBuilder() {
         this.imports = new ImportBuilder().toJavaFile(0);
-        this.name = "class";
+        this.structureType = "class";
+        this.name = "Example";
         this.accessModifier = "public";
         this.modifiers = new ArrayList<>();
         this.annotations = new ArrayList<>();
@@ -29,6 +31,10 @@ public class ClassBuilder implements JavaFileOutput {
 
     public ClassBuilder setImports( String imports ) {
         this.imports = imports;
+        return this;
+    }
+
+    public ClassBuilder setStructureType( String structureType ) {
         return this;
     }
 
@@ -90,7 +96,7 @@ public class ClassBuilder implements JavaFileOutput {
         {
             sb.append(modifier).append(" ");
         }
-        sb.append(this.name);
+        sb.append(this.structureType).append(" ").append(this.name);
         if (!this.generics.isEmpty()) {
             joiner = new StringJoiner(", ", "<", ">");
             for(String generic : this.generics) {
