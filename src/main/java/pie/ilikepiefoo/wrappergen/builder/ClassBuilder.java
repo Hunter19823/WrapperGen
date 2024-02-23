@@ -9,7 +9,7 @@ public class ClassBuilder implements JavaFileOutput {
     private final List<String> annotations;
     private String accessModifier;
     private final List<String> modifiers;
-    private final String structureType;
+    private String structureType;
     private String name;
     private final List<String> generics;
     private String superClass;
@@ -35,6 +35,7 @@ public class ClassBuilder implements JavaFileOutput {
     }
 
     public ClassBuilder setStructureType( String structureType ) {
+        this.structureType = structureType;
         return this;
     }
 
