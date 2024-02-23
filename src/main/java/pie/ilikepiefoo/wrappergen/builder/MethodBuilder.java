@@ -15,6 +15,7 @@ public class MethodBuilder implements JavaFileOutput {
     private final List<String> exceptions;
     private final List<String> annotations;
     private final List<String> generics;
+    private boolean includeMethodBody;
 
     public MethodBuilder() {
         this.name = "method";
@@ -26,6 +27,7 @@ public class MethodBuilder implements JavaFileOutput {
         this.exceptions = new ArrayList<>();
         this.annotations = new ArrayList<>();
         this.generics = new ArrayList<>();
+        this.includeMethodBody = true;
     }
 
     public MethodBuilder setName(String name) {
@@ -93,6 +95,16 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
+    public MethodBuilder addGenerics( String[] generics ) {
+        this.generics.addAll(Arrays.asList(generics));
+        return this;
+    }
+
+    public MethodBuilder setIncludeMethodBody( boolean includeMethodBody ) {
+        this.includeMethodBody = includeMethodBody;
+        return this;
+    }
+
     public String toJavaFile(int indentLevel) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
         StringBuilder method = new StringBuilder();
@@ -121,8 +133,17 @@ public class MethodBuilder implements JavaFileOutput {
             joiner.add(arg);
         }
         method.append(joiner);
-        for(String exception : exceptions) {
-            method.append(" throws ").append(exception);
+        if (!exceptions.isEmpty()) {
+            joiner = new StringJoiner(", ");
+            method.append(" throws ");
+            for (String exception : exceptions) {
+                method.append(exception);
+            }
+            method.append(joiner);
+        }
+        if (!includeMethodBody) {
+            method.append(";");
+            return method.toString();
         }
         method.append(" {\n");
         for(String line : body) {
