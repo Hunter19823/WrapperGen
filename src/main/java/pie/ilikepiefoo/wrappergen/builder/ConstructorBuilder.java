@@ -52,6 +52,30 @@ public class ConstructorBuilder implements JavaFileOutput {
         return this;
     }
 
+    public List<String> getAnnotations() {
+        return annotations;
+    }
+
+    public List<String> getGenerics() {
+        return generics;
+    }
+
+    public List<String> getParameters() {
+        return parameters;
+    }
+
+    public List<String> getBody() {
+        return body;
+    }
+
+    public String getAccessModifier() {
+        return accessModifier;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toJavaFile( int indentLevel ) {
         String indent = " ".repeat(indentLevel * 4);

@@ -29,6 +29,46 @@ public class ClassBuilder implements JavaFileOutput {
         this.body = new ArrayList<>();
     }
 
+    public String getImports() {
+        return imports;
+    }
+
+    public List<String> getAnnotations() {
+        return annotations;
+    }
+
+    public String getAccessModifier() {
+        return accessModifier;
+    }
+
+    public List<String> getModifiers() {
+        return modifiers;
+    }
+
+    public String getStructureType() {
+        return structureType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getGenerics() {
+        return generics;
+    }
+
+    public String getSuperClass() {
+        return superClass;
+    }
+
+    public List<String> getInterfaces() {
+        return interfaces;
+    }
+
+    public List<String> getBody() {
+        return body;
+    }
+
     public ClassBuilder setImports( String imports ) {
         this.imports = imports;
         return this;

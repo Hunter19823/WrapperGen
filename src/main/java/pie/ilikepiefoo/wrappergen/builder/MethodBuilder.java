@@ -105,6 +105,46 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getReturnType() {
+        return returnType;
+    }
+
+    public List<String> getArgs() {
+        return args;
+    }
+
+    public List<String> getBody() {
+        return body;
+    }
+
+    public String getAccessModifier() {
+        return accessModifier;
+    }
+
+    public List<String> getModifiers() {
+        return modifiers;
+    }
+
+    public List<String> getExceptions() {
+        return exceptions;
+    }
+
+    public List<String> getAnnotations() {
+        return annotations;
+    }
+
+    public List<String> getGenerics() {
+        return generics;
+    }
+
+    public boolean isIncludeMethodBody() {
+        return includeMethodBody;
+    }
+
     public String toJavaFile(int indentLevel) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
         StringBuilder method = new StringBuilder();

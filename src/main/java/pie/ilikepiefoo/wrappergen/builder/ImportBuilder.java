@@ -28,6 +28,13 @@ public class ImportBuilder implements JavaFileOutput {
         return this;
     }
 
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public List<String> getImports() {
+        return imports;
+    }
 
     @Override
     public String toJavaFile( int indentLevel ) {

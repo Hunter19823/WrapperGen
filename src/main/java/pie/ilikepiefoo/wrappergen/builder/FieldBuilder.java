@@ -67,6 +67,34 @@ public class FieldBuilder implements JavaFileOutput {
         return this;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getAccessModifier() {
+        return accessModifier;
+    }
+
+    public List<String> getModifiers() {
+        return modifiers;
+    }
+
+    public List<String> getAnnotations() {
+        return annotations;
+    }
+
+    public List<String> getGenerics() {
+        return generics;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
     public String toJavaFile(int indent) {
         StringBuilder sb = new StringBuilder();
         String indentStr = INDENTATION_STRING.repeat(indent);
