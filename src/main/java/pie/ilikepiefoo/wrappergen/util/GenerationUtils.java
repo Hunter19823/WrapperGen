@@ -1,30 +1,52 @@
 package pie.ilikepiefoo.wrappergen.util;
 
 import pie.ilikepiefoo.wrappergen.builder.ClassBuilder;
+import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
+import pie.ilikepiefoo.wrappergen.builder.ImportBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.StringJoiner;
+import java.util.TreeSet;
 
 public class GenerationUtils {
 
-    public static ClassBuilder createMethodHandler( Method method, int indentLevel ) {
+    public static ClassBuilder createMethodHandler( Method method ) {
         ClassBuilder classBuilder = new ClassBuilder();
         // CamelCase the method name and add Handler to the end.
         classBuilder.setImports("");
-        classBuilder.setName(method.getName().substring(0, 1).toUpperCase() +
-            method.getName().substring(1) +
-            "Handler");
+        classBuilder.setName(getMethodHandlerName(method));
         classBuilder.addAnnotations("@FunctionalInterface");
         classBuilder.setAccessModifier("public");
         classBuilder.setStructureType("interface");
 
         // Add the method to the interface.
+        MethodBuilder methodBuilder = createMethodBuilderFromMethod(method);
+
+        classBuilder.addBody(methodBuilder.toJavaFile(2));
+        return classBuilder;
+    }
+
+    public static String getMethodHandlerName( Method method ) {
+        return method.getName().substring(0, 1).toUpperCase() +
+            method.getName().substring(1) +
+            getUniqueName(method.getParameters()) +
+            "Handler";
+    }
+
+    public static MethodBuilder createMethodBuilderFromMethod( Method method ) {
         MethodBuilder methodBuilder = new MethodBuilder().setName(method.getName())
             .setReturnType(method.getReturnType().getSimpleName())
             .setAccessModifier("public")
             .setIncludeMethodBody(false);
 
-        //        classBuilder.addBody(method.toGenericString());
         for (var generic : method.getTypeParameters()) {
             methodBuilder.addArg(generic.toString());
         }
@@ -33,8 +55,115 @@ public class GenerationUtils {
                 " " +
                 parameters.getName());
         }
-        classBuilder.addBody(methodBuilder.toJavaFile(1));
+
+        return methodBuilder;
+    }
+
+    public static String getUniqueName( Parameter[] parameters ) {
+        StringBuilder name = new StringBuilder();
+        for (var parameter : parameters) {
+            name.append(parameter.getType().getSimpleName());
+        }
+        return name.toString().replaceAll("[^a-zA-Z0-9]", "");
+    }
+
+    public static String getArgumentCall( List<String> args ) {
+        StringJoiner joiner = new StringJoiner(", ", "(", ")");
+        args.forEach(joiner::add);
+        return joiner.toString();
+    }
+
+    public static String getFieldName( String handlerName ) {
+        // Return method handler name with first character lowercase.
+        return handlerName.substring(0, 1).toLowerCase() + handlerName.substring(1);
+    }
+
+    public static ClassBuilder createWrapperClass( Class<?> clazz, int indentLevel ) {
+        if (Modifier.isFinal(clazz.getModifiers())) {
+            throw new IllegalArgumentException("Cannot wrap a final class.");
+        }
+        if (Modifier.isStatic(clazz.getModifiers())) {
+            throw new IllegalArgumentException("Cannot wrap a static class.");
+        }
+        ImportBuilder importBuilder = new ImportBuilder();
+        ClassBuilder classBuilder = new ClassBuilder();
+        String wrapperClassName = clazz.getSimpleName() + "Wrapper";
+        classBuilder.setName(wrapperClassName);
+        classBuilder.setAccessModifier("public");
+        classBuilder.setStructureType("class");
+        importBuilder.addImport(clazz.getCanonicalName());
+        if (Modifier.isInterface(clazz.getModifiers())) {
+            classBuilder.addInterfaces(clazz.getCanonicalName());
+        }
+        else {
+            classBuilder.setSuperClass(clazz.getCanonicalName());
+        }
+        Set<String> requiredImports = new TreeSet<>();
+        List<MethodWrapper> methodWrappers = new ArrayList<>();
+
+        Arrays.stream(clazz.getMethods())
+            .filter(method -> !Modifier.isStatic(method.getModifiers()) &&
+                !Modifier.isFinal(method.getModifiers()) &&
+                !Modifier.isPrivate(method.getModifiers()))
+            .forEachOrdered(( method ) -> {
+                var wrapper = new MethodWrapper(method);
+                methodWrappers.add(wrapper);
+                requiredImports.addAll(wrapper.getRequiredImports());
+            });
+
+        List<ConstructorBuilder> constructorBuilders = new ArrayList<>();
+
+        Arrays.stream(clazz.getConstructors())
+            .filter(constructor -> !Modifier.isPrivate(constructor.getModifiers()))
+            .forEachOrdered(( constructor ) -> {
+                var constructorBuilder = createConstructorBuilderFromConstructor(constructor);
+                constructorBuilders.add(constructorBuilder);
+                for (var param : constructor.getParameters()) {
+                    var importName = ReflectionTools.getImportName(param.getType());
+                    if (importName != null) requiredImports.add(importName);
+                }
+                for (var wrapper : methodWrappers) {
+                    constructorBuilder.addBody(wrapper.getConstructorDeclaration());
+                }
+            });
+
+        for (var methodWrapper : methodWrappers) {
+            classBuilder.addBody(methodWrapper.getWrapperType().toJavaFile(indentLevel + 1));
+        }
+        for (var methodWrapper : methodWrappers) {
+            classBuilder.addBody(methodWrapper.getField().toJavaFile(indentLevel + 1));
+        }
+        for (var constructorBuilder : constructorBuilders) {
+            classBuilder.addBody(constructorBuilder.toJavaFile(indentLevel + 1));
+        }
+        for (var methodWrapper : methodWrappers) {
+            classBuilder.addBody(methodWrapper.getOverrideMethod().toJavaFile(indentLevel + 1));
+        }
+        for (var required : requiredImports) {
+            importBuilder.addImport(required);
+        }
+        classBuilder.setImports(importBuilder.toJavaFile(indentLevel));
+
+
         return classBuilder;
+    }
+
+    public static ConstructorBuilder createConstructorBuilderFromConstructor( Constructor<?> constructor ) {
+        ConstructorBuilder constructorBuilder = new ConstructorBuilder();
+        for (var parameter : constructor.getParameters()) {
+            constructorBuilder.addParameters(parameter.getType().getSimpleName() +
+                " " +
+                parameter.getName());
+        }
+        for (var typeParameters : constructor.getTypeParameters()) {
+            constructorBuilder.addGenerics(typeParameters.toString());
+        }
+        // Add super call to constructor.
+        StringJoiner joiner = new StringJoiner(", ", "super(", ");");
+        for (var parameter : constructor.getParameters()) {
+            joiner.add(parameter.getName());
+        }
+        return constructorBuilder;
     }
 
 }
