@@ -119,7 +119,6 @@ public class ClassBuilder implements JavaFileOutput {
         return this;
     }
 
-
     @Override
     public String toJavaFile( int indentLevel ) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
@@ -137,14 +136,7 @@ public class ClassBuilder implements JavaFileOutput {
         {
             sb.append(modifier).append(" ");
         }
-        sb.append(this.structureType).append(" ").append(this.name);
-        if (!this.generics.isEmpty()) {
-            joiner = new StringJoiner(", ", "<", ">");
-            for(String generic : this.generics) {
-                joiner.add(generic);
-            }
-            sb.append(joiner);
-        }
+        sb.append(this.structureType).append(" ").append(this.getFormattedName());
         sb.append(" ");
         if (!this.superClass.isEmpty()) {
             sb.append("extends ").append(this.superClass).append(" ");
@@ -162,6 +154,19 @@ public class ClassBuilder implements JavaFileOutput {
             sb.append(line).append('\n');
         }
         sb.append(indent).append("}\n");
+        return sb.toString();
+    }
+
+    public String getFormattedName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.name);
+        if (!this.generics.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(", ", "<", ">");
+            for (String generic : this.generics) {
+                joiner.add(generic);
+            }
+            sb.append(joiner);
+        }
         return sb.toString();
     }
 }
