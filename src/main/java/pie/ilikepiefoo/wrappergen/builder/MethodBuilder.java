@@ -66,11 +66,13 @@ public class MethodBuilder implements JavaFileOutput {
     }
 
     public MethodBuilder addBody(String line) {
+        this.includeMethodBody = true;
         this.body.add(line);
         return this;
     }
 
     public MethodBuilder addBody(String[] lines) {
+        this.includeMethodBody = true;
         this.body.addAll(Arrays.asList(lines));
         return this;
     }
