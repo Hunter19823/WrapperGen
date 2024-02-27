@@ -29,7 +29,7 @@ public class GenerationUtils {
         // Add the method to the interface.
         MethodBuilder methodBuilder = createMethodBuilderFromMethod(method).setName(
             getHandlerMethodName(method));
-        Set<Type> METHOD_TYPE_PARAMETERS = new HashSet<>(Arrays.asList(method.getGenericParameterTypes()));
+        Set<Type> METHOD_TYPE_PARAMETERS = new HashSet<>(Arrays.asList(method.getTypeParameters()));
 
         METHOD_TYPE_PARAMETERS.addAll(Arrays.asList(method.getTypeParameters()));
         for (var parameterType : method.getGenericParameterTypes()) {
