@@ -28,7 +28,8 @@ public class GenerationUtils {
         classBuilder.setStructureType("interface");
 
         // Add the method to the interface.
-        MethodBuilder methodBuilder = createMethodBuilderFromMethod(method);
+        MethodBuilder methodBuilder = createMethodBuilderFromMethod(method).setName(
+            getHandlerMethodName(method));
 
         classBuilder.addBody(methodBuilder.toJavaFile(2));
         return classBuilder;
@@ -59,6 +60,12 @@ public class GenerationUtils {
         return methodBuilder;
     }
 
+    public static String getHandlerMethodName( Method method ) {
+        return "on" +
+            method.getName().substring(0, 1).toUpperCase() +
+            method.getName().substring(1);
+    }
+
     public static String getUniqueName( Parameter[] parameters ) {
         StringBuilder name = new StringBuilder();
         for (var parameter : parameters) {
@@ -69,7 +76,7 @@ public class GenerationUtils {
 
     public static String getArgumentCall( List<String> args ) {
         StringJoiner joiner = new StringJoiner(", ", "(", ")");
-        args.forEach(joiner::add);
+        args.forEach(( arg ) -> joiner.add(arg.split(" ")[ 1 ]));
         return joiner.toString();
     }
 
@@ -93,10 +100,10 @@ public class GenerationUtils {
         classBuilder.setStructureType("class");
         importBuilder.addImport(clazz.getCanonicalName());
         if (Modifier.isInterface(clazz.getModifiers())) {
-            classBuilder.addInterfaces(clazz.getCanonicalName());
+            classBuilder.addInterfaces(clazz.getSimpleName());
         }
         else {
-            classBuilder.setSuperClass(clazz.getCanonicalName());
+            classBuilder.setSuperClass(clazz.getSimpleName());
         }
         Set<String> requiredImports = new TreeSet<>();
         List<MethodWrapper> methodWrappers = new ArrayList<>();
@@ -126,22 +133,24 @@ public class GenerationUtils {
                     constructorBuilder.addBody(wrapper.getConstructorDeclaration());
                 }
             });
-
-        for (var methodWrapper : methodWrappers) {
-            classBuilder.addBody(methodWrapper.getWrapperType().toJavaFile(indentLevel + 1));
-        }
         for (var methodWrapper : methodWrappers) {
             classBuilder.addBody(methodWrapper.getField().toJavaFile(indentLevel + 1));
         }
         for (var constructorBuilder : constructorBuilders) {
+            constructorBuilder.setName(wrapperClassName);
             classBuilder.addBody(constructorBuilder.toJavaFile(indentLevel + 1));
         }
         for (var methodWrapper : methodWrappers) {
             classBuilder.addBody(methodWrapper.getOverrideMethod().toJavaFile(indentLevel + 1));
         }
+
+        for (var methodWrapper : methodWrappers) {
+            classBuilder.addBody(methodWrapper.getWrapperType().toJavaFile(indentLevel + 1));
+        }
         for (var required : requiredImports) {
             importBuilder.addImport(required);
         }
+
         classBuilder.setImports(importBuilder.toJavaFile(indentLevel));
 
 
@@ -163,6 +172,7 @@ public class GenerationUtils {
         for (var parameter : constructor.getParameters()) {
             joiner.add(parameter.getName());
         }
+        constructorBuilder.addBody(joiner.toString());
         return constructorBuilder;
     }
 

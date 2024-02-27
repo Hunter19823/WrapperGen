@@ -33,7 +33,7 @@ public class MethodWrapper {
             ? ""
             : "return "
         ) + "this.%s.getHandler().%s%s;".formatted(this.field.getName(),
-            method.getName(),
+            GenerationUtils.getHandlerMethodName(this.method),
             GenerationUtils.getArgumentCall(this.overrideMethod.getArgs())
         ));
         this.requiredImports = new HashSet<>();
@@ -41,6 +41,7 @@ public class MethodWrapper {
             var type = ReflectionTools.getImportName(parameter.getType());
             if (type != null) this.requiredImports.add(type);
         }
+        this.requiredImports.add(MethodOverrideHandler.class.getCanonicalName());
     }
 
     public String getConstructorDeclaration() {
