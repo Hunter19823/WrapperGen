@@ -15,13 +15,13 @@ import java.util.TreeMap;
 public class WrapperClassBuilder implements JavaFileOutput {
     private final ClassBuilder classBuilder;
     private final ImportBuilder importBuilder;
-    private final SortedMap<String,FieldBuilder> fieldBuilders;
+    private final SortedMap<String, FieldBuilder> fieldBuilders;
     private final List<ConstructorBuilder> constructorBuilders;
-    private final SortedMap<String,MethodBuilder> methodBuilders;
-    private final SortedMap<String,ClassBuilder> innerClassBuilders;
+    private final SortedMap<String, MethodBuilder> methodBuilders;
+    private final SortedMap<String, ClassBuilder> innerClassBuilders;
     private final List<String> constructorDeclarations;
 
-    public WrapperClassBuilder( String name ) {
+    public WrapperClassBuilder(String name) {
         this.importBuilder = new ImportBuilder();
         this.classBuilder = new ClassBuilder().setName(name);
         this.fieldBuilders = new TreeMap<>();
@@ -31,12 +31,12 @@ public class WrapperClassBuilder implements JavaFileOutput {
         this.constructorDeclarations = new ArrayList<>();
     }
 
-    public WrapperClassBuilder setPackageName( String packageName ) {
+    public WrapperClassBuilder setPackageName(String packageName) {
         this.importBuilder.setPackageName(packageName);
         return this;
     }
 
-    public WrapperClassBuilder addClassImplementation( Class<?> subject ) {
+    public WrapperClassBuilder addClassImplementation(Class<?> subject) {
         if (Modifier.isFinal(subject.getModifiers())) {
             throw new UnsupportedOperationException("Cannot inherit from a final class.");
         }
@@ -54,8 +54,8 @@ public class WrapperClassBuilder implements JavaFileOutput {
         if (subject.getTypeParameters().length > 0) {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (int i = 0; i < subject.getTypeParameters().length; i++) {
-                joiner.add(subject.getTypeParameters()[ i ].getTypeName());
-                this.classBuilder.addGenerics(subject.getTypeParameters()[ i ].getTypeName());
+                joiner.add(subject.getTypeParameters()[i].getTypeName());
+                this.classBuilder.addGenerics(subject.getTypeParameters()[i].getTypeName());
             }
             sb.append(joiner);
         }
@@ -76,8 +76,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 }
                 this.constructorBuilders.add(constructorBuilder);
             }
-        }
-        else {
+        } else {
             this.classBuilder.addInterfaces(sb.toString());
         }
         this.importBuilder.addImport(subject);
@@ -91,7 +90,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return this;
     }
 
-    public WrapperClassBuilder addMethodWrapper( MethodWrapper methodWrapper ) {
+    public WrapperClassBuilder addMethodWrapper(MethodWrapper methodWrapper) {
         if (this.methodBuilders.containsKey(methodWrapper.getOverrideMethod().getName())) {
             throw new IllegalArgumentException("Method with name " +
                 methodWrapper.getOverrideMethod().getName() +
@@ -119,7 +118,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return this;
     }
 
-    public WrapperClassBuilder addField( FieldBuilder... fieldBuilders ) {
+    public WrapperClassBuilder addField(FieldBuilder... fieldBuilders) {
         for (var field : fieldBuilders) {
             if (this.fieldBuilders.containsKey(field.getName())) {
                 throw new IllegalArgumentException("Field with name " +
@@ -131,7 +130,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return this;
     }
 
-    public WrapperClassBuilder addMethod( MethodBuilder... methodBuilders ) {
+    public WrapperClassBuilder addMethod(MethodBuilder... methodBuilders) {
         for (MethodBuilder methodBuilder : methodBuilders) {
             if (this.methodBuilders.containsKey(methodBuilder.getName())) {
                 throw new IllegalArgumentException("Method with name " +
@@ -142,7 +141,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return this;
     }
 
-    public WrapperClassBuilder addInnerClass( ClassBuilder... innerClassBuilders ) {
+    public WrapperClassBuilder addInnerClass(ClassBuilder... innerClassBuilders) {
         for (ClassBuilder innerClassBuilder : innerClassBuilders) {
             if (this.innerClassBuilders.containsKey(innerClassBuilder.getName())) {
                 throw new IllegalArgumentException("Inner class with name " +
@@ -154,7 +153,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return this;
     }
 
-    public WrapperClassBuilder addConstructor( ConstructorBuilder... constructorBuilders ) {
+    public WrapperClassBuilder addConstructor(ConstructorBuilder... constructorBuilders) {
         this.constructorBuilders.addAll(List.of(constructorBuilders));
         for (ConstructorBuilder constructorBuilder : constructorBuilders) {
             for (String declaration : constructorDeclarations) {
@@ -172,7 +171,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return classBuilder;
     }
 
-    public Map<String,FieldBuilder> getFieldBuilders() {
+    public Map<String, FieldBuilder> getFieldBuilders() {
         return fieldBuilders;
     }
 
@@ -180,11 +179,11 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return constructorBuilders;
     }
 
-    public Map<String,MethodBuilder> getMethodBuilders() {
+    public Map<String, MethodBuilder> getMethodBuilders() {
         return methodBuilders;
     }
 
-    public Map<String,ClassBuilder> getInnerClassBuilders() {
+    public Map<String, ClassBuilder> getInnerClassBuilders() {
         return innerClassBuilders;
     }
 
@@ -193,7 +192,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
     }
 
     @Override
-    public String toJavaFile( int indentLevel ) {
+    public String toJavaFile(int indentLevel) {
         var temp = this.classBuilder.getBody();
         this.classBuilder.setImports(this.importBuilder.toJavaFile(indentLevel));
         for (FieldBuilder fieldBuilder : this.fieldBuilders.values()) {

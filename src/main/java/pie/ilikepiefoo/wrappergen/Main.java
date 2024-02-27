@@ -9,7 +9,7 @@ import pie.ilikepiefoo.wrappergen.builder.WrapperClassBuilder;
 import pie.ilikepiefoo.wrappergen.example.ExampleClass;
 
 public class Main {
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         ImportBuilder importBuilder = new ImportBuilder()
             .addImport("java.util.*")
             .addImport("java.io.*");
@@ -70,7 +70,7 @@ public class Main {
 
         WrapperClassBuilder wrapperClassBuilder =
             new WrapperClassBuilder("ExampleClassWrapper").setPackageName(
-            "pie.ilikepiefoo.wrappergen.example").addClassImplementation(ExampleClass.class);
+                "pie.ilikepiefoo.wrappergen.example").addClassImplementation(ExampleClass.class);
         System.out.println(wrapperClassBuilder.toJavaFile(0));
     }
 

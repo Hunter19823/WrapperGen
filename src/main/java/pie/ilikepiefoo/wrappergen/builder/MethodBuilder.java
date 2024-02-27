@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class MethodBuilder implements JavaFileOutput {
-    private String name;
-    private String returnType;
     private final List<String> args;
     private final List<String> body;
-    private String accessModifier;
     private final List<String> modifiers;
     private final List<String> exceptions;
     private final List<String> annotations;
     private final List<String> generics;
+    private String name;
+    private String returnType;
+    private String accessModifier;
     private boolean includeMethodBody;
 
     public MethodBuilder() {
@@ -30,28 +30,13 @@ public class MethodBuilder implements JavaFileOutput {
         this.includeMethodBody = true;
     }
 
-    public MethodBuilder setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public MethodBuilder setReturnType(String returnType) {
-        this.returnType = returnType;
-        return this;
-    }
-
     public MethodBuilder addArg(String arg) {
         this.args.add(arg);
         return this;
     }
 
-    public MethodBuilder addArgs( String... args ) {
+    public MethodBuilder addArgs(String... args) {
         this.args.addAll(Arrays.asList(args));
-        return this;
-    }
-
-    public MethodBuilder setAccessModifier(String accessModifier) {
-        this.accessModifier = accessModifier;
         return this;
     }
 
@@ -60,7 +45,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addModifiers( String... modifiers ) {
+    public MethodBuilder addModifiers(String... modifiers) {
         this.modifiers.addAll(Arrays.asList(modifiers));
         return this;
     }
@@ -71,7 +56,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addBody( String... lines ) {
+    public MethodBuilder addBody(String... lines) {
         this.includeMethodBody = true;
         this.body.addAll(Arrays.asList(lines));
         return this;
@@ -82,7 +67,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addExceptions( String... exceptions ) {
+    public MethodBuilder addExceptions(String... exceptions) {
         this.exceptions.addAll(Arrays.asList(exceptions));
         return this;
     }
@@ -92,18 +77,13 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addAnnotations( String... annotations ) {
+    public MethodBuilder addAnnotations(String... annotations) {
         this.annotations.addAll(Arrays.asList(annotations));
         return this;
     }
 
-    public MethodBuilder addGenerics( String... generics ) {
+    public MethodBuilder addGenerics(String... generics) {
         this.generics.addAll(Arrays.asList(generics));
-        return this;
-    }
-
-    public MethodBuilder setIncludeMethodBody( boolean includeMethodBody ) {
-        this.includeMethodBody = includeMethodBody;
         return this;
     }
 
@@ -111,8 +91,18 @@ public class MethodBuilder implements JavaFileOutput {
         return name;
     }
 
+    public MethodBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     public String getReturnType() {
         return returnType;
+    }
+
+    public MethodBuilder setReturnType(String returnType) {
+        this.returnType = returnType;
+        return this;
     }
 
     public List<String> getArgs() {
@@ -125,6 +115,11 @@ public class MethodBuilder implements JavaFileOutput {
 
     public String getAccessModifier() {
         return accessModifier;
+    }
+
+    public MethodBuilder setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
+        return this;
     }
 
     public List<String> getModifiers() {
@@ -147,21 +142,28 @@ public class MethodBuilder implements JavaFileOutput {
         return includeMethodBody;
     }
 
+    public MethodBuilder setIncludeMethodBody(boolean includeMethodBody) {
+        this.includeMethodBody = includeMethodBody;
+        return this;
+    }
+
     public String toJavaFile(int indentLevel) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
         StringBuilder method = new StringBuilder();
         StringJoiner joiner;
-        for(String annotation : annotations) {
+        for (String annotation : annotations) {
             method.append(indent).append(annotation).append('\n');
         }
         method.append(indent);
-        if (!accessModifier.isBlank()) method.append(accessModifier).append(" ");
-        for(String modifier : modifiers) {
+        if (!accessModifier.isBlank()) {
+            method.append(accessModifier).append(" ");
+        }
+        for (String modifier : modifiers) {
             method.append(modifier).append(" ");
         }
         if (!generics.isEmpty()) {
             joiner = new StringJoiner(", ", "<", ">");
-            for(String generic : generics) {
+            for (String generic : generics) {
                 joiner.add(generic);
             }
             method.append(joiner);
@@ -171,7 +173,7 @@ public class MethodBuilder implements JavaFileOutput {
 
         method.append(name);
         joiner = new StringJoiner(", ", "(", ")");
-        for(String arg : args) {
+        for (String arg : args) {
             joiner.add(arg);
         }
         method.append(joiner);
@@ -188,7 +190,7 @@ public class MethodBuilder implements JavaFileOutput {
             return method.toString();
         }
         method.append(" {\n");
-        for(String line : body) {
+        for (String line : body) {
             method.append(indent).append(INDENTATION_STRING).append(line).append('\n');
         }
         method.append(indent).append("}");

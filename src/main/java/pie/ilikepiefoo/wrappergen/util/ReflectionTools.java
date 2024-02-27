@@ -2,7 +2,7 @@ package pie.ilikepiefoo.wrappergen.util;
 
 public class ReflectionTools {
 
-    public static String getImportName( Class<?> type ) {
+    public static String getImportName(Class<?> type) {
         while (type.isArray()) {
             type = type.getComponentType();
         }

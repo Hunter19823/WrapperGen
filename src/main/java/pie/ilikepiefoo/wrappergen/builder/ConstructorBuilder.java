@@ -22,32 +22,22 @@ public class ConstructorBuilder implements JavaFileOutput {
         this.body = new ArrayList<>();
     }
 
-    public ConstructorBuilder setAccessModifier( String accessModifier ) {
-        this.accessModifier = accessModifier;
-        return this;
-    }
-
-    public ConstructorBuilder setName( String name ) {
-        this.name = name;
-        return this;
-    }
-
-    public ConstructorBuilder addAnnotations( String... annotations ) {
+    public ConstructorBuilder addAnnotations(String... annotations) {
         this.annotations.addAll(List.of(annotations));
         return this;
     }
 
-    public ConstructorBuilder addGenerics( String... generics ) {
+    public ConstructorBuilder addGenerics(String... generics) {
         this.generics.addAll(List.of(generics));
         return this;
     }
 
-    public ConstructorBuilder addParameters( String... parameters ) {
+    public ConstructorBuilder addParameters(String... parameters) {
         this.parameters.addAll(List.of(parameters));
         return this;
     }
 
-    public ConstructorBuilder addBody( String... body ) {
+    public ConstructorBuilder addBody(String... body) {
         this.body.addAll(List.of(body));
         return this;
     }
@@ -72,12 +62,22 @@ public class ConstructorBuilder implements JavaFileOutput {
         return accessModifier;
     }
 
+    public ConstructorBuilder setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
+    public ConstructorBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     @Override
-    public String toJavaFile( int indentLevel ) {
+    public String toJavaFile(int indentLevel) {
         String indent = " ".repeat(indentLevel * 4);
         StringJoiner joiner;
         StringBuilder sb = new StringBuilder();

@@ -19,7 +19,7 @@ import java.util.TreeSet;
 
 public class GenerationUtils {
 
-    public static ClassBuilder createMethodHandler( Method method ) {
+    public static ClassBuilder createMethodHandler(Method method) {
         ClassBuilder classBuilder = new ClassBuilder();
         // CamelCase the method name and add Handler to the end.
         classBuilder.setImports("");
@@ -54,14 +54,14 @@ public class GenerationUtils {
         return classBuilder;
     }
 
-    public static String getMethodHandlerName( Method method ) {
+    public static String getMethodHandlerName(Method method) {
         return method.getName().substring(0, 1).toUpperCase() +
             method.getName().substring(1) +
             getUniqueName(method.getParameters()) +
             "Handler";
     }
 
-    public static MethodBuilder createMethodBuilderFromMethod( Method method ) {
+    public static MethodBuilder createMethodBuilderFromMethod(Method method) {
         MethodBuilder methodBuilder = new MethodBuilder().setName(method.getName()).setReturnType(
                 method.getGenericReturnType().getTypeName())
             .setAccessModifier("public")
@@ -79,13 +79,13 @@ public class GenerationUtils {
         return methodBuilder;
     }
 
-    public static String getHandlerMethodName( Method method ) {
+    public static String getHandlerMethodName(Method method) {
         return "on" +
             method.getName().substring(0, 1).toUpperCase() +
             method.getName().substring(1);
     }
 
-    public static String getUniqueName( Parameter[] parameters ) {
+    public static String getUniqueName(Parameter[] parameters) {
         StringBuilder name = new StringBuilder();
         for (var parameter : parameters) {
             name.append(parameter.getType().getSimpleName());
@@ -93,18 +93,18 @@ public class GenerationUtils {
         return name.toString().replaceAll("[^a-zA-Z0-9]", "");
     }
 
-    public static String getArgumentCall( List<String> args ) {
+    public static String getArgumentCall(List<String> args) {
         StringJoiner joiner = new StringJoiner(", ", "(", ")");
-        args.forEach(( arg ) -> joiner.add(arg.split(" ")[ 1 ]));
+        args.forEach((arg) -> joiner.add(arg.split(" ")[1]));
         return joiner.toString();
     }
 
-    public static String getFieldName( String handlerName ) {
+    public static String getFieldName(String handlerName) {
         // Return method handler name with first character lowercase.
         return handlerName.substring(0, 1).toLowerCase() + handlerName.substring(1);
     }
 
-    public static ClassBuilder createWrapperClass( Class<?> clazz, int indentLevel ) {
+    public static ClassBuilder createWrapperClass(Class<?> clazz, int indentLevel) {
         if (Modifier.isFinal(clazz.getModifiers())) {
             throw new IllegalArgumentException("Cannot wrap a final class.");
         }
@@ -120,8 +120,7 @@ public class GenerationUtils {
         importBuilder.addImport(clazz.getCanonicalName());
         if (Modifier.isInterface(clazz.getModifiers())) {
             classBuilder.addInterfaces(clazz.getSimpleName());
-        }
-        else {
+        } else {
             classBuilder.setSuperClass(clazz.getSimpleName());
         }
         Set<String> requiredImports = new TreeSet<>();
@@ -131,7 +130,7 @@ public class GenerationUtils {
             .filter(method -> !Modifier.isStatic(method.getModifiers()) &&
                 !Modifier.isFinal(method.getModifiers()) &&
                 !Modifier.isPrivate(method.getModifiers()))
-            .forEachOrdered(( method ) -> {
+            .forEachOrdered((method) -> {
                 var wrapper = new MethodWrapper(method);
                 methodWrappers.add(wrapper);
                 requiredImports.addAll(wrapper.getRequiredImports());
@@ -141,12 +140,14 @@ public class GenerationUtils {
 
         Arrays.stream(clazz.getConstructors())
             .filter(constructor -> !Modifier.isPrivate(constructor.getModifiers()))
-            .forEachOrdered(( constructor ) -> {
+            .forEachOrdered((constructor) -> {
                 var constructorBuilder = createConstructorBuilderFromConstructor(constructor);
                 constructorBuilders.add(constructorBuilder);
                 for (var param : constructor.getParameters()) {
                     var importName = ReflectionTools.getImportName(param.getType());
-                    if (importName != null) requiredImports.add(importName);
+                    if (importName != null) {
+                        requiredImports.add(importName);
+                    }
                 }
                 for (var wrapper : methodWrappers) {
                     constructorBuilder.addBody(wrapper.getConstructorDeclaration());
@@ -176,7 +177,7 @@ public class GenerationUtils {
         return classBuilder;
     }
 
-    public static ConstructorBuilder createConstructorBuilderFromConstructor( Constructor<?> constructor ) {
+    public static ConstructorBuilder createConstructorBuilderFromConstructor(Constructor<?> constructor) {
         ConstructorBuilder constructorBuilder = new ConstructorBuilder();
         for (var parameter : constructor.getParameters()) {
             constructorBuilder.addParameters(parameter.getParameterizedType().getTypeName() +

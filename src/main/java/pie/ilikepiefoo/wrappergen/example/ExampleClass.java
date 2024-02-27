@@ -6,13 +6,13 @@ public class ExampleClass<T> {
     private int age;
     private T generic;
 
-    public ExampleClass( String name, int age ) {
+    public ExampleClass(String name, int age) {
         this.name = name;
         this.age = age;
         this.generic = null;
     }
 
-    public ExampleClass( String name, int age, T generic ) {
+    public ExampleClass(String name, int age, T generic) {
         this.name = name;
         this.age = age;
         this.generic = generic;
@@ -22,7 +22,7 @@ public class ExampleClass<T> {
         return generic;
     }
 
-    public void setGeneric( T generic ) {
+    public void setGeneric(T generic) {
         this.generic = generic;
     }
 
@@ -30,7 +30,7 @@ public class ExampleClass<T> {
         return name;
     }
 
-    public void setName( String name ) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -38,15 +38,15 @@ public class ExampleClass<T> {
         return age;
     }
 
-    public void setAge( int age ) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    public void setAge( double age ) {
+    public void setAge(double age) {
         this.age = (int) age;
     }
 
-    public <G> void calculateGeneric( G genericValue ) {
+    public <G> void calculateGeneric(G genericValue) {
         System.out.println("Generic value: " + genericValue);
     }
 

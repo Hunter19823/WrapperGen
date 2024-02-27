@@ -15,5 +15,5 @@ public interface JavaFileOutput {
      *                    ensure proper formatting and readability of the output.
      * @return A string representation of the object, formatted as it would appear in a Java file.
      */
-    String toJavaFile( int indentLevel );
+    String toJavaFile(int indentLevel);
 }

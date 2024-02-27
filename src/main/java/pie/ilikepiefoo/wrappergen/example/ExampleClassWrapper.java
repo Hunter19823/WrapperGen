@@ -15,7 +15,7 @@ public class ExampleClassWrapper<T> extends pie.ilikepiefoo.wrappergen.example.E
     public final MethodOverrideHandler<SetNameStringHandler> setNameStringHandler;
     public final MethodOverrideHandler<ToStringHandler> toStringHandler;
 
-    public ExampleClassWrapper( java.lang.String arg0, int arg1 ) {
+    public ExampleClassWrapper(java.lang.String arg0, int arg1) {
         super(arg0, arg1);
         this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
         this.setAgeintHandler = new MethodOverrideHandler<>(super::setAge);
@@ -30,7 +30,7 @@ public class ExampleClassWrapper<T> extends pie.ilikepiefoo.wrappergen.example.E
         this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
     }
 
-    public ExampleClassWrapper( java.lang.String arg0, int arg1, T arg2 ) {
+    public ExampleClassWrapper(java.lang.String arg0, int arg1, T arg2) {
         super(arg0, arg1, arg2);
         this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
         this.setAgeintHandler = new MethodOverrideHandler<>(super::setAge);
@@ -47,12 +47,12 @@ public class ExampleClassWrapper<T> extends pie.ilikepiefoo.wrappergen.example.E
 
     @FunctionalInterface
     public interface CalculateGenericObjectHandler {
-        <G> void onCalculateGeneric( G arg0 );
+        <G> void onCalculateGeneric(G arg0);
     }
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals( java.lang.Object arg0 );
+        boolean onEquals(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -79,24 +79,24 @@ public class ExampleClassWrapper<T> extends pie.ilikepiefoo.wrappergen.example.E
 
     @FunctionalInterface
     public interface SetAgedoubleHandler {
-        void onSetAge( double arg0 );
+        void onSetAge(double arg0);
 
     }
 
     @FunctionalInterface
     public interface SetAgeintHandler {
-        void onSetAge( int arg0 );
+        void onSetAge(int arg0);
 
     }
 
     @FunctionalInterface
     public interface SetGenericObjectHandler<T> {
-        void onSetGeneric( T arg0 );
+        void onSetGeneric(T arg0);
     }
 
     @FunctionalInterface
     public interface SetNameStringHandler {
-        void onSetName( java.lang.String arg0 );
+        void onSetName(java.lang.String arg0);
 
     }
 

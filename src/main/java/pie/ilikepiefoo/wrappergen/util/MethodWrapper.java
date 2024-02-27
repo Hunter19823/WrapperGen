@@ -15,7 +15,7 @@ public class MethodWrapper {
     private final MethodBuilder overrideMethod;
     private final Set<String> requiredImports;
 
-    public MethodWrapper( Method method ) {
+    public MethodWrapper(Method method) {
         this.method = method;
         this.wrapperType = GenerationUtils.createMethodHandler(method);
         this.field = new FieldBuilder().setName(GenerationUtils.getFieldName(this.wrapperType.getName()))
@@ -28,8 +28,8 @@ public class MethodWrapper {
             "@Override");
         this.overrideMethod.addBody((
             method.getReturnType().equals(Void.TYPE)
-            ? ""
-            : "return "
+                ? ""
+                : "return "
         ) + "this.%s.getHandler().%s%s;".formatted(this.field.getName(),
             GenerationUtils.getHandlerMethodName(this.method),
             GenerationUtils.getArgumentCall(this.overrideMethod.getArgs())
@@ -37,7 +37,9 @@ public class MethodWrapper {
         this.requiredImports = new HashSet<>();
         for (var parameter : method.getParameters()) {
             var type = ReflectionTools.getImportName(parameter.getType());
-            if (type != null) this.requiredImports.add(type);
+            if (type != null) {
+                this.requiredImports.add(type);
+            }
         }
         this.requiredImports.add(MethodOverrideHandler.class.getCanonicalName());
     }

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FieldBuilder implements JavaFileOutput {
-    private String name;
-    private String type;
-    private String accessModifier;
     private final List<String> modifiers;
     private final List<String> annotations;
     private final List<String> generics;
+    private String name;
+    private String type;
+    private String accessModifier;
     private String value;
 
     public FieldBuilder() {
@@ -22,27 +22,12 @@ public class FieldBuilder implements JavaFileOutput {
         this.value = "";
     }
 
-    public FieldBuilder setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public FieldBuilder setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public FieldBuilder setAccessModifier(String accessModifier) {
-        this.accessModifier = accessModifier;
-        return this;
-    }
-
-    public FieldBuilder addModifiers( String... modifiers ) {
+    public FieldBuilder addModifiers(String... modifiers) {
         this.modifiers.addAll(List.of(modifiers));
         return this;
     }
 
-    public FieldBuilder addAnnotations( String... annotations ) {
+    public FieldBuilder addAnnotations(String... annotations) {
         this.annotations.addAll(List.of(annotations));
         return this;
     }
@@ -62,21 +47,31 @@ public class FieldBuilder implements JavaFileOutput {
         return this;
     }
 
-    public FieldBuilder setValue(String value) {
-        this.value = value;
-        return this;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public FieldBuilder setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
+    public FieldBuilder setType(String type) {
+        this.type = type;
+        return this;
+    }
+
     public String getAccessModifier() {
         return accessModifier;
+    }
+
+    public FieldBuilder setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
+        return this;
     }
 
     public List<String> getModifiers() {
@@ -95,6 +90,11 @@ public class FieldBuilder implements JavaFileOutput {
         return value;
     }
 
+    public FieldBuilder setValue(String value) {
+        this.value = value;
+        return this;
+    }
+
     public String toJavaFile(int indent) {
         StringBuilder sb = new StringBuilder();
         String indentStr = INDENTATION_STRING.repeat(indent);
@@ -102,8 +102,9 @@ public class FieldBuilder implements JavaFileOutput {
             sb.append(indentStr).append(annotation).append("\n");
         }
         sb.append(indentStr);
-        if (!accessModifier.isBlank())
+        if (!accessModifier.isBlank()) {
             sb.append(accessModifier).append(" ");
+        }
         for (String modifier : modifiers) {
             sb.append(modifier).append(" ");
         }
