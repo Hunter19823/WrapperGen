@@ -45,7 +45,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addArgs(String[] args) {
+    public MethodBuilder addArgs( String... args ) {
         this.args.addAll(Arrays.asList(args));
         return this;
     }
@@ -60,7 +60,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addModifiers(String[] modifiers) {
+    public MethodBuilder addModifiers( String... modifiers ) {
         this.modifiers.addAll(Arrays.asList(modifiers));
         return this;
     }
@@ -71,7 +71,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addBody(String[] lines) {
+    public MethodBuilder addBody( String... lines ) {
         this.includeMethodBody = true;
         this.body.addAll(Arrays.asList(lines));
         return this;
@@ -82,7 +82,7 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addExceptions(String[] exceptions) {
+    public MethodBuilder addExceptions( String... exceptions ) {
         this.exceptions.addAll(Arrays.asList(exceptions));
         return this;
     }
@@ -92,12 +92,12 @@ public class MethodBuilder implements JavaFileOutput {
         return this;
     }
 
-    public MethodBuilder addAnnotations(String[] annotations) {
+    public MethodBuilder addAnnotations( String... annotations ) {
         this.annotations.addAll(Arrays.asList(annotations));
         return this;
     }
 
-    public MethodBuilder addGenerics( String[] generics ) {
+    public MethodBuilder addGenerics( String... generics ) {
         this.generics.addAll(Arrays.asList(generics));
         return this;
     }
