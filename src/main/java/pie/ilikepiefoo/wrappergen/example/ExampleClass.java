@@ -59,4 +59,16 @@ public class ExampleClass<T> {
     public <T> T varArgGenericExample(T... args) {
         return args[0];
     }
+
+    public <COMPLEX_GENERIC extends Number> void complexGenericExample(COMPLEX_GENERIC generic) {
+        System.out.println("Generic value: " + generic);
+    }
+
+    public <COMPLEX_GENERIC extends Number> COMPLEX_GENERIC getComplexGeneric() {
+        return null;
+    }
+
+    public <COMPLEX_GENERIC extends Number> void setMixedGenerics(COMPLEX_GENERIC generic, T generic2) {
+        System.out.println("Generic value: " + generic);
+    }
 }
