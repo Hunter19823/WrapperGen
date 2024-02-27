@@ -7,16 +7,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
 public class WrapperClassBuilder implements JavaFileOutput {
     private final ClassBuilder classBuilder;
     private final ImportBuilder importBuilder;
-    private final Map<String,FieldBuilder> fieldBuilders;
+    private final SortedMap<String,FieldBuilder> fieldBuilders;
     private final List<ConstructorBuilder> constructorBuilders;
-    private final Map<String,MethodBuilder> methodBuilders;
-    private final Map<String,ClassBuilder> innerClassBuilders;
+    private final SortedMap<String,MethodBuilder> methodBuilders;
+    private final SortedMap<String,ClassBuilder> innerClassBuilders;
     private final List<String> constructorDeclarations;
 
     public WrapperClassBuilder( String name ) {
@@ -177,7 +178,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return classBuilder;
     }
 
-    public List<FieldBuilder> getFieldBuilders() {
+    public Map<String,FieldBuilder> getFieldBuilders() {
         return fieldBuilders;
     }
 
@@ -185,11 +186,11 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return constructorBuilders;
     }
 
-    public List<MethodBuilder> getMethodBuilders() {
+    public Map<String,MethodBuilder> getMethodBuilders() {
         return methodBuilders;
     }
 
-    public List<ClassBuilder> getInnerClassBuilders() {
+    public Map<String,ClassBuilder> getInnerClassBuilders() {
         return innerClassBuilders;
     }
 
@@ -201,16 +202,16 @@ public class WrapperClassBuilder implements JavaFileOutput {
     public String toJavaFile( int indentLevel ) {
         var temp = this.classBuilder.getBody();
         this.classBuilder.setImports(this.importBuilder.toJavaFile(indentLevel));
-        for (FieldBuilder fieldBuilder : this.fieldBuilders) {
+        for (FieldBuilder fieldBuilder : this.fieldBuilders.values()) {
             temp.add(fieldBuilder.toJavaFile(indentLevel + 1));
         }
         for (ConstructorBuilder constructorBuilder : this.constructorBuilders) {
             temp.add(constructorBuilder.toJavaFile(indentLevel + 1));
         }
-        for (MethodBuilder methodBuilder : this.methodBuilders) {
+        for (MethodBuilder methodBuilder : this.methodBuilders.values()) {
             temp.add(methodBuilder.toJavaFile(indentLevel + 1));
         }
-        for (ClassBuilder innerClassBuilder : this.innerClassBuilders) {
+        for (ClassBuilder innerClassBuilder : this.innerClassBuilders.values()) {
             temp.add(innerClassBuilder.toJavaFile(indentLevel + 1));
         }
         String output = this.classBuilder.toJavaFile(indentLevel);
