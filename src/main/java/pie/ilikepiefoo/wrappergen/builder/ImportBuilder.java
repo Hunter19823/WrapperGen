@@ -1,5 +1,7 @@
 package pie.ilikepiefoo.wrappergen.builder;
 
+import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -20,6 +22,13 @@ public class ImportBuilder implements JavaFileOutput {
 
     public ImportBuilder addImport(String importName) {
         this.imports.add(importName);
+        return this;
+    }
+
+    public ImportBuilder addImport( Class<?> target ) {
+        if (ReflectionTools.getImportName(target) != null) {
+            this.imports.add(ReflectionTools.getImportName(target));
+        }
         return this;
     }
 
