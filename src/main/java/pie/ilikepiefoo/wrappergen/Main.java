@@ -5,8 +5,8 @@ import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
 import pie.ilikepiefoo.wrappergen.builder.ImportBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
+import pie.ilikepiefoo.wrappergen.builder.WrapperClassBuilder;
 import pie.ilikepiefoo.wrappergen.example.ExampleClass;
-import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
 
 public class Main {
     public static void main( String[] args ) {
@@ -68,8 +68,10 @@ public class Main {
             .addBody(getGenericField.toJavaFile(1));
         System.out.println(classBuilder.toJavaFile(0));
 
-        System.out.println(GenerationUtils.createWrapperClass(ExampleClass.class, 0)
-            .toJavaFile(0));
+        WrapperClassBuilder wrapperClassBuilder =
+            new WrapperClassBuilder("ExampleClassWrapper").setPackageName(
+            "pie.ilikepiefoo.wrappergen.example").addClassImplementation(ExampleClass.class);
+        System.out.println(wrapperClassBuilder.toJavaFile(0));
     }
 
 }

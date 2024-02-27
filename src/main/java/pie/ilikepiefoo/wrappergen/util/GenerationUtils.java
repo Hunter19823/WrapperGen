@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +31,24 @@ public class GenerationUtils {
         // Add the method to the interface.
         MethodBuilder methodBuilder = createMethodBuilderFromMethod(method).setName(
             getHandlerMethodName(method));
+        for (var parameterType : method.getGenericParameterTypes()) {
+            if (parameterType instanceof TypeVariable<?> variable) {
+                // Only add generics to class if the method does not contain that generic parameter.
+                boolean contains = false;
+                for (var generic : method.getTypeParameters()) {
+                    if (generic.equals(variable)) {
+                        contains = true;
+                        break;
+                    }
+                }
+                if (!contains) {
+                    classBuilder.addGenerics(variable.toString());
+                }
+            }
+        }
+        if (method.getGenericReturnType() instanceof TypeVariable<?> variable) {
+            classBuilder.addGenerics(variable.toString());
+        }
 
         classBuilder.addBody(methodBuilder.toJavaFile(2));
         return classBuilder;
@@ -43,13 +62,13 @@ public class GenerationUtils {
     }
 
     public static MethodBuilder createMethodBuilderFromMethod( Method method ) {
-        MethodBuilder methodBuilder = new MethodBuilder().setName(method.getName())
-            .setReturnType(method.getReturnType().getSimpleName())
+        MethodBuilder methodBuilder = new MethodBuilder().setName(method.getName()).setReturnType(
+                method.getGenericReturnType().getTypeName())
             .setAccessModifier("public")
             .setIncludeMethodBody(false);
 
         for (var generic : method.getTypeParameters()) {
-            methodBuilder.addArg(generic.toString());
+            methodBuilder.addGenerics(generic.getName());
         }
         for (var parameters : method.getParameters()) {
             methodBuilder.addArg(parameters.getParameterizedType().getTypeName() +
@@ -160,7 +179,7 @@ public class GenerationUtils {
     public static ConstructorBuilder createConstructorBuilderFromConstructor( Constructor<?> constructor ) {
         ConstructorBuilder constructorBuilder = new ConstructorBuilder();
         for (var parameter : constructor.getParameters()) {
-            constructorBuilder.addParameters(parameter.getType().getSimpleName() +
+            constructorBuilder.addParameters(parameter.getParameterizedType().getTypeName() +
                 " " +
                 parameter.getName());
         }

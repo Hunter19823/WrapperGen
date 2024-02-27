@@ -18,10 +18,8 @@ public class MethodWrapper {
     public MethodWrapper( Method method ) {
         this.method = method;
         this.wrapperType = GenerationUtils.createMethodHandler(method);
-        this.field =
-            new FieldBuilder().setName(GenerationUtils.getFieldName(this.wrapperType.getName()))
-            .setType("%s<%s>".formatted(
-                MethodOverrideHandler.class.getSimpleName(),
+        this.field = new FieldBuilder().setName(GenerationUtils.getFieldName(this.wrapperType.getName()))
+            .setType("%s<%s>".formatted(MethodOverrideHandler.class.getSimpleName(),
                 this.wrapperType.getFormattedName()
             ))
             .setAccessModifier("public")

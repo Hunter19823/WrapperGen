@@ -1,5 +1,6 @@
 package pie.ilikepiefoo.wrappergen.builder;
 
+import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
 import pie.ilikepiefoo.wrappergen.util.MethodWrapper;
 
 import java.lang.reflect.Modifier;
@@ -64,20 +65,13 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 .filter(constructor -> !Modifier.isPrivate(constructor.getModifiers()))
                 .toList();
             for (var constructor : constructors) {
-                var constructorBuilder = new ConstructorBuilder();
-                constructorBuilder.setAccessModifier("public");
-                constructorBuilder.setName(this.classBuilder.getName());
+                var constructorBuilder = GenerationUtils.createConstructorBuilderFromConstructor(
+                    constructor).setAccessModifier("public").setName(this.classBuilder.getName());
                 for (var annotation : constructor.getAnnotations()) {
                     constructorBuilder.addAnnotations(annotation.annotationType().getSimpleName());
                     this.importBuilder.addImport(annotation.annotationType());
                 }
-                for (var typeParameter : constructor.getTypeParameters()) {
-                    constructorBuilder.addGenerics(typeParameter.getTypeName());
-                }
                 for (var parameter : constructor.getParameters()) {
-                    constructorBuilder.addParameters(parameter.getType().getSimpleName() +
-                        " " +
-                        parameter.getName());
                     this.importBuilder.addImport(parameter.getType());
                 }
                 this.constructorBuilders.add(constructorBuilder);
