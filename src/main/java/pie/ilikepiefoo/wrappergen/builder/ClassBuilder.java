@@ -119,6 +119,18 @@ public class ClassBuilder implements JavaFileOutput {
         return this;
     }
 
+    public ClassBuilder setBody( String... body ) {
+        this.body.clear();
+        this.body.addAll(List.of(body));
+        return this;
+    }
+
+    public ClassBuilder setBody( List<String> body ) {
+        this.body.clear();
+        this.body.addAll(body);
+        return this;
+    }
+
     @Override
     public String toJavaFile( int indentLevel ) {
         String indent = INDENTATION_STRING.repeat(indentLevel);
