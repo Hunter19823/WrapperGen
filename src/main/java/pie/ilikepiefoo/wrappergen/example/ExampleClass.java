@@ -50,4 +50,13 @@ public class ExampleClass<T> {
         System.out.println("Generic value: " + genericValue);
     }
 
+    public void varArgsExample(String... args) {
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+    }
+
+    public <T> T varArgGenericExample(T... args) {
+        return args[0];
+    }
 }

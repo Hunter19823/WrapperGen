@@ -2,20 +2,18 @@ package pie.ilikepiefoo.wrappergen.util;
 
 import pie.ilikepiefoo.wrappergen.builder.ClassBuilder;
 import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
-import pie.ilikepiefoo.wrappergen.builder.ImportBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
-import java.util.TreeSet;
 
 public class GenerationUtils {
 
@@ -31,23 +29,21 @@ public class GenerationUtils {
         // Add the method to the interface.
         MethodBuilder methodBuilder = createMethodBuilderFromMethod(method).setName(
             getHandlerMethodName(method));
+        Set<Type> METHOD_TYPE_PARAMETERS = new HashSet<>(Arrays.asList(method.getGenericParameterTypes()));
+
+        METHOD_TYPE_PARAMETERS.addAll(Arrays.asList(method.getTypeParameters()));
         for (var parameterType : method.getGenericParameterTypes()) {
             if (parameterType instanceof TypeVariable<?> variable) {
                 // Only add generics to class if the method does not contain that generic parameter.
-                boolean contains = false;
-                for (var generic : method.getTypeParameters()) {
-                    if (generic.equals(variable)) {
-                        contains = true;
-                        break;
-                    }
-                }
-                if (!contains) {
+                if (!METHOD_TYPE_PARAMETERS.contains(variable)) {
                     classBuilder.addGenerics(variable.toString());
                 }
             }
         }
         if (method.getGenericReturnType() instanceof TypeVariable<?> variable) {
-            classBuilder.addGenerics(variable.toString());
+            if (!METHOD_TYPE_PARAMETERS.contains(variable)) {
+                classBuilder.addGenerics(variable.toString());
+            }
         }
 
         classBuilder.addBody(methodBuilder.toJavaFile(2));
@@ -70,10 +66,8 @@ public class GenerationUtils {
         for (var generic : method.getTypeParameters()) {
             methodBuilder.addGenerics(generic.getName());
         }
-        for (var parameters : method.getParameters()) {
-            methodBuilder.addArg(parameters.getParameterizedType().getTypeName() +
-                " " +
-                parameters.getName());
+        for (var parameter : method.getParameters()) {
+            methodBuilder.addArg(ReflectionTools.getParameterArgument(parameter));
         }
 
         return methodBuilder;
@@ -104,85 +98,10 @@ public class GenerationUtils {
         return handlerName.substring(0, 1).toLowerCase() + handlerName.substring(1);
     }
 
-    public static ClassBuilder createWrapperClass(Class<?> clazz, int indentLevel) {
-        if (Modifier.isFinal(clazz.getModifiers())) {
-            throw new IllegalArgumentException("Cannot wrap a final class.");
-        }
-        if (Modifier.isStatic(clazz.getModifiers())) {
-            throw new IllegalArgumentException("Cannot wrap a static class.");
-        }
-        ImportBuilder importBuilder = new ImportBuilder();
-        ClassBuilder classBuilder = new ClassBuilder();
-        String wrapperClassName = clazz.getSimpleName() + "Wrapper";
-        classBuilder.setName(wrapperClassName);
-        classBuilder.setAccessModifier("public");
-        classBuilder.setStructureType("class");
-        importBuilder.addImport(clazz.getCanonicalName());
-        if (Modifier.isInterface(clazz.getModifiers())) {
-            classBuilder.addInterfaces(clazz.getSimpleName());
-        } else {
-            classBuilder.setSuperClass(clazz.getSimpleName());
-        }
-        Set<String> requiredImports = new TreeSet<>();
-        List<MethodWrapper> methodWrappers = new ArrayList<>();
-
-        Arrays.stream(clazz.getMethods())
-            .filter(method -> !Modifier.isStatic(method.getModifiers()) &&
-                !Modifier.isFinal(method.getModifiers()) &&
-                !Modifier.isPrivate(method.getModifiers()))
-            .forEachOrdered((method) -> {
-                var wrapper = new MethodWrapper(method);
-                methodWrappers.add(wrapper);
-                requiredImports.addAll(wrapper.getRequiredImports());
-            });
-
-        List<ConstructorBuilder> constructorBuilders = new ArrayList<>();
-
-        Arrays.stream(clazz.getConstructors())
-            .filter(constructor -> !Modifier.isPrivate(constructor.getModifiers()))
-            .forEachOrdered((constructor) -> {
-                var constructorBuilder = createConstructorBuilderFromConstructor(constructor);
-                constructorBuilders.add(constructorBuilder);
-                for (var param : constructor.getParameters()) {
-                    var importName = ReflectionTools.getImportName(param.getType());
-                    if (importName != null) {
-                        requiredImports.add(importName);
-                    }
-                }
-                for (var wrapper : methodWrappers) {
-                    constructorBuilder.addBody(wrapper.getConstructorDeclaration());
-                }
-            });
-        for (var methodWrapper : methodWrappers) {
-            classBuilder.addBody(methodWrapper.getField().toJavaFile(indentLevel + 1));
-        }
-        for (var constructorBuilder : constructorBuilders) {
-            constructorBuilder.setName(wrapperClassName);
-            classBuilder.addBody(constructorBuilder.toJavaFile(indentLevel + 1));
-        }
-        for (var methodWrapper : methodWrappers) {
-            classBuilder.addBody(methodWrapper.getOverrideMethod().toJavaFile(indentLevel + 1));
-        }
-
-        for (var methodWrapper : methodWrappers) {
-            classBuilder.addBody(methodWrapper.getWrapperType().toJavaFile(indentLevel + 1));
-        }
-        for (var required : requiredImports) {
-            importBuilder.addImport(required);
-        }
-
-        classBuilder.setImports(importBuilder.toJavaFile(indentLevel));
-
-
-        return classBuilder;
-    }
-
     public static ConstructorBuilder createConstructorBuilderFromConstructor(Constructor<?> constructor) {
         ConstructorBuilder constructorBuilder = new ConstructorBuilder();
         for (var parameter : constructor.getParameters()) {
-            constructorBuilder.addParameters(parameter.getParameterizedType().getTypeName() +
-                " " +
-                parameter.getName());
+            constructorBuilder.addParameters(ReflectionTools.getParameterArgument(parameter));
         }
         for (var typeParameters : constructor.getTypeParameters()) {
             constructorBuilder.addGenerics(typeParameters.toString());
