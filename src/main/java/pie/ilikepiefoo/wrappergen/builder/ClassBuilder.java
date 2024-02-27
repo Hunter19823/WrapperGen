@@ -100,7 +100,9 @@ public class ClassBuilder implements JavaFileOutput {
     }
 
     public ClassBuilder addGenerics( String... generics ) {
-        this.generics.addAll(List.of(generics));
+        for (String generic : generics) {
+            if (!this.generics.contains(generic)) this.generics.add(generic);
+        }
         return this;
     }
 
