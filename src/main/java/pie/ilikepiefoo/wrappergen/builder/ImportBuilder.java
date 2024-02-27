@@ -1,16 +1,16 @@
 package pie.ilikepiefoo.wrappergen.builder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.TreeSet;
 
 public class ImportBuilder implements JavaFileOutput {
     private String packageName;
-    private final List<String> imports;
+    private final TreeSet<String> imports;
 
     public ImportBuilder() {
         this.packageName = this.getClass().getPackageName();
-        this.imports = new ArrayList<>();
+        this.imports = new TreeSet<>();
     }
 
     public ImportBuilder setPackageName(String packageName) {
@@ -28,11 +28,16 @@ public class ImportBuilder implements JavaFileOutput {
         return this;
     }
 
+    public ImportBuilder addImports( Collection<String> importNames ) {
+        this.imports.addAll(importNames);
+        return this;
+    }
+
     public String getPackageName() {
         return packageName;
     }
 
-    public List<String> getImports() {
+    public TreeSet<String> getImports() {
         return imports;
     }
 
