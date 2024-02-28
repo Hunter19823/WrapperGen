@@ -5,6 +5,7 @@ import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -55,6 +56,17 @@ public class MethodWrapper {
     }
 
     public String getConstructorDeclaration() {
+        if (Modifier.isAbstract(method.getModifiers())) {
+            return "this.%s = new %s<>();".formatted(field.getName(),
+                MethodOverrideHandler.class.getSimpleName()
+            );
+        }
+        if (method.isDefault() && method.getDeclaringClass().isInterface()) {
+            return "this.%s = new %s<>(this::%s);".formatted(field.getName(),
+                MethodOverrideHandler.class.getSimpleName(),
+                this.method.getName()
+            );
+        }
         return "this.%s = new %s<>(super::%s);".formatted(field.getName(),
             MethodOverrideHandler.class.getSimpleName(),
             this.method.getName()

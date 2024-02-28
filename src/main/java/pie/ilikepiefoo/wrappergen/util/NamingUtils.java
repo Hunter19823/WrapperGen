@@ -29,7 +29,7 @@ public class NamingUtils {
 
     public static String getArgumentCall(List<String> args) {
         StringJoiner joiner = new StringJoiner(", ", "(", ")");
-        args.forEach((arg) -> joiner.add(arg.split(" ")[1]));
+        args.forEach((arg) -> joiner.add(arg.substring(arg.lastIndexOf(" ") + 1)));
         return joiner.toString();
     }
 

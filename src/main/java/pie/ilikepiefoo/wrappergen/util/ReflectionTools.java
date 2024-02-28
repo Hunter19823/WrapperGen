@@ -1,9 +1,11 @@
 package pie.ilikepiefoo.wrappergen.util;
 
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,6 +54,15 @@ public class ReflectionTools {
             }
             return variable.getName() + joiner;
         }
+        if (type instanceof WildcardType wildcardType) {
+            if (wildcardType.getLowerBounds().length > 0) {
+                return "? super " + wildcardType.getLowerBounds()[0].getTypeName();
+            }
+            if (wildcardType.getUpperBounds().length > 0) {
+                return "? extends " + wildcardType.getUpperBounds()[0].getTypeName();
+            }
+            return "?";
+        }
         return type.getTypeName();
     }
 
@@ -78,6 +89,11 @@ public class ReflectionTools {
                 unprocessed.addAll(Arrays.asList(parameterizedType.getActualTypeArguments()));
                 unprocessed.push(parameterizedType.getRawType());
                 unprocessed.push(parameterizedType.getOwnerType());
+            } else if (current instanceof WildcardType wildcardType) {
+                unprocessed.addAll(Arrays.asList(wildcardType.getLowerBounds()));
+                unprocessed.addAll(Arrays.asList(wildcardType.getUpperBounds()));
+            } else if (current instanceof GenericArrayType genericArrayType) {
+                unprocessed.push(genericArrayType.getGenericComponentType());
             }
         }
         return dependencies;

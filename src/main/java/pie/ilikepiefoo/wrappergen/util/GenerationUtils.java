@@ -43,18 +43,16 @@ public class GenerationUtils {
                 generics
             );
         }
-        if (method.getGenericReturnType() instanceof TypeVariable<?> variable) {
-            String[] generics = ReflectionTools
-                .getDependencies(variable)
-                .stream()
-                .filter((type) -> type instanceof TypeVariable<?>)
-                .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
-                .map(ReflectionTools::getGenericDefinition)
-                .toArray(String[]::new);
-            classBuilder.addGenerics(
-                generics
-            );
-        }
+        String[] generics = ReflectionTools
+            .getDependencies(method.getGenericReturnType())
+            .stream()
+            .filter((type) -> type instanceof TypeVariable<?>)
+            .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
+            .map(ReflectionTools::getGenericDefinition)
+            .toArray(String[]::new);
+        classBuilder.addGenerics(
+            generics
+        );
 
         classBuilder.addBody(methodBuilder.toJavaFile(2));
         return classBuilder;

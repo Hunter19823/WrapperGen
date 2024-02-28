@@ -4,6 +4,10 @@ public class MethodOverrideHandler<HANDLER> {
     private HANDLER superHandler;
     private HANDLER customHandler;
 
+    public MethodOverrideHandler() {
+
+    }
+
     public MethodOverrideHandler(HANDLER superHandler) {
         this.superHandler = superHandler;
     }
@@ -19,6 +23,9 @@ public class MethodOverrideHandler<HANDLER> {
     }
 
     public HANDLER getHandler() {
+        if (superHandler == null && customHandler == null) {
+            throw new IllegalStateException("Not implemented.");
+        }
         return customHandler != null
             ? customHandler
             : superHandler;

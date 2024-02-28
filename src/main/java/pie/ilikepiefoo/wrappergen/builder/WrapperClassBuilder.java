@@ -18,7 +18,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
     private final ImportBuilder importBuilder;
     private final SortedMap<String, FieldBuilder> fieldBuilders;
     private final List<ConstructorBuilder> constructorBuilders;
-    private final SortedMap<String, MethodBuilder> methodBuilders;
+    private final List<MethodBuilder> methodBuilders;
     private final SortedMap<String, ClassBuilder> innerClassBuilders;
     private final List<String> constructorDeclarations;
 
@@ -27,7 +27,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         this.classBuilder = new ClassBuilder().setName(name);
         this.fieldBuilders = new TreeMap<>();
         this.constructorBuilders = new ArrayList<>();
-        this.methodBuilders = new TreeMap<>();
+        this.methodBuilders = new ArrayList<>();
         this.innerClassBuilders = new TreeMap<>();
         this.constructorDeclarations = new ArrayList<>();
     }
@@ -87,23 +87,20 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 !Modifier.isFinal(method.getModifiers()) &&
                 !Modifier.isPrivate(method.getModifiers()))
             .map(MethodWrapper::new)
-            .forEachOrdered(this::addMethodWrapper);
+            .forEachOrdered((methodWrapper) -> {
+                try {
+                    this.addMethodWrapper(methodWrapper);
+                } catch (IllegalArgumentException e) {
+                    System.err.println(e.getMessage());
+                }
+            });
+
         return this;
     }
 
     public WrapperClassBuilder addMethodWrapper(MethodWrapper methodWrapper) {
-        if (this.methodBuilders.containsKey(methodWrapper.getOverrideMethod().getName())) {
-            throw new IllegalArgumentException("Method with name " +
-                methodWrapper.getOverrideMethod().getName() +
-                " already exists.");
-        }
-        if (this.fieldBuilders.containsKey(methodWrapper.getField().getName())) {
-            throw new IllegalArgumentException("Field with name " +
-                methodWrapper.getField().getName() +
-                " already exists.");
-        }
         if (this.innerClassBuilders.containsKey(methodWrapper.getWrapperType().getName())) {
-            throw new IllegalArgumentException("Inner class with name " +
+            throw new IllegalArgumentException("Inner class already exists with name " +
                 methodWrapper.getWrapperType().getName() +
                 " already exists.");
         }
@@ -132,13 +129,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
     }
 
     public WrapperClassBuilder addMethod(MethodBuilder... methodBuilders) {
-        for (MethodBuilder methodBuilder : methodBuilders) {
-            if (this.methodBuilders.containsKey(methodBuilder.getName())) {
-                throw new IllegalArgumentException("Method with name " +
-                    methodBuilder.getName() +
-                    " already exists.");
-            }
-        }
+        this.methodBuilders.addAll(List.of(methodBuilders));
         return this;
     }
 
@@ -180,7 +171,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
         return constructorBuilders;
     }
 
-    public Map<String, MethodBuilder> getMethodBuilders() {
+    public List<MethodBuilder> getMethodBuilders() {
         return methodBuilders;
     }
 
@@ -199,10 +190,13 @@ public class WrapperClassBuilder implements JavaFileOutput {
         for (FieldBuilder fieldBuilder : this.fieldBuilders.values()) {
             temp.add(fieldBuilder.toJavaFile(indentLevel + 1));
         }
+        if (this.constructorBuilders.isEmpty()) {
+            this.addConstructor(new ConstructorBuilder().setName(this.classBuilder.getName()));
+        }
         for (ConstructorBuilder constructorBuilder : this.constructorBuilders) {
             temp.add(constructorBuilder.toJavaFile(indentLevel + 1));
         }
-        for (MethodBuilder methodBuilder : this.methodBuilders.values()) {
+        for (MethodBuilder methodBuilder : this.methodBuilders) {
             temp.add(methodBuilder.toJavaFile(indentLevel + 1));
         }
         for (ClassBuilder innerClassBuilder : this.innerClassBuilders.values()) {
