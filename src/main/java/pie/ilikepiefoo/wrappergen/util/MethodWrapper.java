@@ -7,6 +7,7 @@ import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class MethodWrapper {
     private final Method method;
@@ -18,9 +19,18 @@ public class MethodWrapper {
     public MethodWrapper(Method method) {
         this.method = method;
         this.wrapperType = GenerationUtils.createMethodHandler(method);
-        this.field = new FieldBuilder().setName(GenerationUtils.getFieldName(this.wrapperType.getName()))
-            .setType("%s<%s>".formatted(MethodOverrideHandler.class.getSimpleName(),
-                this.wrapperType.getFormattedName()
+        StringJoiner stringJoiner = new StringJoiner(", ", "<", ">");
+        for (var generic : this.wrapperType.getGenerics()) {
+            if (generic.contains(" ")) {
+                stringJoiner.add(generic.substring(0, generic.indexOf(" ")));
+            } else {
+                stringJoiner.add(generic);
+            }
+        }
+        this.field = new FieldBuilder().setName(NamingUtils.getFieldName(this.wrapperType.getName()))
+            .setType("%s<%s>".formatted(
+                MethodOverrideHandler.class.getSimpleName(),
+                this.wrapperType.getName() + (this.wrapperType.getGenerics().isEmpty() ? "" : stringJoiner.toString())
             ))
             .setAccessModifier("public")
             .addModifiers("final");
@@ -31,8 +41,8 @@ public class MethodWrapper {
                 ? ""
                 : "return "
         ) + "this.%s.getHandler().%s%s;".formatted(this.field.getName(),
-            GenerationUtils.getHandlerMethodName(this.method),
-            GenerationUtils.getArgumentCall(this.overrideMethod.getArgs())
+            NamingUtils.getHandlerMethodName(this.method),
+            NamingUtils.getArgumentCall(this.overrideMethod.getArgs())
         ));
         this.requiredImports = new HashSet<>();
         for (var parameter : method.getParameters()) {

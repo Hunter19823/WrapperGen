@@ -1,6 +1,10 @@
 package pie.ilikepiefoo.wrappergen.example;
 
-public class ExampleClass<T> {
+import java.util.List;
+import java.util.NavigableMap;
+import java.util.Set;
+
+public class ExampleClass<T extends NavigableMap<String, List<Set<T>>>, G extends T, F extends H, H extends List<F>> {
 
     private String name;
     private int age;
@@ -70,5 +74,9 @@ public class ExampleClass<T> {
 
     public <COMPLEX_GENERIC extends Number> void setMixedGenerics(COMPLEX_GENERIC generic, T generic2) {
         System.out.println("Generic value: " + generic);
+    }
+
+    public <L, M, N extends T> L getPITAGeneric(T tGeneric, L lGeneric) {
+        return null;
     }
 }

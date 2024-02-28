@@ -2,6 +2,7 @@ package pie.ilikepiefoo.wrappergen.builder;
 
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
 import pie.ilikepiefoo.wrappergen.util.MethodWrapper;
+import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (int i = 0; i < subject.getTypeParameters().length; i++) {
                 joiner.add(subject.getTypeParameters()[i].getTypeName());
-                this.classBuilder.addGenerics(subject.getTypeParameters()[i].getTypeName());
+                this.classBuilder.addGenerics(ReflectionTools.getGenericDefinition(subject.getTypeParameters()[i]));
             }
             sb.append(joiner);
         }
