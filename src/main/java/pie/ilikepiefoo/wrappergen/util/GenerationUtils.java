@@ -32,28 +32,28 @@ public class GenerationUtils {
         METHOD_TYPE_PARAMETERS.addAll(Arrays.asList(method.getTypeParameters()));
         for (var parameterType : method.getGenericParameterTypes()) {
                 // Only add generics to class if the method does not contain that generic parameter.
-            if (!METHOD_TYPE_PARAMETERS.contains(parameterType) && parameterType instanceof TypeVariable<?> variable) {
-                String[] generics = ReflectionTools
-                    .getDependencies(parameterType)
-                    .stream()
-                    .filter((type) -> type instanceof TypeVariable<?>)
-                    .map(ReflectionTools::getGenericDefinition)
-                    .toArray(String[]::new);
-                classBuilder.addGenerics(
-                    generics
-                );
-            }
+            String[] generics = ReflectionTools
+                .getDependencies(parameterType)
+                .stream()
+                .filter((type) -> type instanceof TypeVariable<?>)
+                .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
+                .map(ReflectionTools::getGenericDefinition)
+                .toArray(String[]::new);
+            classBuilder.addGenerics(
+                generics
+            );
         }
         if (method.getGenericReturnType() instanceof TypeVariable<?> variable) {
-            if (!METHOD_TYPE_PARAMETERS.contains(variable)) {
-                String[] generics = ReflectionTools
-                    .getDependencies(variable)
-                    .stream()
-                    .filter((type) -> type instanceof TypeVariable<?>)
-                    .map(ReflectionTools::getGenericDefinition)
-                    .toArray(String[]::new);
-                classBuilder.addGenerics(generics);
-            }
+            String[] generics = ReflectionTools
+                .getDependencies(variable)
+                .stream()
+                .filter((type) -> type instanceof TypeVariable<?>)
+                .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
+                .map(ReflectionTools::getGenericDefinition)
+                .toArray(String[]::new);
+            classBuilder.addGenerics(
+                generics
+            );
         }
 
         classBuilder.addBody(methodBuilder.toJavaFile(2));

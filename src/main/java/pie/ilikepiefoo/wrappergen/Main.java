@@ -1,14 +1,18 @@
 package pie.ilikepiefoo.wrappergen;
 
-import pie.ilikepiefoo.wrappergen.builder.WrapperClassBuilder;
-import pie.ilikepiefoo.wrappergen.example.ExampleClass;
+import pie.ilikepiefoo.wrappergen.example.PerfectlyNormalExampleClassWrapper;
 
 public class Main {
     public static void main(String[] args) {
-        WrapperClassBuilder wrapperClassBuilder =
-            new WrapperClassBuilder("ExampleClassWrapper").setPackageName(
-                "pie.ilikepiefoo.wrappergen.example").addClassImplementation(ExampleClass.class);
-        System.out.println(wrapperClassBuilder.toJavaFile(0));
+        PerfectlyNormalExampleClassWrapper<Integer> exampleWrapper = new PerfectlyNormalExampleClassWrapper<>();
+        System.out.println(exampleWrapper.getPerfectlyNormalResult(5));
+        exampleWrapper.getPerfectlyNormalResultNumberHandler.setCustomHandler(Main::getPerfectlyNormalResult);
+        System.out.println(exampleWrapper.getPerfectlyNormalResult(5));
+    }
+
+    public static <T extends Number> T getPerfectlyNormalResult(T t) {
+        System.out.println("Custom Handler");
+        return t;
     }
 
 }
