@@ -41,6 +41,10 @@ public class ReflectionTools {
     }
 
     public static String getGenericDefinition(Type type, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
+        return getGenericDefinition(type, typeVariableMap, new HashSet<>());
+    }
+
+    private static String getGenericDefinition(Type type, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap, Set<TypeVariable<?>> seenTypeVariables) {
         if (type instanceof Class<?> clazz) {
             return clazz.getCanonicalName();
         }
@@ -48,34 +52,38 @@ public class ReflectionTools {
             if (typeVariableMap.containsKey(variable)) {
                 variable = typeVariableMap.get(variable);
             }
+            if (seenTypeVariables.contains(variable)) {
+                return variable.getName();
+            }
+            seenTypeVariables.add(variable);
             var nonObjectBounds = Arrays.stream(variable.getBounds()).filter(b -> b != Object.class).toArray(Type[]::new);
             if (nonObjectBounds.length == 0) {
                 return variable.getName();
             }
             StringJoiner joiner = new StringJoiner(" & ", " extends ", "");
             for (Type bound : nonObjectBounds) {
-                joiner.add(getGenericDefinition(bound, typeVariableMap));
+                joiner.add(getGenericDefinition(bound, typeVariableMap, seenTypeVariables));
             }
             return variable.getName() + joiner;
         }
         if (type instanceof WildcardType wildcardType) {
             if (wildcardType.getLowerBounds().length > 0 && wildcardType.getLowerBounds()[0] != Object.class) {
-                return "? super " + getGenericDefinition(wildcardType.getLowerBounds()[0], typeVariableMap);
+                return "? super " + getGenericDefinition(wildcardType.getLowerBounds()[0], typeVariableMap, seenTypeVariables);
             }
             if (wildcardType.getUpperBounds().length > 0 && wildcardType.getUpperBounds()[0] != Object.class) {
-                return "? extends " + getGenericDefinition(wildcardType.getUpperBounds()[0], typeVariableMap);
+                return "? extends " + getGenericDefinition(wildcardType.getUpperBounds()[0], typeVariableMap, seenTypeVariables);
             }
             return "?";
         }
         if (type instanceof GenericArrayType genericArrayType) {
-            return getGenericDefinition(genericArrayType.getGenericComponentType(), typeVariableMap) + "[]";
+            return getGenericDefinition(genericArrayType.getGenericComponentType(), typeVariableMap, seenTypeVariables) + "[]";
         }
         if (type instanceof ParameterizedType parameterizedType) {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (var arg : parameterizedType.getActualTypeArguments()) {
-                joiner.add(getGenericDefinition(arg, typeVariableMap));
+                joiner.add(getGenericDefinition(arg, typeVariableMap, seenTypeVariables));
             }
-            return getGenericDefinition(parameterizedType.getRawType(), typeVariableMap) + joiner;
+            return getGenericDefinition(parameterizedType.getRawType(), typeVariableMap, seenTypeVariables) + joiner;
         }
         return type.getTypeName();
     }
