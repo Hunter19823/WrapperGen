@@ -1,33 +1,38 @@
 package pie.ilikepiefoo.wrappergen;
 
 import pie.ilikepiefoo.wrappergen.builder.WrapperClassBuilder;
-import pie.ilikepiefoo.wrappergen.example.CustomWrapper;
+import pie.ilikepiefoo.wrappergen.example.TreeMapWrapper;
+
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
-        CustomWrapper<Double> arrayListWrapper = new CustomWrapper<>();
-        arrayListWrapper.add(5.0);
-        arrayListWrapper.add(10.0);
-        System.out.println(arrayListWrapper.get(0));
-        System.out.println(arrayListWrapper.get(1));
-        arrayListWrapper.getintHandler.setCustomHandler(
-            (index) -> {
-                var value = arrayListWrapper.getintHandler.getSuperHandler().onGet(index);
-                System.out.println("The get method was called with index " + index + " and returned " + value);
-                return value;
+//        generateWrapperClass(TreeMap.class, "pie.ilikepiefoo.wrappergen.example", "TreeMapWrapper");
+        TreeMapWrapper<String, String> treeMapWrapper = new TreeMapWrapper<>();
+        treeMapWrapper.put("Hello", "World");
+        System.out.println(treeMapWrapper.get("Hello"));
+
+        treeMapWrapper.putObjectObjectHandler.setCustomHandler(
+            (key, value) -> {
+                System.out.println("An item with key: " + key + " and value: " + value + " was added to the TreeMap.");
+                return treeMapWrapper.putObjectObjectHandler.getSuperHandler().onPut(key, value);
             }
         );
-        System.out.println(arrayListWrapper.get(0));
-        System.out.println(arrayListWrapper.get(1));
 
+        treeMapWrapper.put("Hello", "Earth");
+        System.out.println(treeMapWrapper.get("Hello"));
     }
 
-    public static void generateWrapperClass(Class<?> subject) {
-
-        WrapperClassBuilder builder = new WrapperClassBuilder("CustomWrapper");
-        builder.setPackageName("pie.ilikepiefoo.wrappergen.example");
+    public static void generateWrapperClass(Class<?> subject, String packageName, String className) {
+        WrapperClassBuilder builder = new WrapperClassBuilder(className);
+        builder.setPackageName(packageName);
         builder.addClassImplementation(subject);
-        System.out.println(builder.toJavaFile(0));
+        File file = new File("src/main/java/" + packageName.replace(".", "/") + "/" + className + ".java");
+        try (java.io.FileWriter writer = new java.io.FileWriter(file)) {
+            writer.write(builder.toJavaFile(0));
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
