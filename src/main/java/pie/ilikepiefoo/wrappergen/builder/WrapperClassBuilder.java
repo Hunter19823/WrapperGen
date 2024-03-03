@@ -5,6 +5,7 @@ import pie.ilikepiefoo.wrappergen.util.MethodWrapper;
 import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
 
 import java.lang.reflect.Modifier;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,7 @@ public class WrapperClassBuilder implements JavaFileOutput {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (int i = 0; i < subject.getTypeParameters().length; i++) {
                 joiner.add(subject.getTypeParameters()[i].getTypeName());
-                this.classBuilder.addGenerics(ReflectionTools.getGenericDefinition(subject.getTypeParameters()[i]));
+                this.classBuilder.addGenerics(ReflectionTools.getGenericDefinition(subject.getTypeParameters()[i], Map.of()));
             }
             sb.append(joiner);
         }
@@ -67,7 +68,8 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 .toList();
             for (var constructor : constructors) {
                 var constructorBuilder = GenerationUtils.createConstructorBuilderFromConstructor(
-                    constructor).setAccessModifier("public").setName(this.classBuilder.getName());
+                    constructor
+                ).setAccessModifier("public").setName(this.classBuilder.getName());
                 for (var annotation : constructor.getAnnotations()) {
                     constructorBuilder.addAnnotations(annotation.annotationType().getSimpleName());
                     this.importBuilder.addImport(annotation.annotationType());
@@ -82,11 +84,13 @@ public class WrapperClassBuilder implements JavaFileOutput {
         }
         this.importBuilder.addImport(subject);
 
+        Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap = GenerationUtils.createTypeVariableMap(subject);
+
         Arrays.stream(subject.getMethods())
             .filter(method -> !Modifier.isStatic(method.getModifiers()) &&
                 !Modifier.isFinal(method.getModifiers()) &&
                 !Modifier.isPrivate(method.getModifiers()))
-            .map(MethodWrapper::new)
+            .map(method -> new MethodWrapper(method, typeVariableMap))
             .forEachOrdered((methodWrapper) -> {
                 try {
                     this.addMethodWrapper(methodWrapper);

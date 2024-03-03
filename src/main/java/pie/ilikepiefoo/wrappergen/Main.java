@@ -2,13 +2,13 @@ package pie.ilikepiefoo.wrappergen;
 
 import pie.ilikepiefoo.wrappergen.builder.WrapperClassBuilder;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
         WrapperClassBuilder builder = new WrapperClassBuilder("CustomWrapper");
         builder.setPackageName("pie.ilikepiefoo.wrappergen.example");
-        builder.addClassImplementation(List.class);
+        builder.addClassImplementation(ArrayList.class);
         System.out.println(builder.toJavaFile(0));
     }
 

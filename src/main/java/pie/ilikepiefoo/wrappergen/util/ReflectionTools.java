@@ -8,6 +8,7 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringJoiner;
@@ -27,8 +28,8 @@ public class ReflectionTools {
         return type.getCanonicalName();
     }
 
-    public static String getParameterArgument(Parameter parameter) {
-        String typeName = parameter.getParameterizedType().getTypeName();
+    public static String getParameterArgument(Parameter parameter, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
+        String typeName = ReflectionTools.getGenericDefinition(parameter.getParameterizedType(), typeVariableMap);
         if (parameter.isVarArgs()) {
             // Remove the array brackets as we are using varargs.
             typeName = typeName.substring(0, typeName.length() - 2);
@@ -39,29 +40,42 @@ public class ReflectionTools {
             parameter.getName();
     }
 
-    public static String getGenericDefinition(Type type) {
+    public static String getGenericDefinition(Type type, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
         if (type instanceof Class<?> clazz) {
             return clazz.getCanonicalName();
         }
         if (type instanceof TypeVariable<?> variable) {
+            if (typeVariableMap.containsKey(variable)) {
+                variable = typeVariableMap.get(variable);
+            }
             var nonObjectBounds = Arrays.stream(variable.getBounds()).filter(b -> b != Object.class).toArray(Type[]::new);
             if (nonObjectBounds.length == 0) {
                 return variable.getName();
             }
             StringJoiner joiner = new StringJoiner(" & ", " extends ", "");
             for (Type bound : nonObjectBounds) {
-                joiner.add(bound.getTypeName());
+                joiner.add(getGenericDefinition(bound, typeVariableMap));
             }
             return variable.getName() + joiner;
         }
         if (type instanceof WildcardType wildcardType) {
-            if (wildcardType.getLowerBounds().length > 0) {
-                return "? super " + wildcardType.getLowerBounds()[0].getTypeName();
+            if (wildcardType.getLowerBounds().length > 0 && wildcardType.getLowerBounds()[0] != Object.class) {
+                return "? super " + getGenericDefinition(wildcardType.getLowerBounds()[0], typeVariableMap);
             }
-            if (wildcardType.getUpperBounds().length > 0) {
-                return "? extends " + wildcardType.getUpperBounds()[0].getTypeName();
+            if (wildcardType.getUpperBounds().length > 0 && wildcardType.getUpperBounds()[0] != Object.class) {
+                return "? extends " + getGenericDefinition(wildcardType.getUpperBounds()[0], typeVariableMap);
             }
             return "?";
+        }
+        if (type instanceof GenericArrayType genericArrayType) {
+            return getGenericDefinition(genericArrayType.getGenericComponentType(), typeVariableMap) + "[]";
+        }
+        if (type instanceof ParameterizedType parameterizedType) {
+            StringJoiner joiner = new StringJoiner(", ", "<", ">");
+            for (var arg : parameterizedType.getActualTypeArguments()) {
+                joiner.add(getGenericDefinition(arg, typeVariableMap));
+            }
+            return getGenericDefinition(parameterizedType.getRawType(), typeVariableMap) + joiner;
         }
         return type.getTypeName();
     }

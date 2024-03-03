@@ -6,7 +6,9 @@ import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.TypeVariable;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
@@ -17,9 +19,9 @@ public class MethodWrapper {
     private final MethodBuilder overrideMethod;
     private final Set<String> requiredImports;
 
-    public MethodWrapper(Method method) {
+    public MethodWrapper(Method method, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
         this.method = method;
-        this.wrapperType = GenerationUtils.createMethodHandler(method);
+        this.wrapperType = GenerationUtils.createMethodHandler(method, typeVariableMap);
         StringJoiner stringJoiner = new StringJoiner(", ", "<", ">");
         for (var generic : this.wrapperType.getGenerics()) {
             if (generic.contains(" ")) {
@@ -35,7 +37,7 @@ public class MethodWrapper {
             ))
             .setAccessModifier("public")
             .addModifiers("final");
-        this.overrideMethod = GenerationUtils.createMethodBuilderFromMethod(method).addAnnotation(
+        this.overrideMethod = GenerationUtils.createMethodBuilderFromMethod(method, typeVariableMap).addAnnotation(
             "@Override");
         this.overrideMethod.addBody((
             method.getReturnType().equals(Void.TYPE)
