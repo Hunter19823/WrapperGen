@@ -79,7 +79,7 @@ public class GenerationUtils {
     public static MethodBuilder createMethodBuilderFromMethod(Method method, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
         MethodBuilder methodBuilder = new MethodBuilder()
             .setName(method.getName())
-            .setReturnType(method.getGenericReturnType().getTypeName())
+            .setReturnType(ReflectionTools.getGenericDefinition(method.getGenericReturnType(), typeVariableMap))
             .setAccessModifier("public")
             .setIncludeMethodBody(false);
 
