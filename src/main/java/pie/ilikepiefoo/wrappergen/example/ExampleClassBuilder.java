@@ -18,7 +18,6 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
     public ToStringHandler toStringHandler;
     public VarArgGenericExampleObjectHandler varArgGenericExampleObjectHandler;
     public VarArgsExampleStringHandler varArgsExampleStringHandler;
-
     public ExampleClassBuilder() {
     }
 
@@ -26,87 +25,70 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
         this.calculateGenericObjectHandler = calculateGenericObjectHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setComplexGenericExampleNumberHandler(ComplexGenericExampleNumberHandler complexGenericExampleNumberHandler) {
         this.complexGenericExampleNumberHandler = complexGenericExampleNumberHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setEqualsObjectHandler(EqualsObjectHandler equalsObjectHandler) {
         this.equalsObjectHandler = equalsObjectHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setGetAgeHandler(GetAgeHandler getAgeHandler) {
         this.getAgeHandler = getAgeHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setGetComplexGenericHandler(GetComplexGenericHandler getComplexGenericHandler) {
         this.getComplexGenericHandler = getComplexGenericHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setGetGenericHandler(GetGenericHandler<T> getGenericHandler) {
         this.getGenericHandler = getGenericHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setGetNameHandler(GetNameHandler getNameHandler) {
         this.getNameHandler = getNameHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setGetPITAGenericNavigableMapObjectHandler(GetPITAGenericNavigableMapObjectHandler<T> getPITAGenericNavigableMapObjectHandler) {
         this.getPITAGenericNavigableMapObjectHandler = getPITAGenericNavigableMapObjectHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setHashCodeHandler(HashCodeHandler hashCodeHandler) {
         this.hashCodeHandler = hashCodeHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setSetAgeDoubleHandler(SetAgeDoubleHandler setAgeDoubleHandler) {
         this.setAgeDoubleHandler = setAgeDoubleHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setSetAgeIntHandler(SetAgeIntHandler setAgeIntHandler) {
         this.setAgeIntHandler = setAgeIntHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setSetGenericNavigableMapHandler(SetGenericNavigableMapHandler<T> setGenericNavigableMapHandler) {
         this.setGenericNavigableMapHandler = setGenericNavigableMapHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setSetMixedGenericsNumberNavigableMapHandler(SetMixedGenericsNumberNavigableMapHandler<T> setMixedGenericsNumberNavigableMapHandler) {
         this.setMixedGenericsNumberNavigableMapHandler = setMixedGenericsNumberNavigableMapHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setSetNameStringHandler(SetNameStringHandler setNameStringHandler) {
         this.setNameStringHandler = setNameStringHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setToStringHandler(ToStringHandler toStringHandler) {
         this.toStringHandler = toStringHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setVarArgGenericExampleObjectHandler(VarArgGenericExampleObjectHandler varArgGenericExampleObjectHandler) {
         this.varArgGenericExampleObjectHandler = varArgGenericExampleObjectHandler;
         return this;
     }
-
     public ExampleClassBuilder<T, G, F, H> setVarArgsExampleStringHandler(VarArgsExampleStringHandler varArgsExampleStringHandler) {
         this.varArgsExampleStringHandler = varArgsExampleStringHandler;
         return this;
     }
-
     @FunctionalInterface
     public interface CalculateGenericObjectHandler {
         <G> void onCalculateGeneric(G arg0);

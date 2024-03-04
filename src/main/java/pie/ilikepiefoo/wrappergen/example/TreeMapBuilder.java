@@ -52,7 +52,6 @@ public class TreeMapBuilder<K, V> {
     public TailMapObjectHandler<K, V> tailMapObjectHandler;
     public ToStringHandler toStringHandler;
     public ValuesHandler<V> valuesHandler;
-
     public TreeMapBuilder() {
     }
 
@@ -60,257 +59,206 @@ public class TreeMapBuilder<K, V> {
         this.ceilingEntryObjectHandler = ceilingEntryObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setCeilingKeyObjectHandler(CeilingKeyObjectHandler<K> ceilingKeyObjectHandler) {
         this.ceilingKeyObjectHandler = ceilingKeyObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setClearHandler(ClearHandler clearHandler) {
         this.clearHandler = clearHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setCloneHandler(CloneHandler cloneHandler) {
         this.cloneHandler = cloneHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setComparatorHandler(ComparatorHandler<K> comparatorHandler) {
         this.comparatorHandler = comparatorHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setComputeIfAbsentObjectFunctionHandler(ComputeIfAbsentObjectFunctionHandler<K, V> computeIfAbsentObjectFunctionHandler) {
         this.computeIfAbsentObjectFunctionHandler = computeIfAbsentObjectFunctionHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setComputeIfPresentObjectBiFunctionHandler(ComputeIfPresentObjectBiFunctionHandler<K, V> computeIfPresentObjectBiFunctionHandler) {
         this.computeIfPresentObjectBiFunctionHandler = computeIfPresentObjectBiFunctionHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setComputeObjectBiFunctionHandler(ComputeObjectBiFunctionHandler<K, V> computeObjectBiFunctionHandler) {
         this.computeObjectBiFunctionHandler = computeObjectBiFunctionHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setContainsKeyObjectHandler(ContainsKeyObjectHandler containsKeyObjectHandler) {
         this.containsKeyObjectHandler = containsKeyObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setContainsValueObjectHandler(ContainsValueObjectHandler containsValueObjectHandler) {
         this.containsValueObjectHandler = containsValueObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setDescendingKeySetHandler(DescendingKeySetHandler<K> descendingKeySetHandler) {
         this.descendingKeySetHandler = descendingKeySetHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setDescendingMapHandler(DescendingMapHandler<V, K> descendingMapHandler) {
         this.descendingMapHandler = descendingMapHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setEntrySetHandler(EntrySetHandler<V, K> entrySetHandler) {
         this.entrySetHandler = entrySetHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setEqualsObjectHandler(EqualsObjectHandler equalsObjectHandler) {
         this.equalsObjectHandler = equalsObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setFirstEntryHandler(FirstEntryHandler<V, K> firstEntryHandler) {
         this.firstEntryHandler = firstEntryHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setFirstKeyHandler(FirstKeyHandler<K> firstKeyHandler) {
         this.firstKeyHandler = firstKeyHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setFloorEntryObjectHandler(FloorEntryObjectHandler<K, V> floorEntryObjectHandler) {
         this.floorEntryObjectHandler = floorEntryObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setFloorKeyObjectHandler(FloorKeyObjectHandler<K> floorKeyObjectHandler) {
         this.floorKeyObjectHandler = floorKeyObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setForEachBiConsumerHandler(ForEachBiConsumerHandler<V, K> forEachBiConsumerHandler) {
         this.forEachBiConsumerHandler = forEachBiConsumerHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setGetObjectHandler(GetObjectHandler<V> getObjectHandler) {
         this.getObjectHandler = getObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setGetOrDefaultObjectObjectHandler(GetOrDefaultObjectObjectHandler<V> getOrDefaultObjectObjectHandler) {
         this.getOrDefaultObjectObjectHandler = getOrDefaultObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setHashCodeHandler(HashCodeHandler hashCodeHandler) {
         this.hashCodeHandler = hashCodeHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setHeadMapObjectBooleanHandler(HeadMapObjectBooleanHandler<K, V> headMapObjectBooleanHandler) {
         this.headMapObjectBooleanHandler = headMapObjectBooleanHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setHeadMapObjectHandler(HeadMapObjectHandler<K, V> headMapObjectHandler) {
         this.headMapObjectHandler = headMapObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setHigherEntryObjectHandler(HigherEntryObjectHandler<K, V> higherEntryObjectHandler) {
         this.higherEntryObjectHandler = higherEntryObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setHigherKeyObjectHandler(HigherKeyObjectHandler<K> higherKeyObjectHandler) {
         this.higherKeyObjectHandler = higherKeyObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setIsEmptyHandler(IsEmptyHandler isEmptyHandler) {
         this.isEmptyHandler = isEmptyHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setKeySetHandler(KeySetHandler<K> keySetHandler) {
         this.keySetHandler = keySetHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setLastEntryHandler(LastEntryHandler<V, K> lastEntryHandler) {
         this.lastEntryHandler = lastEntryHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setLastKeyHandler(LastKeyHandler<K> lastKeyHandler) {
         this.lastKeyHandler = lastKeyHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setLowerEntryObjectHandler(LowerEntryObjectHandler<K, V> lowerEntryObjectHandler) {
         this.lowerEntryObjectHandler = lowerEntryObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setLowerKeyObjectHandler(LowerKeyObjectHandler<K> lowerKeyObjectHandler) {
         this.lowerKeyObjectHandler = lowerKeyObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setMergeObjectObjectBiFunctionHandler(MergeObjectObjectBiFunctionHandler<K, V> mergeObjectObjectBiFunctionHandler) {
         this.mergeObjectObjectBiFunctionHandler = mergeObjectObjectBiFunctionHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setNavigableKeySetHandler(NavigableKeySetHandler<K> navigableKeySetHandler) {
         this.navigableKeySetHandler = navigableKeySetHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setPollFirstEntryHandler(PollFirstEntryHandler<V, K> pollFirstEntryHandler) {
         this.pollFirstEntryHandler = pollFirstEntryHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setPollLastEntryHandler(PollLastEntryHandler<V, K> pollLastEntryHandler) {
         this.pollLastEntryHandler = pollLastEntryHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setPutAllMapHandler(PutAllMapHandler<V, K> putAllMapHandler) {
         this.putAllMapHandler = putAllMapHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setPutIfAbsentObjectObjectHandler(PutIfAbsentObjectObjectHandler<K, V> putIfAbsentObjectObjectHandler) {
         this.putIfAbsentObjectObjectHandler = putIfAbsentObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setPutObjectObjectHandler(PutObjectObjectHandler<K, V> putObjectObjectHandler) {
         this.putObjectObjectHandler = putObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setRemoveObjectHandler(RemoveObjectHandler<V> removeObjectHandler) {
         this.removeObjectHandler = removeObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setRemoveObjectObjectHandler(RemoveObjectObjectHandler removeObjectObjectHandler) {
         this.removeObjectObjectHandler = removeObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setReplaceAllBiFunctionHandler(ReplaceAllBiFunctionHandler<V, K> replaceAllBiFunctionHandler) {
         this.replaceAllBiFunctionHandler = replaceAllBiFunctionHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setReplaceObjectObjectHandler(ReplaceObjectObjectHandler<K, V> replaceObjectObjectHandler) {
         this.replaceObjectObjectHandler = replaceObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setReplaceObjectObjectObjectHandler(ReplaceObjectObjectObjectHandler<K, V> replaceObjectObjectObjectHandler) {
         this.replaceObjectObjectObjectHandler = replaceObjectObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setSizeHandler(SizeHandler sizeHandler) {
         this.sizeHandler = sizeHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setSubMapObjectBooleanObjectBooleanHandler(SubMapObjectBooleanObjectBooleanHandler<K, V> subMapObjectBooleanObjectBooleanHandler) {
         this.subMapObjectBooleanObjectBooleanHandler = subMapObjectBooleanObjectBooleanHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setSubMapObjectObjectHandler(SubMapObjectObjectHandler<K, V> subMapObjectObjectHandler) {
         this.subMapObjectObjectHandler = subMapObjectObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setTailMapObjectBooleanHandler(TailMapObjectBooleanHandler<K, V> tailMapObjectBooleanHandler) {
         this.tailMapObjectBooleanHandler = tailMapObjectBooleanHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setTailMapObjectHandler(TailMapObjectHandler<K, V> tailMapObjectHandler) {
         this.tailMapObjectHandler = tailMapObjectHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setToStringHandler(ToStringHandler toStringHandler) {
         this.toStringHandler = toStringHandler;
         return this;
     }
-
     public TreeMapBuilder<K, V> setValuesHandler(ValuesHandler<V> valuesHandler) {
         this.valuesHandler = valuesHandler;
         return this;
     }
-
     @FunctionalInterface
     public interface CeilingEntryObjectHandler<K, V> {
         java.util.Map.Entry<K, V> onCeilingEntry(K arg0);

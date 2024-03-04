@@ -1,58 +1,59 @@
 package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 public class ParentClassWrapper extends ParentClass {
-    public MethodHandler<CeilingEntryObjectHandler> ceilingEntryObjectHandler;
-    public MethodHandler<CeilingKeyObjectHandler> ceilingKeyObjectHandler;
-    public MethodHandler<ClearHandler> clearHandler;
-    public MethodHandler<CloneHandler> cloneHandler;
-    public MethodHandler<ComparatorHandler> comparatorHandler;
-    public MethodHandler<ComputeIfAbsentObjectFunctionHandler> computeIfAbsentObjectFunctionHandler;
-    public MethodHandler<ComputeIfPresentObjectBiFunctionHandler> computeIfPresentObjectBiFunctionHandler;
-    public MethodHandler<ComputeObjectBiFunctionHandler> computeObjectBiFunctionHandler;
-    public MethodHandler<ContainsKeyObjectHandler> containsKeyObjectHandler;
-    public MethodHandler<ContainsValueObjectHandler> containsValueObjectHandler;
-    public MethodHandler<DescendingKeySetHandler> descendingKeySetHandler;
-    public MethodHandler<DescendingMapHandler> descendingMapHandler;
-    public MethodHandler<EntrySetHandler> entrySetHandler;
-    public MethodHandler<EqualsObjectHandler> equalsObjectHandler;
-    public MethodHandler<FirstEntryHandler> firstEntryHandler;
-    public MethodHandler<FirstKeyHandler> firstKeyHandler;
-    public MethodHandler<FloorEntryObjectHandler> floorEntryObjectHandler;
-    public MethodHandler<FloorKeyObjectHandler> floorKeyObjectHandler;
-    public MethodHandler<ForEachBiConsumerHandler> forEachBiConsumerHandler;
-    public MethodHandler<GetObjectHandler> getObjectHandler;
-    public MethodHandler<GetOrDefaultObjectObjectHandler> getOrDefaultObjectObjectHandler;
-    public MethodHandler<HashCodeHandler> hashCodeHandler;
-    public MethodHandler<HeadMapObjectBooleanHandler> headMapObjectBooleanHandler;
-    public MethodHandler<HeadMapObjectHandler> headMapObjectHandler;
-    public MethodHandler<HigherEntryObjectHandler> higherEntryObjectHandler;
-    public MethodHandler<HigherKeyObjectHandler> higherKeyObjectHandler;
-    public MethodHandler<IsEmptyHandler> isEmptyHandler;
-    public MethodHandler<KeySetHandler> keySetHandler;
-    public MethodHandler<LastEntryHandler> lastEntryHandler;
-    public MethodHandler<LastKeyHandler> lastKeyHandler;
-    public MethodHandler<LowerEntryObjectHandler> lowerEntryObjectHandler;
-    public MethodHandler<LowerKeyObjectHandler> lowerKeyObjectHandler;
-    public MethodHandler<MergeObjectObjectBiFunctionHandler> mergeObjectObjectBiFunctionHandler;
-    public MethodHandler<NavigableKeySetHandler> navigableKeySetHandler;
-    public MethodHandler<PollFirstEntryHandler> pollFirstEntryHandler;
-    public MethodHandler<PollLastEntryHandler> pollLastEntryHandler;
-    public MethodHandler<PutAllMapHandler> putAllMapHandler;
-    public MethodHandler<PutIfAbsentObjectObjectHandler> putIfAbsentObjectObjectHandler;
-    public MethodHandler<PutObjectObjectHandler> putObjectObjectHandler;
-    public MethodHandler<RemoveObjectHandler> removeObjectHandler;
-    public MethodHandler<RemoveObjectObjectHandler> removeObjectObjectHandler;
-    public MethodHandler<ReplaceAllBiFunctionHandler> replaceAllBiFunctionHandler;
-    public MethodHandler<ReplaceObjectObjectHandler> replaceObjectObjectHandler;
-    public MethodHandler<ReplaceObjectObjectObjectHandler> replaceObjectObjectObjectHandler;
-    public MethodHandler<SizeHandler> sizeHandler;
-    public MethodHandler<SubMapObjectBooleanObjectBooleanHandler> subMapObjectBooleanObjectBooleanHandler;
-    public MethodHandler<SubMapObjectObjectHandler> subMapObjectObjectHandler;
-    public MethodHandler<TailMapObjectBooleanHandler> tailMapObjectBooleanHandler;
-    public MethodHandler<TailMapObjectHandler> tailMapObjectHandler;
-    public MethodHandler<ToStringHandler> toStringHandler;
-    public MethodHandler<ValuesHandler> valuesHandler;
+    public MethodHandler<CeilingEntryObjectHandler> ceilingEntryObjectHandler = new MethodHotSwapHandler<>(super::ceilingEntry);
+    public MethodHandler<CeilingKeyObjectHandler> ceilingKeyObjectHandler = new MethodHotSwapHandler<>(super::ceilingKey);
+    public MethodHandler<ClearHandler> clearHandler = new MethodHotSwapHandler<>(super::clear);
+    public MethodHandler<CloneHandler> cloneHandler = new MethodHotSwapHandler<>(super::clone);
+    public MethodHandler<ComparatorHandler> comparatorHandler = new MethodHotSwapHandler<>(super::comparator);
+    public MethodHandler<ComputeIfAbsentObjectFunctionHandler> computeIfAbsentObjectFunctionHandler = new MethodHotSwapHandler<>(super::computeIfAbsent);
+    public MethodHandler<ComputeIfPresentObjectBiFunctionHandler> computeIfPresentObjectBiFunctionHandler = new MethodHotSwapHandler<>(super::computeIfPresent);
+    public MethodHandler<ComputeObjectBiFunctionHandler> computeObjectBiFunctionHandler = new MethodHotSwapHandler<>(super::compute);
+    public MethodHandler<ContainsKeyObjectHandler> containsKeyObjectHandler = new MethodHotSwapHandler<>(super::containsKey);
+    public MethodHandler<ContainsValueObjectHandler> containsValueObjectHandler = new MethodHotSwapHandler<>(super::containsValue);
+    public MethodHandler<DescendingKeySetHandler> descendingKeySetHandler = new MethodHotSwapHandler<>(super::descendingKeySet);
+    public MethodHandler<DescendingMapHandler> descendingMapHandler = new MethodHotSwapHandler<>(super::descendingMap);
+    public MethodHandler<EntrySetHandler> entrySetHandler = new MethodHotSwapHandler<>(super::entrySet);
+    public MethodHandler<EqualsObjectHandler> equalsObjectHandler = new MethodHotSwapHandler<>(super::equals);
+    public MethodHandler<FirstEntryHandler> firstEntryHandler = new MethodHotSwapHandler<>(super::firstEntry);
+    public MethodHandler<FirstKeyHandler> firstKeyHandler = new MethodHotSwapHandler<>(super::firstKey);
+    public MethodHandler<FloorEntryObjectHandler> floorEntryObjectHandler = new MethodHotSwapHandler<>(super::floorEntry);
+    public MethodHandler<FloorKeyObjectHandler> floorKeyObjectHandler = new MethodHotSwapHandler<>(super::floorKey);
+    public MethodHandler<ForEachBiConsumerHandler> forEachBiConsumerHandler = new MethodHotSwapHandler<>(super::forEach);
+    public MethodHandler<GetObjectHandler> getObjectHandler = new MethodHotSwapHandler<>(super::get);
+    public MethodHandler<GetOrDefaultObjectObjectHandler> getOrDefaultObjectObjectHandler = new MethodHotSwapHandler<>(super::getOrDefault);
+    public MethodHandler<HashCodeHandler> hashCodeHandler = new MethodHotSwapHandler<>(super::hashCode);
+    public MethodHandler<HeadMapObjectBooleanHandler> headMapObjectBooleanHandler = new MethodHotSwapHandler<>(super::headMap);
+    public MethodHandler<HeadMapObjectHandler> headMapObjectHandler = new MethodHotSwapHandler<>(super::headMap);
+    public MethodHandler<HigherEntryObjectHandler> higherEntryObjectHandler = new MethodHotSwapHandler<>(super::higherEntry);
+    public MethodHandler<HigherKeyObjectHandler> higherKeyObjectHandler = new MethodHotSwapHandler<>(super::higherKey);
+    public MethodHandler<IsEmptyHandler> isEmptyHandler = new MethodHotSwapHandler<>(super::isEmpty);
+    public MethodHandler<KeySetHandler> keySetHandler = new MethodHotSwapHandler<>(super::keySet);
+    public MethodHandler<LastEntryHandler> lastEntryHandler = new MethodHotSwapHandler<>(super::lastEntry);
+    public MethodHandler<LastKeyHandler> lastKeyHandler = new MethodHotSwapHandler<>(super::lastKey);
+    public MethodHandler<LowerEntryObjectHandler> lowerEntryObjectHandler = new MethodHotSwapHandler<>(super::lowerEntry);
+    public MethodHandler<LowerKeyObjectHandler> lowerKeyObjectHandler = new MethodHotSwapHandler<>(super::lowerKey);
+    public MethodHandler<MergeObjectObjectBiFunctionHandler> mergeObjectObjectBiFunctionHandler = new MethodHotSwapHandler<>(super::merge);
+    public MethodHandler<NavigableKeySetHandler> navigableKeySetHandler = new MethodHotSwapHandler<>(super::navigableKeySet);
+    public MethodHandler<PollFirstEntryHandler> pollFirstEntryHandler = new MethodHotSwapHandler<>(super::pollFirstEntry);
+    public MethodHandler<PollLastEntryHandler> pollLastEntryHandler = new MethodHotSwapHandler<>(super::pollLastEntry);
+    public MethodHandler<PutAllMapHandler> putAllMapHandler = new MethodHotSwapHandler<>(super::putAll);
+    public MethodHandler<PutIfAbsentObjectObjectHandler> putIfAbsentObjectObjectHandler = new MethodHotSwapHandler<>(super::putIfAbsent);
+    public MethodHandler<PutObjectObjectHandler> putObjectObjectHandler = new MethodHotSwapHandler<>(super::put);
+    public MethodHandler<RemoveObjectHandler> removeObjectHandler = new MethodHotSwapHandler<>(super::remove);
+    public MethodHandler<RemoveObjectObjectHandler> removeObjectObjectHandler = new MethodHotSwapHandler<>(super::remove);
+    public MethodHandler<ReplaceAllBiFunctionHandler> replaceAllBiFunctionHandler = new MethodHotSwapHandler<>(super::replaceAll);
+    public MethodHandler<ReplaceObjectObjectHandler> replaceObjectObjectHandler = new MethodHotSwapHandler<>(super::replace);
+    public MethodHandler<ReplaceObjectObjectObjectHandler> replaceObjectObjectObjectHandler = new MethodHotSwapHandler<>(super::replace);
+    public MethodHandler<SizeHandler> sizeHandler = new MethodHotSwapHandler<>(super::size);
+    public MethodHandler<SubMapObjectBooleanObjectBooleanHandler> subMapObjectBooleanObjectBooleanHandler = new MethodHotSwapHandler<>(super::subMap);
+    public MethodHandler<SubMapObjectObjectHandler> subMapObjectObjectHandler = new MethodHotSwapHandler<>(super::subMap);
+    public MethodHandler<TailMapObjectBooleanHandler> tailMapObjectBooleanHandler = new MethodHotSwapHandler<>(super::tailMap);
+    public MethodHandler<TailMapObjectHandler> tailMapObjectHandler = new MethodHotSwapHandler<>(super::tailMap);
+    public MethodHandler<ToStringHandler> toStringHandler = new MethodHotSwapHandler<>(super::toString);
+    public MethodHandler<ValuesHandler> valuesHandler = new MethodHotSwapHandler<>(super::values);
     public ParentClassWrapper() {
         super();
     }
@@ -76,7 +77,6 @@ public class ParentClassWrapper extends ParentClass {
     public boolean equals(java.lang.Object arg0) {
         return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
-
     @Override
     public java.util.Comparator<? super java.lang.String> comparator() {
         return (this.comparatorHandler != null && this.comparatorHandler.getHandler() != null) ? this.comparatorHandler.getHandler().onComparator() : super.comparator();
@@ -94,6 +94,14 @@ public class ParentClassWrapper extends ParentClass {
     public java.lang.String computeIfPresent(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1) {
         return (this.computeIfPresentObjectBiFunctionHandler != null && this.computeIfPresentObjectBiFunctionHandler.getHandler() != null) ? this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1) : super.computeIfPresent(arg0, arg1);
     }
+    @Override
+    public boolean containsKey(java.lang.Object arg0) {
+        return (this.containsKeyObjectHandler != null && this.containsKeyObjectHandler.getHandler() != null) ? this.containsKeyObjectHandler.getHandler().onContainsKey(arg0) : super.containsKey(arg0);
+    }
+    @Override
+    public boolean containsValue(java.lang.Object arg0) {
+        return (this.containsValueObjectHandler != null && this.containsValueObjectHandler.getHandler() != null) ? this.containsValueObjectHandler.getHandler().onContainsValue(arg0) : super.containsValue(arg0);
+    }
 
     @Override
     public java.lang.String toString() {
@@ -106,16 +114,6 @@ public class ParentClassWrapper extends ParentClass {
     }
 
     @Override
-    public boolean containsKey(java.lang.Object arg0) {
-        return (this.containsKeyObjectHandler != null && this.containsKeyObjectHandler.getHandler() != null) ? this.containsKeyObjectHandler.getHandler().onContainsKey(arg0) : super.containsKey(arg0);
-    }
-
-    @Override
-    public boolean containsValue(java.lang.Object arg0) {
-        return (this.containsValueObjectHandler != null && this.containsValueObjectHandler.getHandler() != null) ? this.containsValueObjectHandler.getHandler().onContainsValue(arg0) : super.containsValue(arg0);
-    }
-
-    @Override
     public java.lang.String get(java.lang.Object arg0) {
         return (this.getObjectHandler != null && this.getObjectHandler.getHandler() != null) ? this.getObjectHandler.getHandler().onGet(arg0) : super.get(arg0);
     }
@@ -124,7 +122,6 @@ public class ParentClassWrapper extends ParentClass {
     public java.lang.String firstKey() {
         return (this.firstKeyHandler != null && this.firstKeyHandler.getHandler() != null) ? this.firstKeyHandler.getHandler().onFirstKey() : super.firstKey();
     }
-
     @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> firstEntry() {
         return (this.firstEntryHandler != null && this.firstEntryHandler.getHandler() != null) ? this.firstEntryHandler.getHandler().onFirstEntry() : super.firstEntry();
@@ -197,35 +194,36 @@ public class ParentClassWrapper extends ParentClass {
     public java.util.Set<java.lang.String> keySet() {
         return (this.keySetHandler != null && this.keySetHandler.getHandler() != null) ? this.keySetHandler.getHandler().onKeySet() : super.keySet();
     }
-
-    @Override
-    public java.lang.Object clone() {
-        return (this.cloneHandler != null && this.cloneHandler.getHandler() != null) ? this.cloneHandler.getHandler().onClone() : super.clone();
-    }
-
     @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> lastEntry() {
         return (this.lastEntryHandler != null && this.lastEntryHandler.getHandler() != null) ? this.lastEntryHandler.getHandler().onLastEntry() : super.lastEntry();
     }
 
     @Override
+    public java.lang.Object clone() {
+        return (this.cloneHandler != null && this.cloneHandler.getHandler() != null) ? this.cloneHandler.getHandler().onClone() : super.clone();
+    }
+    @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> lowerEntry(java.lang.String arg0) {
+        return (this.lowerEntryObjectHandler != null && this.lowerEntryObjectHandler.getHandler() != null) ? this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0) : super.lowerEntry(arg0);
+    }
+    @Override
+    public java.lang.String lowerKey(java.lang.String arg0) {
+        return (this.lowerKeyObjectHandler != null && this.lowerKeyObjectHandler.getHandler() != null) ? this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0) : super.lowerKey(arg0);
+    }
+
+    @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> pollFirstEntry() {
         return (this.pollFirstEntryHandler != null && this.pollFirstEntryHandler.getHandler() != null) ? this.pollFirstEntryHandler.getHandler().onPollFirstEntry() : super.pollFirstEntry();
+    }
+    @Override
+    public java.util.NavigableSet<java.lang.String> navigableKeySet() {
+        return (this.navigableKeySetHandler != null && this.navigableKeySetHandler.getHandler() != null) ? this.navigableKeySetHandler.getHandler().onNavigableKeySet() : super.navigableKeySet();
     }
 
     @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> pollLastEntry() {
         return (this.pollLastEntryHandler != null && this.pollLastEntryHandler.getHandler() != null) ? this.pollLastEntryHandler.getHandler().onPollLastEntry() : super.pollLastEntry();
-    }
-
-    @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> lowerEntry(java.lang.String arg0) {
-        return (this.lowerEntryObjectHandler != null && this.lowerEntryObjectHandler.getHandler() != null) ? this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0) : super.lowerEntry(arg0);
-    }
-
-    @Override
-    public java.lang.String lowerKey(java.lang.String arg0) {
-        return (this.lowerKeyObjectHandler != null && this.lowerKeyObjectHandler.getHandler() != null) ? this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0) : super.lowerKey(arg0);
     }
 
     @Override
@@ -236,11 +234,6 @@ public class ParentClassWrapper extends ParentClass {
     @Override
     public java.lang.String ceilingKey(java.lang.String arg0) {
         return (this.ceilingKeyObjectHandler != null && this.ceilingKeyObjectHandler.getHandler() != null) ? this.ceilingKeyObjectHandler.getHandler().onCeilingKey(arg0) : super.ceilingKey(arg0);
-    }
-
-    @Override
-    public java.util.NavigableSet<java.lang.String> navigableKeySet() {
-        return (this.navigableKeySetHandler != null && this.navigableKeySetHandler.getHandler() != null) ? this.navigableKeySetHandler.getHandler().onNavigableKeySet() : super.navigableKeySet();
     }
 
     @Override
@@ -285,8 +278,17 @@ public class ParentClassWrapper extends ParentClass {
     }
 
     @Override
+    public java.util.SortedMap<java.lang.String, java.lang.String> subMap(java.lang.String arg0, java.lang.String arg1) {
+        return (this.subMapObjectObjectHandler != null && this.subMapObjectObjectHandler.getHandler() != null) ? this.subMapObjectObjectHandler.getHandler().onSubMap(arg0, arg1) : super.subMap(arg0, arg1);
+    }
+
+    @Override
     public java.util.NavigableMap<java.lang.String, java.lang.String> headMap(java.lang.String arg0, boolean arg1) {
         return (this.headMapObjectBooleanHandler != null && this.headMapObjectBooleanHandler.getHandler() != null) ? this.headMapObjectBooleanHandler.getHandler().onHeadMap(arg0, arg1) : super.headMap(arg0, arg1);
+    }
+    @Override
+    public java.util.SortedMap<java.lang.String, java.lang.String> tailMap(java.lang.String arg0) {
+        return (this.tailMapObjectHandler != null && this.tailMapObjectHandler.getHandler() != null) ? this.tailMapObjectHandler.getHandler().onTailMap(arg0) : super.tailMap(arg0);
     }
 
     @Override
@@ -295,18 +297,8 @@ public class ParentClassWrapper extends ParentClass {
     }
 
     @Override
-    public java.util.SortedMap<java.lang.String, java.lang.String> subMap(java.lang.String arg0, java.lang.String arg1) {
-        return (this.subMapObjectObjectHandler != null && this.subMapObjectObjectHandler.getHandler() != null) ? this.subMapObjectObjectHandler.getHandler().onSubMap(arg0, arg1) : super.subMap(arg0, arg1);
-    }
-
-    @Override
     public java.util.SortedMap<java.lang.String, java.lang.String> headMap(java.lang.String arg0) {
         return (this.headMapObjectHandler != null && this.headMapObjectHandler.getHandler() != null) ? this.headMapObjectHandler.getHandler().onHeadMap(arg0) : super.headMap(arg0);
-    }
-
-    @Override
-    public java.util.SortedMap<java.lang.String, java.lang.String> tailMap(java.lang.String arg0) {
-        return (this.tailMapObjectHandler != null && this.tailMapObjectHandler.getHandler() != null) ? this.tailMapObjectHandler.getHandler().onTailMap(arg0) : super.tailMap(arg0);
     }
 
     @Override

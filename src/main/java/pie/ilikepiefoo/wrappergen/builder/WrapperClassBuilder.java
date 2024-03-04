@@ -2,6 +2,8 @@ package pie.ilikepiefoo.wrappergen.builder;
 
 import pie.ilikepiefoo.wrappergen.presets.MethodWrapper;
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
+import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 import pie.ilikepiefoo.wrappergen.util.NamingUtils;
 import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
 import pie.ilikepiefoo.wrappergen.util.TypeVariableMap;
@@ -111,11 +113,18 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 methodWrapper.getWrapperType().getName() +
                 " already exists.");
         }
+        methodWrapper.getField().setValue("new %s<>(super::%s)".formatted(
+            MethodHotSwapHandler.class.getSimpleName(),
+            methodWrapper.getMethod().getName()
+        ));
         this.addField(methodWrapper.getField());
         this.constructorDeclarations.add(methodWrapper.getConstructorDeclaration());
         this.addMethod(methodWrapper.getOverrideMethod());
         this.addInnerClass(methodWrapper.getWrapperType());
+
         this.importBuilder.addImports(methodWrapper.getRequiredImports());
+        this.importBuilder.addImport(MethodHotSwapHandler.class);
+        this.importBuilder.addImport(MethodHandler.class);
 
         return this;
     }

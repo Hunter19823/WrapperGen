@@ -1,48 +1,47 @@
 package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 
 import java.util.ArrayList;
-
 public class ArrayListWrapper<E> extends ArrayList<E> {
-    public MethodHandler<AddAllCollectionHandler<E>> addAllCollectionHandler;
-    public MethodHandler<AddAllIntCollectionHandler<E>> addAllIntCollectionHandler;
-    public MethodHandler<AddIntObjectHandler<E>> addIntObjectHandler;
-    public MethodHandler<AddObjectHandler<E>> addObjectHandler;
-    public MethodHandler<ClearHandler> clearHandler;
-    public MethodHandler<CloneHandler> cloneHandler;
-    public MethodHandler<ContainsAllCollectionHandler> containsAllCollectionHandler;
-    public MethodHandler<ContainsObjectHandler> containsObjectHandler;
-    public MethodHandler<EnsureCapacityIntHandler> ensureCapacityIntHandler;
-    public MethodHandler<EqualsObjectHandler> equalsObjectHandler;
-    public MethodHandler<ForEachConsumerHandler<E>> forEachConsumerHandler;
-    public MethodHandler<GetIntHandler<E>> getIntHandler;
-    public MethodHandler<HashCodeHandler> hashCodeHandler;
-    public MethodHandler<IndexOfObjectHandler> indexOfObjectHandler;
-    public MethodHandler<IsEmptyHandler> isEmptyHandler;
-    public MethodHandler<IteratorHandler<E>> iteratorHandler;
-    public MethodHandler<LastIndexOfObjectHandler> lastIndexOfObjectHandler;
-    public MethodHandler<ListIteratorHandler<E>> listIteratorHandler;
-    public MethodHandler<ListIteratorIntHandler<E>> listIteratorIntHandler;
-    public MethodHandler<ParallelStreamHandler<E>> parallelStreamHandler;
-    public MethodHandler<RemoveAllCollectionHandler> removeAllCollectionHandler;
-    public MethodHandler<RemoveIfPredicateHandler<E>> removeIfPredicateHandler;
-    public MethodHandler<RemoveIntHandler<E>> removeIntHandler;
-    public MethodHandler<RemoveObjectHandler> removeObjectHandler;
-    public MethodHandler<ReplaceAllUnaryOperatorHandler<E>> replaceAllUnaryOperatorHandler;
-    public MethodHandler<RetainAllCollectionHandler> retainAllCollectionHandler;
-    public MethodHandler<SetIntObjectHandler<E>> setIntObjectHandler;
-    public MethodHandler<SizeHandler> sizeHandler;
-    public MethodHandler<SortComparatorHandler<E>> sortComparatorHandler;
-    public MethodHandler<SpliteratorHandler<E>> spliteratorHandler;
-    public MethodHandler<StreamHandler<E>> streamHandler;
-    public MethodHandler<SubListIntIntHandler<E>> subListIntIntHandler;
-    public MethodHandler<ToArrayHandler> toArrayHandler;
-    public MethodHandler<ToArrayIntFunctionHandler> toArrayIntFunctionHandler;
-    public MethodHandler<ToArrayObjectHandler> toArrayObjectHandler;
-    public MethodHandler<ToStringHandler> toStringHandler;
-    public MethodHandler<TrimToSizeHandler> trimToSizeHandler;
-
+    public MethodHandler<AddAllCollectionHandler<E>> addAllCollectionHandler = new MethodHotSwapHandler<>(super::addAll);
+    public MethodHandler<AddAllIntCollectionHandler<E>> addAllIntCollectionHandler = new MethodHotSwapHandler<>(super::addAll);
+    public MethodHandler<AddIntObjectHandler<E>> addIntObjectHandler = new MethodHotSwapHandler<>(super::add);
+    public MethodHandler<AddObjectHandler<E>> addObjectHandler = new MethodHotSwapHandler<>(super::add);
+    public MethodHandler<ClearHandler> clearHandler = new MethodHotSwapHandler<>(super::clear);
+    public MethodHandler<CloneHandler> cloneHandler = new MethodHotSwapHandler<>(super::clone);
+    public MethodHandler<ContainsAllCollectionHandler> containsAllCollectionHandler = new MethodHotSwapHandler<>(super::containsAll);
+    public MethodHandler<ContainsObjectHandler> containsObjectHandler = new MethodHotSwapHandler<>(super::contains);
+    public MethodHandler<EnsureCapacityIntHandler> ensureCapacityIntHandler = new MethodHotSwapHandler<>(super::ensureCapacity);
+    public MethodHandler<EqualsObjectHandler> equalsObjectHandler = new MethodHotSwapHandler<>(super::equals);
+    public MethodHandler<ForEachConsumerHandler<E>> forEachConsumerHandler = new MethodHotSwapHandler<>(super::forEach);
+    public MethodHandler<GetIntHandler<E>> getIntHandler = new MethodHotSwapHandler<>(super::get);
+    public MethodHandler<HashCodeHandler> hashCodeHandler = new MethodHotSwapHandler<>(super::hashCode);
+    public MethodHandler<IndexOfObjectHandler> indexOfObjectHandler = new MethodHotSwapHandler<>(super::indexOf);
+    public MethodHandler<IsEmptyHandler> isEmptyHandler = new MethodHotSwapHandler<>(super::isEmpty);
+    public MethodHandler<IteratorHandler<E>> iteratorHandler = new MethodHotSwapHandler<>(super::iterator);
+    public MethodHandler<LastIndexOfObjectHandler> lastIndexOfObjectHandler = new MethodHotSwapHandler<>(super::lastIndexOf);
+    public MethodHandler<ListIteratorHandler<E>> listIteratorHandler = new MethodHotSwapHandler<>(super::listIterator);
+    public MethodHandler<ListIteratorIntHandler<E>> listIteratorIntHandler = new MethodHotSwapHandler<>(super::listIterator);
+    public MethodHandler<ParallelStreamHandler<E>> parallelStreamHandler = new MethodHotSwapHandler<>(super::parallelStream);
+    public MethodHandler<RemoveAllCollectionHandler> removeAllCollectionHandler = new MethodHotSwapHandler<>(super::removeAll);
+    public MethodHandler<RemoveIfPredicateHandler<E>> removeIfPredicateHandler = new MethodHotSwapHandler<>(super::removeIf);
+    public MethodHandler<RemoveIntHandler<E>> removeIntHandler = new MethodHotSwapHandler<>(super::remove);
+    public MethodHandler<RemoveObjectHandler> removeObjectHandler = new MethodHotSwapHandler<>(super::remove);
+    public MethodHandler<ReplaceAllUnaryOperatorHandler<E>> replaceAllUnaryOperatorHandler = new MethodHotSwapHandler<>(super::replaceAll);
+    public MethodHandler<RetainAllCollectionHandler> retainAllCollectionHandler = new MethodHotSwapHandler<>(super::retainAll);
+    public MethodHandler<SetIntObjectHandler<E>> setIntObjectHandler = new MethodHotSwapHandler<>(super::set);
+    public MethodHandler<SizeHandler> sizeHandler = new MethodHotSwapHandler<>(super::size);
+    public MethodHandler<SortComparatorHandler<E>> sortComparatorHandler = new MethodHotSwapHandler<>(super::sort);
+    public MethodHandler<SpliteratorHandler<E>> spliteratorHandler = new MethodHotSwapHandler<>(super::spliterator);
+    public MethodHandler<StreamHandler<E>> streamHandler = new MethodHotSwapHandler<>(super::stream);
+    public MethodHandler<SubListIntIntHandler<E>> subListIntIntHandler = new MethodHotSwapHandler<>(super::subList);
+    public MethodHandler<ToArrayHandler> toArrayHandler = new MethodHotSwapHandler<>(super::toArray);
+    public MethodHandler<ToArrayIntFunctionHandler> toArrayIntFunctionHandler = new MethodHotSwapHandler<>(super::toArray);
+    public MethodHandler<ToArrayObjectHandler> toArrayObjectHandler = new MethodHotSwapHandler<>(super::toArray);
+    public MethodHandler<ToStringHandler> toStringHandler = new MethodHotSwapHandler<>(super::toString);
+    public MethodHandler<TrimToSizeHandler> trimToSizeHandler = new MethodHotSwapHandler<>(super::trimToSize);
     public ArrayListWrapper(java.util.Collection<? extends E> arg0) {
         super(arg0);
     }
@@ -94,17 +93,16 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
+    public int size() {
+        return (this.sizeHandler != null && this.sizeHandler.getHandler() != null) ? this.sizeHandler.getHandler().onSize() : super.size();
+    }
+    @Override
     public void ensureCapacity(int arg0) {
         if (this.ensureCapacityIntHandler != null && this.ensureCapacityIntHandler.getHandler() != null) {
             this.ensureCapacityIntHandler.getHandler().onEnsureCapacity(arg0);
         } else {
             super.ensureCapacity(arg0);
         }
-    }
-
-    @Override
-    public int size() {
-        return (this.sizeHandler != null && this.sizeHandler.getHandler() != null) ? this.sizeHandler.getHandler().onSize() : super.size();
     }
 
     @Override

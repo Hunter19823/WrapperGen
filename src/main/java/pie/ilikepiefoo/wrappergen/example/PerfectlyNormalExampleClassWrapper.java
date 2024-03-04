@@ -1,11 +1,12 @@
 package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> extends PerfectlyNormalExampleClass<T> {
-    public MethodHandler<EqualsObjectHandler> equalsObjectHandler;
-    public MethodHandler<GetPerfectlyNormalResultNumberHandler<T>> getPerfectlyNormalResultNumberHandler;
-    public MethodHandler<HashCodeHandler> hashCodeHandler;
-    public MethodHandler<ToStringHandler> toStringHandler;
+    public MethodHandler<EqualsObjectHandler> equalsObjectHandler = new MethodHotSwapHandler<>(super::equals);
+    public MethodHandler<GetPerfectlyNormalResultNumberHandler<T>> getPerfectlyNormalResultNumberHandler = new MethodHotSwapHandler<>(super::getPerfectlyNormalResult);
+    public MethodHandler<HashCodeHandler> hashCodeHandler = new MethodHotSwapHandler<>(super::hashCode);
+    public MethodHandler<ToStringHandler> toStringHandler = new MethodHotSwapHandler<>(super::toString);
     public PerfectlyNormalExampleClassWrapper() {
         super();
     }

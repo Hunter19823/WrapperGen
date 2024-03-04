@@ -38,7 +38,6 @@ public class ArrayListBuilder<E> {
     public ToArrayObjectHandler toArrayObjectHandler;
     public ToStringHandler toStringHandler;
     public TrimToSizeHandler trimToSizeHandler;
-
     public ArrayListBuilder() {
     }
 
@@ -46,187 +45,150 @@ public class ArrayListBuilder<E> {
         this.addAllCollectionHandler = addAllCollectionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setAddAllIntCollectionHandler(AddAllIntCollectionHandler<E> addAllIntCollectionHandler) {
         this.addAllIntCollectionHandler = addAllIntCollectionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setAddIntObjectHandler(AddIntObjectHandler<E> addIntObjectHandler) {
         this.addIntObjectHandler = addIntObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setAddObjectHandler(AddObjectHandler<E> addObjectHandler) {
         this.addObjectHandler = addObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setClearHandler(ClearHandler clearHandler) {
         this.clearHandler = clearHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setCloneHandler(CloneHandler cloneHandler) {
         this.cloneHandler = cloneHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setContainsAllCollectionHandler(ContainsAllCollectionHandler containsAllCollectionHandler) {
         this.containsAllCollectionHandler = containsAllCollectionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setContainsObjectHandler(ContainsObjectHandler containsObjectHandler) {
         this.containsObjectHandler = containsObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setEnsureCapacityIntHandler(EnsureCapacityIntHandler ensureCapacityIntHandler) {
         this.ensureCapacityIntHandler = ensureCapacityIntHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setEqualsObjectHandler(EqualsObjectHandler equalsObjectHandler) {
         this.equalsObjectHandler = equalsObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setForEachConsumerHandler(ForEachConsumerHandler<E> forEachConsumerHandler) {
         this.forEachConsumerHandler = forEachConsumerHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setGetIntHandler(GetIntHandler<E> getIntHandler) {
         this.getIntHandler = getIntHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setHashCodeHandler(HashCodeHandler hashCodeHandler) {
         this.hashCodeHandler = hashCodeHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setIndexOfObjectHandler(IndexOfObjectHandler indexOfObjectHandler) {
         this.indexOfObjectHandler = indexOfObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setIsEmptyHandler(IsEmptyHandler isEmptyHandler) {
         this.isEmptyHandler = isEmptyHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setIteratorHandler(IteratorHandler<E> iteratorHandler) {
         this.iteratorHandler = iteratorHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setLastIndexOfObjectHandler(LastIndexOfObjectHandler lastIndexOfObjectHandler) {
         this.lastIndexOfObjectHandler = lastIndexOfObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setListIteratorHandler(ListIteratorHandler<E> listIteratorHandler) {
         this.listIteratorHandler = listIteratorHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setListIteratorIntHandler(ListIteratorIntHandler<E> listIteratorIntHandler) {
         this.listIteratorIntHandler = listIteratorIntHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setParallelStreamHandler(ParallelStreamHandler<E> parallelStreamHandler) {
         this.parallelStreamHandler = parallelStreamHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setRemoveAllCollectionHandler(RemoveAllCollectionHandler removeAllCollectionHandler) {
         this.removeAllCollectionHandler = removeAllCollectionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setRemoveIfPredicateHandler(RemoveIfPredicateHandler<E> removeIfPredicateHandler) {
         this.removeIfPredicateHandler = removeIfPredicateHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setRemoveIntHandler(RemoveIntHandler<E> removeIntHandler) {
         this.removeIntHandler = removeIntHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setRemoveObjectHandler(RemoveObjectHandler removeObjectHandler) {
         this.removeObjectHandler = removeObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setReplaceAllUnaryOperatorHandler(ReplaceAllUnaryOperatorHandler<E> replaceAllUnaryOperatorHandler) {
         this.replaceAllUnaryOperatorHandler = replaceAllUnaryOperatorHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setRetainAllCollectionHandler(RetainAllCollectionHandler retainAllCollectionHandler) {
         this.retainAllCollectionHandler = retainAllCollectionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setSetIntObjectHandler(SetIntObjectHandler<E> setIntObjectHandler) {
         this.setIntObjectHandler = setIntObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setSizeHandler(SizeHandler sizeHandler) {
         this.sizeHandler = sizeHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setSortComparatorHandler(SortComparatorHandler<E> sortComparatorHandler) {
         this.sortComparatorHandler = sortComparatorHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setSpliteratorHandler(SpliteratorHandler<E> spliteratorHandler) {
         this.spliteratorHandler = spliteratorHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setStreamHandler(StreamHandler<E> streamHandler) {
         this.streamHandler = streamHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setSubListIntIntHandler(SubListIntIntHandler<E> subListIntIntHandler) {
         this.subListIntIntHandler = subListIntIntHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setToArrayHandler(ToArrayHandler toArrayHandler) {
         this.toArrayHandler = toArrayHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setToArrayIntFunctionHandler(ToArrayIntFunctionHandler toArrayIntFunctionHandler) {
         this.toArrayIntFunctionHandler = toArrayIntFunctionHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setToArrayObjectHandler(ToArrayObjectHandler toArrayObjectHandler) {
         this.toArrayObjectHandler = toArrayObjectHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setToStringHandler(ToStringHandler toStringHandler) {
         this.toStringHandler = toStringHandler;
         return this;
     }
-
     public ArrayListBuilder<E> setTrimToSizeHandler(TrimToSizeHandler trimToSizeHandler) {
         this.trimToSizeHandler = trimToSizeHandler;
         return this;
     }
-
     @FunctionalInterface
     public interface AddAllCollectionHandler<E> {
         boolean onAddAll(java.util.Collection<? extends E> arg0);

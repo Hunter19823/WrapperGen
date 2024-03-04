@@ -52,7 +52,6 @@ public class ChildClassBuilder {
     public TailMapObjectHandler tailMapObjectHandler;
     public ToStringHandler toStringHandler;
     public ValuesHandler valuesHandler;
-
     public ChildClassBuilder() {
     }
 
@@ -60,257 +59,206 @@ public class ChildClassBuilder {
         this.ceilingEntryObjectHandler = ceilingEntryObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setCeilingKeyObjectHandler(CeilingKeyObjectHandler ceilingKeyObjectHandler) {
         this.ceilingKeyObjectHandler = ceilingKeyObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setClearHandler(ClearHandler clearHandler) {
         this.clearHandler = clearHandler;
         return this;
     }
-
     public ChildClassBuilder setCloneHandler(CloneHandler cloneHandler) {
         this.cloneHandler = cloneHandler;
         return this;
     }
-
     public ChildClassBuilder setComparatorHandler(ComparatorHandler comparatorHandler) {
         this.comparatorHandler = comparatorHandler;
         return this;
     }
-
     public ChildClassBuilder setComputeIfAbsentObjectFunctionHandler(ComputeIfAbsentObjectFunctionHandler computeIfAbsentObjectFunctionHandler) {
         this.computeIfAbsentObjectFunctionHandler = computeIfAbsentObjectFunctionHandler;
         return this;
     }
-
     public ChildClassBuilder setComputeIfPresentObjectBiFunctionHandler(ComputeIfPresentObjectBiFunctionHandler computeIfPresentObjectBiFunctionHandler) {
         this.computeIfPresentObjectBiFunctionHandler = computeIfPresentObjectBiFunctionHandler;
         return this;
     }
-
     public ChildClassBuilder setComputeObjectBiFunctionHandler(ComputeObjectBiFunctionHandler computeObjectBiFunctionHandler) {
         this.computeObjectBiFunctionHandler = computeObjectBiFunctionHandler;
         return this;
     }
-
     public ChildClassBuilder setContainsKeyObjectHandler(ContainsKeyObjectHandler containsKeyObjectHandler) {
         this.containsKeyObjectHandler = containsKeyObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setContainsValueObjectHandler(ContainsValueObjectHandler containsValueObjectHandler) {
         this.containsValueObjectHandler = containsValueObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setDescendingKeySetHandler(DescendingKeySetHandler descendingKeySetHandler) {
         this.descendingKeySetHandler = descendingKeySetHandler;
         return this;
     }
-
     public ChildClassBuilder setDescendingMapHandler(DescendingMapHandler descendingMapHandler) {
         this.descendingMapHandler = descendingMapHandler;
         return this;
     }
-
     public ChildClassBuilder setEntrySetHandler(EntrySetHandler entrySetHandler) {
         this.entrySetHandler = entrySetHandler;
         return this;
     }
-
     public ChildClassBuilder setEqualsObjectHandler(EqualsObjectHandler equalsObjectHandler) {
         this.equalsObjectHandler = equalsObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setFirstEntryHandler(FirstEntryHandler firstEntryHandler) {
         this.firstEntryHandler = firstEntryHandler;
         return this;
     }
-
     public ChildClassBuilder setFirstKeyHandler(FirstKeyHandler firstKeyHandler) {
         this.firstKeyHandler = firstKeyHandler;
         return this;
     }
-
     public ChildClassBuilder setFloorEntryObjectHandler(FloorEntryObjectHandler floorEntryObjectHandler) {
         this.floorEntryObjectHandler = floorEntryObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setFloorKeyObjectHandler(FloorKeyObjectHandler floorKeyObjectHandler) {
         this.floorKeyObjectHandler = floorKeyObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setForEachBiConsumerHandler(ForEachBiConsumerHandler forEachBiConsumerHandler) {
         this.forEachBiConsumerHandler = forEachBiConsumerHandler;
         return this;
     }
-
     public ChildClassBuilder setGetObjectHandler(GetObjectHandler getObjectHandler) {
         this.getObjectHandler = getObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setGetOrDefaultObjectObjectHandler(GetOrDefaultObjectObjectHandler getOrDefaultObjectObjectHandler) {
         this.getOrDefaultObjectObjectHandler = getOrDefaultObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setHashCodeHandler(HashCodeHandler hashCodeHandler) {
         this.hashCodeHandler = hashCodeHandler;
         return this;
     }
-
     public ChildClassBuilder setHeadMapObjectBooleanHandler(HeadMapObjectBooleanHandler headMapObjectBooleanHandler) {
         this.headMapObjectBooleanHandler = headMapObjectBooleanHandler;
         return this;
     }
-
     public ChildClassBuilder setHeadMapObjectHandler(HeadMapObjectHandler headMapObjectHandler) {
         this.headMapObjectHandler = headMapObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setHigherEntryObjectHandler(HigherEntryObjectHandler higherEntryObjectHandler) {
         this.higherEntryObjectHandler = higherEntryObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setHigherKeyObjectHandler(HigherKeyObjectHandler higherKeyObjectHandler) {
         this.higherKeyObjectHandler = higherKeyObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setIsEmptyHandler(IsEmptyHandler isEmptyHandler) {
         this.isEmptyHandler = isEmptyHandler;
         return this;
     }
-
     public ChildClassBuilder setKeySetHandler(KeySetHandler keySetHandler) {
         this.keySetHandler = keySetHandler;
         return this;
     }
-
     public ChildClassBuilder setLastEntryHandler(LastEntryHandler lastEntryHandler) {
         this.lastEntryHandler = lastEntryHandler;
         return this;
     }
-
     public ChildClassBuilder setLastKeyHandler(LastKeyHandler lastKeyHandler) {
         this.lastKeyHandler = lastKeyHandler;
         return this;
     }
-
     public ChildClassBuilder setLowerEntryObjectHandler(LowerEntryObjectHandler lowerEntryObjectHandler) {
         this.lowerEntryObjectHandler = lowerEntryObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setLowerKeyObjectHandler(LowerKeyObjectHandler lowerKeyObjectHandler) {
         this.lowerKeyObjectHandler = lowerKeyObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setMergeObjectObjectBiFunctionHandler(MergeObjectObjectBiFunctionHandler mergeObjectObjectBiFunctionHandler) {
         this.mergeObjectObjectBiFunctionHandler = mergeObjectObjectBiFunctionHandler;
         return this;
     }
-
     public ChildClassBuilder setNavigableKeySetHandler(NavigableKeySetHandler navigableKeySetHandler) {
         this.navigableKeySetHandler = navigableKeySetHandler;
         return this;
     }
-
     public ChildClassBuilder setPollFirstEntryHandler(PollFirstEntryHandler pollFirstEntryHandler) {
         this.pollFirstEntryHandler = pollFirstEntryHandler;
         return this;
     }
-
     public ChildClassBuilder setPollLastEntryHandler(PollLastEntryHandler pollLastEntryHandler) {
         this.pollLastEntryHandler = pollLastEntryHandler;
         return this;
     }
-
     public ChildClassBuilder setPutAllMapHandler(PutAllMapHandler putAllMapHandler) {
         this.putAllMapHandler = putAllMapHandler;
         return this;
     }
-
     public ChildClassBuilder setPutIfAbsentObjectObjectHandler(PutIfAbsentObjectObjectHandler putIfAbsentObjectObjectHandler) {
         this.putIfAbsentObjectObjectHandler = putIfAbsentObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setPutObjectObjectHandler(PutObjectObjectHandler putObjectObjectHandler) {
         this.putObjectObjectHandler = putObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setRemoveObjectHandler(RemoveObjectHandler removeObjectHandler) {
         this.removeObjectHandler = removeObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setRemoveObjectObjectHandler(RemoveObjectObjectHandler removeObjectObjectHandler) {
         this.removeObjectObjectHandler = removeObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setReplaceAllBiFunctionHandler(ReplaceAllBiFunctionHandler replaceAllBiFunctionHandler) {
         this.replaceAllBiFunctionHandler = replaceAllBiFunctionHandler;
         return this;
     }
-
     public ChildClassBuilder setReplaceObjectObjectHandler(ReplaceObjectObjectHandler replaceObjectObjectHandler) {
         this.replaceObjectObjectHandler = replaceObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setReplaceObjectObjectObjectHandler(ReplaceObjectObjectObjectHandler replaceObjectObjectObjectHandler) {
         this.replaceObjectObjectObjectHandler = replaceObjectObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setSizeHandler(SizeHandler sizeHandler) {
         this.sizeHandler = sizeHandler;
         return this;
     }
-
     public ChildClassBuilder setSubMapObjectBooleanObjectBooleanHandler(SubMapObjectBooleanObjectBooleanHandler subMapObjectBooleanObjectBooleanHandler) {
         this.subMapObjectBooleanObjectBooleanHandler = subMapObjectBooleanObjectBooleanHandler;
         return this;
     }
-
     public ChildClassBuilder setSubMapObjectObjectHandler(SubMapObjectObjectHandler subMapObjectObjectHandler) {
         this.subMapObjectObjectHandler = subMapObjectObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setTailMapObjectBooleanHandler(TailMapObjectBooleanHandler tailMapObjectBooleanHandler) {
         this.tailMapObjectBooleanHandler = tailMapObjectBooleanHandler;
         return this;
     }
-
     public ChildClassBuilder setTailMapObjectHandler(TailMapObjectHandler tailMapObjectHandler) {
         this.tailMapObjectHandler = tailMapObjectHandler;
         return this;
     }
-
     public ChildClassBuilder setToStringHandler(ToStringHandler toStringHandler) {
         this.toStringHandler = toStringHandler;
         return this;
     }
-
     public ChildClassBuilder setValuesHandler(ValuesHandler valuesHandler) {
         this.valuesHandler = valuesHandler;
         return this;
     }
-
     @FunctionalInterface
     public interface CeilingEntryObjectHandler {
         java.util.Map.Entry<java.lang.String, java.lang.String> onCeilingEntry(java.lang.String arg0);

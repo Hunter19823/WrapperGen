@@ -1,30 +1,31 @@
 package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>, G extends T, F extends H, H extends java.util.List<F>> extends ExampleClass<T, G, F, H> {
-    public MethodHandler<CalculateGenericObjectHandler> calculateGenericObjectHandler;
-    public MethodHandler<ComplexGenericExampleNumberHandler> complexGenericExampleNumberHandler;
-    public MethodHandler<EqualsObjectHandler> equalsObjectHandler;
-    public MethodHandler<GetAgeHandler> getAgeHandler;
-    public MethodHandler<GetComplexGenericHandler> getComplexGenericHandler;
-    public MethodHandler<GetGenericHandler<T>> getGenericHandler;
-    public MethodHandler<GetNameHandler> getNameHandler;
-    public MethodHandler<GetPITAGenericNavigableMapObjectHandler<T>> getPITAGenericNavigableMapObjectHandler;
-    public MethodHandler<HashCodeHandler> hashCodeHandler;
-    public MethodHandler<SetAgeDoubleHandler> setAgeDoubleHandler;
-    public MethodHandler<SetAgeIntHandler> setAgeIntHandler;
-    public MethodHandler<SetGenericNavigableMapHandler<T>> setGenericNavigableMapHandler;
-    public MethodHandler<SetMixedGenericsNumberNavigableMapHandler<T>> setMixedGenericsNumberNavigableMapHandler;
-    public MethodHandler<SetNameStringHandler> setNameStringHandler;
-    public MethodHandler<ToStringHandler> toStringHandler;
-    public MethodHandler<VarArgGenericExampleObjectHandler> varArgGenericExampleObjectHandler;
-    public MethodHandler<VarArgsExampleStringHandler> varArgsExampleStringHandler;
-    public ExampleClassWrapper(java.lang.String arg0, int arg1) {
-        super(arg0, arg1);
-    }
-
+    public MethodHandler<CalculateGenericObjectHandler> calculateGenericObjectHandler = new MethodHotSwapHandler<>(super::calculateGeneric);
+    public MethodHandler<ComplexGenericExampleNumberHandler> complexGenericExampleNumberHandler = new MethodHotSwapHandler<>(super::complexGenericExample);
+    public MethodHandler<EqualsObjectHandler> equalsObjectHandler = new MethodHotSwapHandler<>(super::equals);
+    public MethodHandler<GetAgeHandler> getAgeHandler = new MethodHotSwapHandler<>(super::getAge);
+    public MethodHandler<GetComplexGenericHandler> getComplexGenericHandler = new MethodHotSwapHandler<>(super::getComplexGeneric);
+    public MethodHandler<GetGenericHandler<T>> getGenericHandler = new MethodHotSwapHandler<>(super::getGeneric);
+    public MethodHandler<GetNameHandler> getNameHandler = new MethodHotSwapHandler<>(super::getName);
+    public MethodHandler<GetPITAGenericNavigableMapObjectHandler<T>> getPITAGenericNavigableMapObjectHandler = new MethodHotSwapHandler<>(super::getPITAGeneric);
+    public MethodHandler<HashCodeHandler> hashCodeHandler = new MethodHotSwapHandler<>(super::hashCode);
+    public MethodHandler<SetAgeDoubleHandler> setAgeDoubleHandler = new MethodHotSwapHandler<>(super::setAge);
+    public MethodHandler<SetAgeIntHandler> setAgeIntHandler = new MethodHotSwapHandler<>(super::setAge);
+    public MethodHandler<SetGenericNavigableMapHandler<T>> setGenericNavigableMapHandler = new MethodHotSwapHandler<>(super::setGeneric);
+    public MethodHandler<SetMixedGenericsNumberNavigableMapHandler<T>> setMixedGenericsNumberNavigableMapHandler = new MethodHotSwapHandler<>(super::setMixedGenerics);
+    public MethodHandler<SetNameStringHandler> setNameStringHandler = new MethodHotSwapHandler<>(super::setName);
+    public MethodHandler<ToStringHandler> toStringHandler = new MethodHotSwapHandler<>(super::toString);
+    public MethodHandler<VarArgGenericExampleObjectHandler> varArgGenericExampleObjectHandler = new MethodHotSwapHandler<>(super::varArgGenericExample);
+    public MethodHandler<VarArgsExampleStringHandler> varArgsExampleStringHandler = new MethodHotSwapHandler<>(super::varArgsExample);
     public ExampleClassWrapper(java.lang.String arg0, int arg1, T arg2) {
         super(arg0, arg1, arg2);
+    }
+
+    public ExampleClassWrapper(java.lang.String arg0, int arg1) {
+        super(arg0, arg1);
     }
 
     @Override
@@ -33,13 +34,12 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public boolean equals(java.lang.Object arg0) {
-        return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
-    }
-
-    @Override
     public java.lang.String toString() {
         return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
+    }
+    @Override
+    public boolean equals(java.lang.Object arg0) {
+        return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
 
     @Override
@@ -63,7 +63,6 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     public T getGeneric() {
         return (this.getGenericHandler != null && this.getGenericHandler.getHandler() != null) ? this.getGenericHandler.getHandler().onGetGeneric() : super.getGeneric();
     }
-
     @Override
     public java.lang.String getName() {
         return (this.getNameHandler != null && this.getNameHandler.getHandler() != null) ? this.getNameHandler.getHandler().onGetName() : super.getName();
@@ -75,6 +74,14 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
+    public <G> void calculateGeneric(G arg0) {
+        if (this.calculateGenericObjectHandler != null && this.calculateGenericObjectHandler.getHandler() != null) {
+            this.calculateGenericObjectHandler.getHandler().onCalculateGeneric(arg0);
+        } else {
+            super.calculateGeneric(arg0);
+        }
+    }
+    @Override
     public void setAge(int arg0) {
         if (this.setAgeIntHandler != null && this.setAgeIntHandler.getHandler() != null) {
             this.setAgeIntHandler.getHandler().onSetAge(arg0);
@@ -82,22 +89,12 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
             super.setAge(arg0);
         }
     }
-
     @Override
     public void setAge(double arg0) {
         if (this.setAgeDoubleHandler != null && this.setAgeDoubleHandler.getHandler() != null) {
             this.setAgeDoubleHandler.getHandler().onSetAge(arg0);
         } else {
             super.setAge(arg0);
-        }
-    }
-
-    @Override
-    public <G> void calculateGeneric(G arg0) {
-        if (this.calculateGenericObjectHandler != null && this.calculateGenericObjectHandler.getHandler() != null) {
-            this.calculateGenericObjectHandler.getHandler().onCalculateGeneric(arg0);
-        } else {
-            super.calculateGeneric(arg0);
         }
     }
 
@@ -120,11 +117,6 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public <T> T varArgGenericExample(T... arg0) {
-        return (this.varArgGenericExampleObjectHandler != null && this.varArgGenericExampleObjectHandler.getHandler() != null) ? this.varArgGenericExampleObjectHandler.getHandler().onVarArgGenericExample(arg0) : super.varArgGenericExample(arg0);
-    }
-
-    @Override
     public <COMPLEX_GENERIC extends java.lang.Number> void complexGenericExample(COMPLEX_GENERIC arg0) {
         if (this.complexGenericExampleNumberHandler != null && this.complexGenericExampleNumberHandler.getHandler() != null) {
             this.complexGenericExampleNumberHandler.getHandler().onComplexGenericExample(arg0);
@@ -136,6 +128,10 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     @Override
     public <COMPLEX_GENERIC extends java.lang.Number> COMPLEX_GENERIC getComplexGeneric() {
         return (this.getComplexGenericHandler != null && this.getComplexGenericHandler.getHandler() != null) ? this.getComplexGenericHandler.getHandler().onGetComplexGeneric() : super.getComplexGeneric();
+    }
+    @Override
+    public <T> T varArgGenericExample(T... arg0) {
+        return (this.varArgGenericExampleObjectHandler != null && this.varArgGenericExampleObjectHandler.getHandler() != null) ? this.varArgGenericExampleObjectHandler.getHandler().onVarArgGenericExample(arg0) : super.varArgGenericExample(arg0);
     }
 
     @Override
