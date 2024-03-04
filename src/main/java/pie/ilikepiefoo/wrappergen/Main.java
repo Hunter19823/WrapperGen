@@ -23,30 +23,17 @@ public class Main {
         classMap.put(ArrayList.class, examplePackage);
         classMap.put(ChildClass.class, examplePackage);
         classMap.put(ParentClass.class, examplePackage);
+        classMap.put(HashMap.class, examplePackage);
         for (Map.Entry<Class<?>, String> entry : classMap.entrySet()) {
             generateWrapperClass(entry.getKey(), entry.getValue());
             generateBuilderClass(entry.getKey(), entry.getValue());
         }
-//        TreeMapWrapper<String, String> treeMapWrapper = new TreeMapWrapper<>();
-//        treeMapWrapper.put("Hello", "World");
-//        System.out.println(treeMapWrapper.get("Hello"));
-//
-//        treeMapWrapper.putObjectObjectHandler.setCustomHandler(
-//            (key, value) -> {
-//                System.out.println("An item with key: " + key + " and value: " + value + " was added to the TreeMap.");
-//                return treeMapWrapper.putObjectObjectHandler.getSuperHandler().onPut(key, value);
-//            }
-//        );
-//
-//        treeMapWrapper.put("Hello", "Earth");
-//        System.out.println(treeMapWrapper.get("Hello"));
     }
 
     public static void generateWrapperClass(Class<?> subject, String packageName) {
         WrapperClassBuilder builder = new WrapperClassBuilder(subject.getSimpleName() + "Wrapper");
         builder.setPackageName(packageName);
         builder.addClassImplementation(subject);
-//        System.out.println(builder.toJavaFile(0));
         File file = new File("src/main/java/" + packageName.replace(".", "/") + "/" + subject.getSimpleName() + "Wrapper" + ".java");
         try (java.io.FileWriter writer = new java.io.FileWriter(file)) {
             writer.write(builder.toJavaFile(0));
@@ -59,7 +46,6 @@ public class Main {
         WrapperClassBuilder builder = new BuilderClassBuilder(subject.getSimpleName() + "Builder");
         builder.setPackageName(packageName);
         builder.addClassImplementation(subject);
-//        System.out.println(builder.toJavaFile(0));
         File file = new File("src/main/java/" + packageName.replace(".", "/") + "/" + subject.getSimpleName() + "Builder" + ".java");
         try (java.io.FileWriter writer = new java.io.FileWriter(file)) {
             writer.write(builder.toJavaFile(0));
