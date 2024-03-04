@@ -30,7 +30,7 @@ public class FunctionalInterfaceWrapper extends ClassBuilder {
         // CamelCase the method name and add Handler to the end.
         this.setImports("");
         this.setName(NamingUtils.getMethodHandlerName(method));
-        this.addAnnotations("@FunctionalInterfaceWrapper");
+        this.addAnnotations("@FunctionalInterface");
         this.setAccessModifier("public");
         this.setStructureType("interface");
 
