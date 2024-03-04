@@ -18,19 +18,19 @@ import java.util.StringJoiner;
 
 import static pie.ilikepiefoo.wrappergen.util.GenerationUtils.createMethodBuilderFromMethod;
 
-public class FunctionalInterface extends ClassBuilder {
+public class FunctionalInterfaceWrapper extends ClassBuilder {
     protected Method method;
     protected TypeVariableMap typeVariableMap;
     protected MethodBuilder methodBuilder;
     protected List<String> genericNames = new ArrayList<>();
 
-    public FunctionalInterface(Method method, TypeVariableMap typeVariableMap) {
+    public FunctionalInterfaceWrapper(Method method, TypeVariableMap typeVariableMap) {
         this.method = method;
         this.typeVariableMap = typeVariableMap;
         // CamelCase the method name and add Handler to the end.
         this.setImports("");
         this.setName(NamingUtils.getMethodHandlerName(method));
-        this.addAnnotations("@FunctionalInterface");
+        this.addAnnotations("@FunctionalInterfaceWrapper");
         this.setAccessModifier("public");
         this.setStructureType("interface");
 

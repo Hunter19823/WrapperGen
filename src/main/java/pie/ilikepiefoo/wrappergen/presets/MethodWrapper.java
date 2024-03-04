@@ -1,6 +1,5 @@
 package pie.ilikepiefoo.wrappergen.presets;
 
-import pie.ilikepiefoo.wrappergen.builder.ClassBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
@@ -18,7 +17,7 @@ import java.util.Set;
 public class MethodWrapper {
     private final Method method;
     private final FieldBuilder field;
-    private final FunctionalInterface wrapperType;
+    private final FunctionalInterfaceWrapper wrapperType;
     private final MethodBuilder overrideMethod;
     private final Set<String> requiredImports;
 
@@ -103,7 +102,7 @@ public class MethodWrapper {
         return field;
     }
 
-    public ClassBuilder getWrapperType() {
+    public FunctionalInterfaceWrapper getWrapperType() {
         return wrapperType;
     }
 

@@ -2,7 +2,7 @@ package pie.ilikepiefoo.wrappergen.util;
 
 import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
-import pie.ilikepiefoo.wrappergen.presets.FunctionalInterface;
+import pie.ilikepiefoo.wrappergen.presets.FunctionalInterfaceWrapper;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -10,8 +10,8 @@ import java.util.StringJoiner;
 
 public class GenerationUtils {
 
-    public static FunctionalInterface createMethodHandler(Method method, TypeVariableMap typeVariableMap) {
-        return new FunctionalInterface(method, typeVariableMap);
+    public static FunctionalInterfaceWrapper createMethodHandler(Method method, TypeVariableMap typeVariableMap) {
+        return new FunctionalInterfaceWrapper(method, typeVariableMap);
     }
 
     public static MethodBuilder createMethodBuilderFromMethod(Method method, TypeVariableMap typeVariableMap) {
