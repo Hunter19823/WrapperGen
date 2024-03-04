@@ -8,7 +8,6 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringJoiner;
@@ -28,8 +27,8 @@ public class ReflectionTools {
         return type.getCanonicalName();
     }
 
-    public static String getParameterArgument(Parameter parameter, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
-        String typeName = ReflectionTools.getGenericDefinition(parameter.getParameterizedType(), typeVariableMap);
+    public static String getParameterArgument(Parameter parameter, TypeVariableMap typeVariableMap) {
+        String typeName = ReflectionTools.getGenericName(parameter.getParameterizedType(), typeVariableMap);
         if (parameter.isVarArgs()) {
             // Remove the array brackets as we are using varargs.
             typeName = typeName.substring(0, typeName.length() - 2);
@@ -40,50 +39,53 @@ public class ReflectionTools {
             parameter.getName();
     }
 
-    public static String getGenericDefinition(Type type, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap) {
-        return getGenericDefinition(type, typeVariableMap, new HashSet<>());
+    public static String getGenericDefinition(Type type, TypeVariableMap typeVariableMap) {
+        return getGenericDefinition(type, typeVariableMap, false);
     }
 
-    private static String getGenericDefinition(Type type, Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap, Set<TypeVariable<?>> seenTypeVariables) {
+    public static String getGenericName(Type type, TypeVariableMap typeVariableMap) {
+        return getGenericDefinition(type, typeVariableMap, true);
+    }
+
+    private static String getGenericDefinition(Type type, TypeVariableMap typeVariableMap, boolean isDefiningTypeVariable) {
+        if (type instanceof TypeVariable<?> variable) {
+            type = typeVariableMap.get(variable);
+        }
         if (type instanceof Class<?> clazz) {
             return clazz.getCanonicalName();
         }
         if (type instanceof TypeVariable<?> variable) {
-            if (typeVariableMap.containsKey(variable)) {
-                variable = typeVariableMap.get(variable);
-            }
-            if (seenTypeVariables.contains(variable)) {
+            if (isDefiningTypeVariable) {
                 return variable.getName();
             }
-            seenTypeVariables.add(variable);
             var nonObjectBounds = Arrays.stream(variable.getBounds()).filter(b -> b != Object.class).toArray(Type[]::new);
             if (nonObjectBounds.length == 0) {
                 return variable.getName();
             }
             StringJoiner joiner = new StringJoiner(" & ", " extends ", "");
             for (Type bound : nonObjectBounds) {
-                joiner.add(getGenericDefinition(bound, typeVariableMap, seenTypeVariables));
+                joiner.add(getGenericDefinition(bound, typeVariableMap, true));
             }
             return variable.getName() + joiner;
         }
         if (type instanceof WildcardType wildcardType) {
             if (wildcardType.getLowerBounds().length > 0 && wildcardType.getLowerBounds()[0] != Object.class) {
-                return "? super " + getGenericDefinition(wildcardType.getLowerBounds()[0], typeVariableMap, seenTypeVariables);
+                return "? super " + getGenericDefinition(wildcardType.getLowerBounds()[0], typeVariableMap, isDefiningTypeVariable);
             }
             if (wildcardType.getUpperBounds().length > 0 && wildcardType.getUpperBounds()[0] != Object.class) {
-                return "? extends " + getGenericDefinition(wildcardType.getUpperBounds()[0], typeVariableMap, seenTypeVariables);
+                return "? extends " + getGenericDefinition(wildcardType.getUpperBounds()[0], typeVariableMap, isDefiningTypeVariable);
             }
             return "?";
         }
         if (type instanceof GenericArrayType genericArrayType) {
-            return getGenericDefinition(genericArrayType.getGenericComponentType(), typeVariableMap, seenTypeVariables) + "[]";
+            return getGenericDefinition(genericArrayType.getGenericComponentType(), typeVariableMap, isDefiningTypeVariable) + "[]";
         }
         if (type instanceof ParameterizedType parameterizedType) {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (var arg : parameterizedType.getActualTypeArguments()) {
-                joiner.add(getGenericDefinition(arg, typeVariableMap, seenTypeVariables));
+                joiner.add(getGenericDefinition(arg, typeVariableMap, isDefiningTypeVariable));
             }
-            return getGenericDefinition(parameterizedType.getRawType(), typeVariableMap, seenTypeVariables) + joiner;
+            return getGenericDefinition(parameterizedType.getRawType(), typeVariableMap, isDefiningTypeVariable) + joiner;
         }
         return type.getTypeName();
     }

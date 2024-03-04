@@ -37,4 +37,12 @@ public class NamingUtils {
         // Return method handler name with first character lowercase.
         return handlerName.substring(0, 1).toLowerCase() + handlerName.substring(1);
     }
+
+    public static String getShortName(Class<?> clazz) {
+        var name = clazz.getCanonicalName();
+        if (name.contains(clazz.getPackageName())) {
+            return name.substring(clazz.getPackageName().length() + 1);
+        }
+        return clazz.getSimpleName();
+    }
 }

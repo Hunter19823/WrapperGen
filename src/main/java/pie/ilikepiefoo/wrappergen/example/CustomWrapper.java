@@ -2,7 +2,9 @@ package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
 
-public class CustomWrapper<E> extends java.util.ArrayList<E> {
+import java.util.ArrayList;
+
+public class CustomWrapper<E> extends ArrayList<E> {
     public final MethodOverrideHandler<AddAllCollectionHandler<E>> addAllCollectionHandler;
     public final MethodOverrideHandler<AddAllintCollectionHandler<E>> addAllintCollectionHandler;
     public final MethodOverrideHandler<AddObjectHandler<E>> addObjectHandler;
@@ -40,7 +42,6 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     public final MethodOverrideHandler<ToArrayObjectHandler> toArrayObjectHandler;
     public final MethodOverrideHandler<ToStringHandler> toStringHandler;
     public final MethodOverrideHandler<TrimToSizeHandler> trimToSizeHandler;
-
     public CustomWrapper(java.util.Collection<? extends E> arg0) {
         super(arg0);
         this.addObjectHandler = new MethodOverrideHandler<>(super::add);
@@ -80,21 +81,6 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
         this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
         this.streamHandler = new MethodOverrideHandler<>(this::stream);
         this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
-    }
-
-    @Override
-    public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
-        return this.toArrayIntFunctionHandler.getHandler().onToArray(arg0);
-    }
-
-    @Override
-    public java.util.stream.Stream<E> stream() {
-        return this.streamHandler.getHandler().onStream();
-    }
-
-    @Override
-    public java.util.stream.Stream<E> parallelStream() {
-        return this.parallelStreamHandler.getHandler().onParallelStream();
     }
 
     public CustomWrapper() {
@@ -180,6 +166,26 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     }
 
     @Override
+    public boolean containsAll(java.util.Collection<?> arg0) {
+        return this.containsAllCollectionHandler.getHandler().onContainsAll(arg0);
+    }
+
+    @Override
+    public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
+        return this.toArrayIntFunctionHandler.getHandler().onToArray(arg0);
+    }
+
+    @Override
+    public java.util.stream.Stream<E> stream() {
+        return this.streamHandler.getHandler().onStream();
+    }
+
+    @Override
+    public java.util.stream.Stream<E> parallelStream() {
+        return this.parallelStreamHandler.getHandler().onParallelStream();
+    }
+
+    @Override
     public void trimToSize() {
         this.trimToSizeHandler.getHandler().onTrimToSize();
     }
@@ -187,6 +193,10 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     @Override
     public void ensureCapacity(int arg0) {
         this.ensureCapacityintHandler.getHandler().onEnsureCapacity(arg0);
+    }
+    @Override
+    public boolean contains(java.lang.Object arg0) {
+        return this.containsObjectHandler.getHandler().onContains(arg0);
     }
 
     @Override
@@ -200,11 +210,6 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     }
 
     @Override
-    public boolean contains(java.lang.Object arg0) {
-        return this.containsObjectHandler.getHandler().onContains(arg0);
-    }
-
-    @Override
     public int indexOf(java.lang.Object arg0) {
         return this.indexOfObjectHandler.getHandler().onIndexOf(arg0);
     }
@@ -212,6 +217,10 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     @Override
     public int lastIndexOf(java.lang.Object arg0) {
         return this.lastIndexOfObjectHandler.getHandler().onLastIndexOf(arg0);
+    }
+    @Override
+    public E get(int arg0) {
+        return this.getintHandler.getHandler().onGet(arg0);
     }
 
     @Override
@@ -227,11 +236,6 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     @Override
     public <T> T[] toArray(T[] arg0) {
         return this.toArrayObjectHandler.getHandler().onToArray(arg0);
-    }
-
-    @Override
-    public E get(int arg0) {
-        return this.getintHandler.getHandler().onGet(arg0);
     }
 
     @Override
@@ -268,6 +272,10 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     public boolean remove(java.lang.Object arg0) {
         return this.removeObjectHandler.getHandler().onRemove(arg0);
     }
+    @Override
+    public boolean removeAll(java.util.Collection<?> arg0) {
+        return this.removeAllCollectionHandler.getHandler().onRemoveAll(arg0);
+    }
 
     @Override
     public void clear() {
@@ -278,20 +286,14 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     public boolean addAll(java.util.Collection<? extends E> arg0) {
         return this.addAllCollectionHandler.getHandler().onAddAll(arg0);
     }
+    @Override
+    public boolean retainAll(java.util.Collection<?> arg0) {
+        return this.retainAllCollectionHandler.getHandler().onRetainAll(arg0);
+    }
 
     @Override
     public boolean addAll(int arg0, java.util.Collection<? extends E> arg1) {
         return this.addAllintCollectionHandler.getHandler().onAddAll(arg0, arg1);
-    }
-
-    @Override
-    public boolean removeAll(java.util.Collection<?> arg0) {
-        return this.removeAllCollectionHandler.getHandler().onRemoveAll(arg0);
-    }
-
-    @Override
-    public boolean retainAll(java.util.Collection<?> arg0) {
-        return this.retainAllCollectionHandler.getHandler().onRetainAll(arg0);
     }
 
     @Override
@@ -302,6 +304,10 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     @Override
     public java.util.ListIterator<E> listIterator() {
         return this.listIteratorHandler.getHandler().onListIterator();
+    }
+    @Override
+    public java.util.Spliterator<E> spliterator() {
+        return this.spliteratorHandler.getHandler().onSpliterator();
     }
 
     @Override
@@ -320,11 +326,6 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     }
 
     @Override
-    public java.util.Spliterator<E> spliterator() {
-        return this.spliteratorHandler.getHandler().onSpliterator();
-    }
-
-    @Override
     public boolean removeIf(java.util.function.Predicate<? super E> arg0) {
         return this.removeIfPredicateHandler.getHandler().onRemoveIf(arg0);
     }
@@ -333,22 +334,15 @@ public class CustomWrapper<E> extends java.util.ArrayList<E> {
     public void replaceAll(java.util.function.UnaryOperator<E> arg0) {
         this.replaceAllUnaryOperatorHandler.getHandler().onReplaceAll(arg0);
     }
-
-    @Override
-    public void sort(java.util.Comparator<? super E> arg0) {
-        this.sortComparatorHandler.getHandler().onSort(arg0);
-    }
-
-    @Override
-    public boolean containsAll(java.util.Collection<?> arg0) {
-        return this.containsAllCollectionHandler.getHandler().onContainsAll(arg0);
-    }
-
     @Override
     public java.lang.String toString() {
         return this.toStringHandler.getHandler().onToString();
     }
 
+    @Override
+    public void sort(java.util.Comparator<? super E> arg0) {
+        this.sortComparatorHandler.getHandler().onSort(arg0);
+    }
     @FunctionalInterface
     public interface AddAllCollectionHandler<E> {
         boolean onAddAll( java.util.Collection<? extends E> arg0 );

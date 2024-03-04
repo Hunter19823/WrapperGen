@@ -2,12 +2,14 @@ package pie.ilikepiefoo.wrappergen.builder;
 
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
 import pie.ilikepiefoo.wrappergen.util.MethodWrapper;
+import pie.ilikepiefoo.wrappergen.util.NamingUtils;
 import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
+import pie.ilikepiefoo.wrappergen.util.TypeVariableMap;
 
 import java.lang.reflect.Modifier;
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -51,13 +53,15 @@ public class WrapperClassBuilder implements JavaFileOutput {
         if (!subject.isInterface() && !this.classBuilder.getSuperClass().isBlank()) {
             throw new IllegalArgumentException("Class already has a superclass.");
         }
+        TypeVariableMap typeVariableMap = new TypeVariableMap(subject);
+
         StringBuilder sb = new StringBuilder();
-        sb.append(subject.getName());
+        sb.append(NamingUtils.getShortName(subject));
         if (subject.getTypeParameters().length > 0) {
             StringJoiner joiner = new StringJoiner(", ", "<", ">");
             for (int i = 0; i < subject.getTypeParameters().length; i++) {
                 joiner.add(subject.getTypeParameters()[i].getTypeName());
-                this.classBuilder.addGenerics(ReflectionTools.getGenericDefinition(subject.getTypeParameters()[i], Map.of()));
+                this.classBuilder.addGenerics(ReflectionTools.getGenericDefinition(subject.getTypeParameters()[i], typeVariableMap));
             }
             sb.append(joiner);
         }
@@ -68,7 +72,8 @@ public class WrapperClassBuilder implements JavaFileOutput {
                 .toList();
             for (var constructor : constructors) {
                 var constructorBuilder = GenerationUtils.createConstructorBuilderFromConstructor(
-                    constructor
+                    constructor,
+                    typeVariableMap
                 ).setAccessModifier("public").setName(this.classBuilder.getName());
                 for (var annotation : constructor.getAnnotations()) {
                     constructorBuilder.addAnnotations(annotation.annotationType().getSimpleName());
@@ -83,8 +88,6 @@ public class WrapperClassBuilder implements JavaFileOutput {
             this.classBuilder.addInterfaces(sb.toString());
         }
         this.importBuilder.addImport(subject);
-
-        Map<TypeVariable<?>, TypeVariable<?>> typeVariableMap = GenerationUtils.createTypeVariableMap(subject);
 
         Arrays.stream(subject.getMethods())
             .filter(method -> !Modifier.isStatic(method.getModifiers()) &&
@@ -191,6 +194,8 @@ public class WrapperClassBuilder implements JavaFileOutput {
     public String toJavaFile(int indentLevel) {
         var temp = this.classBuilder.getBody();
         this.classBuilder.setImports(this.importBuilder.toJavaFile(indentLevel));
+        this.methodBuilders.sort(Comparator.comparing(MethodBuilder::getName));
+        this.constructorBuilders.sort(Comparator.comparing(ConstructorBuilder::getName));
         for (FieldBuilder fieldBuilder : this.fieldBuilders.values()) {
             temp.add(fieldBuilder.toJavaFile(indentLevel + 1));
         }
