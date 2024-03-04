@@ -1,23 +1,23 @@
 package pie.ilikepiefoo.wrappergen.util;
 
-public class MethodOverrideHandler<HANDLER> {
+public class MethodHotSwapHandler<HANDLER> implements MethodHandler<HANDLER> {
     private HANDLER superHandler;
     private HANDLER customHandler;
 
-    public MethodOverrideHandler() {
+    public MethodHotSwapHandler() {
 
     }
 
-    public MethodOverrideHandler(HANDLER superHandler) {
+    public MethodHotSwapHandler(HANDLER superHandler) {
         this.superHandler = superHandler;
     }
 
-    public MethodOverrideHandler(HANDLER superHandler, HANDLER customHandler) {
+    public MethodHotSwapHandler(HANDLER superHandler, HANDLER customHandler) {
         this.superHandler = superHandler;
         this.customHandler = customHandler;
     }
 
-    public MethodOverrideHandler<HANDLER> setCustomHandler(HANDLER customHandler) {
+    public MethodHotSwapHandler<HANDLER> setCustomHandler(HANDLER customHandler) {
         this.customHandler = customHandler;
         return this;
     }
@@ -31,11 +31,15 @@ public class MethodOverrideHandler<HANDLER> {
             : superHandler;
     }
 
+    public HANDLER getHandler(HANDLER superHandler) {
+        return (this.customHandler == null) ? superHandler : this.customHandler;
+    }
+
     public HANDLER getSuperHandler() {
         return superHandler;
     }
 
-    public MethodOverrideHandler<HANDLER> setSuperHandler(HANDLER superHandler) {
+    public MethodHotSwapHandler<HANDLER> setSuperHandler(HANDLER superHandler) {
         this.superHandler = superHandler;
         return this;
     }

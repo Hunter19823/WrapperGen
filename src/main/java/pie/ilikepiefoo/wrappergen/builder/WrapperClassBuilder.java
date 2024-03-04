@@ -116,9 +116,6 @@ public class WrapperClassBuilder implements JavaFileOutput {
         this.addMethod(methodWrapper.getOverrideMethod());
         this.addInnerClass(methodWrapper.getWrapperType());
         this.importBuilder.addImports(methodWrapper.getRequiredImports());
-        for (ConstructorBuilder constructorBuilder : this.constructorBuilders) {
-            constructorBuilder.addBody(methodWrapper.getConstructorDeclaration());
-        }
 
         return this;
     }
@@ -154,11 +151,6 @@ public class WrapperClassBuilder implements JavaFileOutput {
 
     public WrapperClassBuilder addConstructor(ConstructorBuilder... constructorBuilders) {
         this.constructorBuilders.addAll(List.of(constructorBuilders));
-        for (ConstructorBuilder constructorBuilder : constructorBuilders) {
-            for (String declaration : constructorDeclarations) {
-                constructorBuilder.addBody(declaration);
-            }
-        }
         return this;
     }
 

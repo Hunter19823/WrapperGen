@@ -1,34 +1,33 @@
 package pie.ilikepiefoo.wrappergen.example;
 
-import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHandler;
 public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> extends PerfectlyNormalExampleClass<T> {
-    public final MethodOverrideHandler<EqualsObjectHandler> equalsObjectHandler;
-    public final MethodOverrideHandler<GetPerfectlyNormalResultNumberHandler<T>> getPerfectlyNormalResultNumberHandler;
-    public final MethodOverrideHandler<HashCodeHandler> hashCodeHandler;
-    public final MethodOverrideHandler<ToStringHandler> toStringHandler;
+    public MethodHandler<EqualsObjectHandler> equalsObjectHandler;
+    public MethodHandler<GetPerfectlyNormalResultNumberHandler<T>> getPerfectlyNormalResultNumberHandler;
+    public MethodHandler<HashCodeHandler> hashCodeHandler;
+    public MethodHandler<ToStringHandler> toStringHandler;
     public PerfectlyNormalExampleClassWrapper() {
         super();
-        this.getPerfectlyNormalResultNumberHandler = new MethodOverrideHandler<>(super::getPerfectlyNormalResult);
-        this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
-        this.toStringHandler = new MethodOverrideHandler<>(super::toString);
-        this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
+    }
+
+    @Override
+    public <N extends T> N getPerfectlyNormalResult(N arg0) {
+        return (this.getPerfectlyNormalResultNumberHandler != null && this.getPerfectlyNormalResultNumberHandler.getHandler() != null) ? this.getPerfectlyNormalResultNumberHandler.getHandler().onGetPerfectlyNormalResult(arg0) : super.getPerfectlyNormalResult(arg0);
+    }
+
+    @Override
+    public int hashCode() {
+        return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
     }
 
     @Override
     public boolean equals(java.lang.Object arg0) {
-        return this.equalsObjectHandler.getHandler().onEquals(arg0);
+        return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
-    @Override
-    public <N extends T> N getPerfectlyNormalResult(N arg0) {
-        return this.getPerfectlyNormalResultNumberHandler.getHandler().onGetPerfectlyNormalResult(arg0);
-    }
-    @Override
-    public int hashCode() {
-        return this.hashCodeHandler.getHandler().onHashCode();
-    }
+
     @Override
     public java.lang.String toString() {
-        return this.toStringHandler.getHandler().onToString();
+        return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
     }
     @FunctionalInterface
     public interface EqualsObjectHandler {
