@@ -1,5 +1,6 @@
 package pie.ilikepiefoo.wrappergen.presets;
 
+import pie.ilikepiefoo.wrappergen.builder.BuilderMethodBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
@@ -20,9 +21,11 @@ public class MethodWrapper {
     private final FunctionalInterfaceWrapper wrapperType;
     private final MethodBuilder overrideMethod;
     private final Set<String> requiredImports;
+    public final TypeVariableMap typeVariableMap;
 
     public MethodWrapper(Method method, TypeVariableMap typeVariableMap) {
         this.method = method;
+        this.typeVariableMap = typeVariableMap;
         this.wrapperType = GenerationUtils.createMethodHandler(method, typeVariableMap);
         this.field = new FieldBuilder()
             .setName(NamingUtils.getFieldName(this.wrapperType.getName()))
@@ -33,6 +36,18 @@ public class MethodWrapper {
             .setAccessModifier("public");
         this.overrideMethod = GenerationUtils.createMethodBuilderFromMethod(method, typeVariableMap)
             .addAnnotation("@Override");
+        this.overrideMethod.addBody(getOverrideMethodBody(method));
+        this.requiredImports = new HashSet<>();
+        for (var parameter : method.getParameters()) {
+            var type = ReflectionTools.getImportName(parameter.getType());
+            if (type != null) {
+                this.requiredImports.add(type);
+            }
+        }
+        this.requiredImports.add(MethodHandler.class.getCanonicalName());
+    }
+
+    public String getOverrideMethodBody(Method method) {
         StringBuilder sb = new StringBuilder();
         if (!method.getReturnType().equals(Void.TYPE)) {
             sb.append("return ");
@@ -65,16 +80,45 @@ public class MethodWrapper {
             ));
             sb.append("}");
         }
-        this.overrideMethod.addBody(sb.toString());
-        this.requiredImports = new HashSet<>();
-        for (var parameter : method.getParameters()) {
-            var type = ReflectionTools.getImportName(parameter.getType());
-            if (type != null) {
-                this.requiredImports.add(type);
-            }
-        }
-        this.requiredImports.add(MethodHandler.class.getCanonicalName());
+        return sb.toString();
     }
+
+    public String getOverrideMethodBodyWithBuilder(Method method, BuilderMethodBuilder builderMethodBuilder) {
+        StringBuilder sb = new StringBuilder();
+        if (!method.getReturnType().equals(Void.TYPE)) {
+            sb.append("return ");
+        } else {
+            sb.append("if");
+        }
+        sb.append("(this.builder != null && this.builder.%s() != null)".formatted(
+            this.field.getName()
+        ));
+        if (!method.getReturnType().equals(Void.TYPE)) {
+            sb.append(" ? this.builder.%s.%s%s : super.%s%s;".formatted(
+                this.field.getName(),
+                NamingUtils.getHandlerMethodName(this.method),
+                NamingUtils.getArgumentCall(this.overrideMethod.getArgs()),
+                this.method.getName(),
+                NamingUtils.getArgumentCall(this.overrideMethod.getArgs())
+            ));
+        } else {
+            sb.append(" {");
+            sb.append("this.builder.%s.%s%s;".formatted(
+                this.field.getName(),
+                NamingUtils.getHandlerMethodName(this.method),
+                NamingUtils.getArgumentCall(this.overrideMethod.getArgs())
+            ));
+            sb.append("} else {");
+            sb.append("super.%s%s;".formatted(
+                this.method.getName(),
+                NamingUtils.getArgumentCall(this.overrideMethod.getArgs())
+            ));
+            sb.append("}");
+        }
+        return sb.toString();
+    }
+
+
 
     public String getConstructorDeclaration() {
         if (Modifier.isAbstract(method.getModifiers())) {

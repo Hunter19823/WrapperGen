@@ -21,14 +21,18 @@ public class GenerationUtils {
             .setAccessModifier("public")
             .setIncludeMethodBody(false);
 
+        appendArgsAndGenerics(method, typeVariableMap, methodBuilder);
+
+        return methodBuilder;
+    }
+
+    public static void appendArgsAndGenerics(Method method, TypeVariableMap typeVariableMap, MethodBuilder methodBuilder) {
         for (var generic : method.getTypeParameters()) {
             methodBuilder.addGenerics(ReflectionTools.getGenericDefinition(generic, typeVariableMap));
         }
         for (var parameter : method.getParameters()) {
             methodBuilder.addArg(ReflectionTools.getParameterArgument(parameter, typeVariableMap));
         }
-
-        return methodBuilder;
     }
 
     public static ConstructorBuilder createConstructorBuilderFromConstructor(Constructor<?> constructor, TypeVariableMap typeVariableMap) {

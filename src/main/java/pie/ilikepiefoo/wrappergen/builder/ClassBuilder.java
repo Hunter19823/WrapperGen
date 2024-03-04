@@ -182,4 +182,21 @@ public class ClassBuilder implements JavaFileOutput {
         }
         return sb.toString();
     }
+
+    public String getCanonicalName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.name);
+        if (!this.generics.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(", ", "<", ">");
+            for (String generic : this.generics) {
+                if (generic.contains(" ")) {
+                    joiner.add(generic.substring(0, generic.indexOf(" ")));
+                } else {
+                    joiner.add(generic);
+                }
+            }
+            sb.append(joiner);
+        }
+        return sb.toString();
+    }
 }

@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class MethodBuilder implements JavaFileOutput {
-    private final List<String> args;
-    private final List<String> body;
-    private final List<String> modifiers;
-    private final List<String> exceptions;
-    private final List<String> annotations;
-    private final List<String> generics;
-    private String name;
-    private String returnType;
-    private String accessModifier;
-    private boolean includeMethodBody;
+    protected final List<String> args;
+    protected final List<String> body;
+    protected final List<String> modifiers;
+    protected final List<String> exceptions;
+    protected final List<String> annotations;
+    protected final List<String> generics;
+    protected String name;
+    protected String returnType;
+    protected String accessModifier;
+    protected boolean includeMethodBody;
 
     public MethodBuilder() {
         this.name = "method";
@@ -111,6 +111,12 @@ public class MethodBuilder implements JavaFileOutput {
 
     public List<String> getBody() {
         return body;
+    }
+
+    public MethodBuilder setBody(String... body) {
+        this.body.clear();
+        this.body.addAll(Arrays.asList(body));
+        return this;
     }
 
     public String getAccessModifier() {

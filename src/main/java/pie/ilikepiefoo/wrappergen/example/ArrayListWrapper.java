@@ -3,7 +3,8 @@ package pie.ilikepiefoo.wrappergen.example;
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
 
 import java.util.ArrayList;
-public class CustomWrapper<E> extends ArrayList<E> {
+
+public class ArrayListWrapper<E> extends ArrayList<E> {
     public MethodHandler<AddAllCollectionHandler<E>> addAllCollectionHandler;
     public MethodHandler<AddAllIntCollectionHandler<E>> addAllIntCollectionHandler;
     public MethodHandler<AddIntObjectHandler<E>> addIntObjectHandler;
@@ -41,15 +42,16 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public MethodHandler<ToArrayObjectHandler> toArrayObjectHandler;
     public MethodHandler<ToStringHandler> toStringHandler;
     public MethodHandler<TrimToSizeHandler> trimToSizeHandler;
-    public CustomWrapper(java.util.Collection<? extends E> arg0) {
+
+    public ArrayListWrapper(java.util.Collection<? extends E> arg0) {
         super(arg0);
     }
 
-    public CustomWrapper() {
+    public ArrayListWrapper() {
         super();
     }
 
-    public CustomWrapper(int arg0) {
+    public ArrayListWrapper(int arg0) {
         super(arg0);
     }
 
@@ -86,6 +88,10 @@ public class CustomWrapper<E> extends ArrayList<E> {
             super.trimToSize();
         }
     }
+    @Override
+    public boolean contains(java.lang.Object arg0) {
+        return (this.containsObjectHandler != null && this.containsObjectHandler.getHandler() != null) ? this.containsObjectHandler.getHandler().onContains(arg0) : super.contains(arg0);
+    }
 
     @Override
     public void ensureCapacity(int arg0) {
@@ -107,13 +113,12 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean contains(java.lang.Object arg0) {
-        return (this.containsObjectHandler != null && this.containsObjectHandler.getHandler() != null) ? this.containsObjectHandler.getHandler().onContains(arg0) : super.contains(arg0);
-    }
-
-    @Override
     public int indexOf(java.lang.Object arg0) {
         return (this.indexOfObjectHandler != null && this.indexOfObjectHandler.getHandler() != null) ? this.indexOfObjectHandler.getHandler().onIndexOf(arg0) : super.indexOf(arg0);
+    }
+    @Override
+    public E get(int arg0) {
+        return (this.getIntHandler != null && this.getIntHandler.getHandler() != null) ? this.getIntHandler.getHandler().onGet(arg0) : super.get(arg0);
     }
 
     @Override
@@ -134,11 +139,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     @Override
     public <T> T[] toArray(T[] arg0) {
         return (this.toArrayObjectHandler != null && this.toArrayObjectHandler.getHandler() != null) ? this.toArrayObjectHandler.getHandler().onToArray(arg0) : super.toArray(arg0);
-    }
-
-    @Override
-    public E get(int arg0) {
-        return (this.getIntHandler != null && this.getIntHandler.getHandler() != null) ? this.getIntHandler.getHandler().onGet(arg0) : super.get(arg0);
     }
 
     @Override
@@ -164,6 +164,10 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public E remove(int arg0) {
         return (this.removeIntHandler != null && this.removeIntHandler.getHandler() != null) ? this.removeIntHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
+    @Override
+    public boolean remove(java.lang.Object arg0) {
+        return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
+    }
 
     @Override
     public boolean equals(java.lang.Object arg0) {
@@ -173,11 +177,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     @Override
     public int hashCode() {
         return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
-    }
-
-    @Override
-    public boolean remove(java.lang.Object arg0) {
-        return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
 
     @Override
@@ -193,6 +192,10 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public boolean addAll(java.util.Collection<? extends E> arg0) {
         return (this.addAllCollectionHandler != null && this.addAllCollectionHandler.getHandler() != null) ? this.addAllCollectionHandler.getHandler().onAddAll(arg0) : super.addAll(arg0);
     }
+    @Override
+    public boolean retainAll(java.util.Collection<?> arg0) {
+        return (this.retainAllCollectionHandler != null && this.retainAllCollectionHandler.getHandler() != null) ? this.retainAllCollectionHandler.getHandler().onRetainAll(arg0) : super.retainAll(arg0);
+    }
 
     @Override
     public boolean addAll(int arg0, java.util.Collection<? extends E> arg1) {
@@ -202,11 +205,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     @Override
     public boolean removeAll(java.util.Collection<?> arg0) {
         return (this.removeAllCollectionHandler != null && this.removeAllCollectionHandler.getHandler() != null) ? this.removeAllCollectionHandler.getHandler().onRemoveAll(arg0) : super.removeAll(arg0);
-    }
-
-    @Override
-    public boolean retainAll(java.util.Collection<?> arg0) {
-        return (this.retainAllCollectionHandler != null && this.retainAllCollectionHandler.getHandler() != null) ? this.retainAllCollectionHandler.getHandler().onRetainAll(arg0) : super.retainAll(arg0);
     }
 
     @Override
@@ -223,7 +221,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public java.util.Iterator<E> iterator() {
         return (this.iteratorHandler != null && this.iteratorHandler.getHandler() != null) ? this.iteratorHandler.getHandler().onIterator() : super.iterator();
     }
-
     @Override
     public java.util.List<E> subList(int arg0, int arg1) {
         return (this.subListIntIntHandler != null && this.subListIntIntHandler.getHandler() != null) ? this.subListIntIntHandler.getHandler().onSubList(arg0, arg1) : super.subList(arg0, arg1);

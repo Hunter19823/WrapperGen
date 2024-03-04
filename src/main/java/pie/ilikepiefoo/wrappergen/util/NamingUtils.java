@@ -25,6 +25,10 @@ public class NamingUtils {
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
+    public static String SnakeCase(String name) {
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
+    }
+
     public static String getHandlerMethodName(Method method) {
         return "on" +
             CamelCase(method.getName());

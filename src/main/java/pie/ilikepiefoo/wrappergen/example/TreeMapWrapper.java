@@ -90,10 +90,23 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public boolean equals(java.lang.Object arg0) {
         return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
+    @Override
+    public java.util.Comparator<? super K> comparator() {
+        return (this.comparatorHandler != null && this.comparatorHandler.getHandler() != null) ? this.comparatorHandler.getHandler().onComparator() : super.comparator();
+    }
 
     @Override
     public int hashCode() {
         return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
+    }
+    @Override
+    public V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1) {
+        return (this.computeIfAbsentObjectFunctionHandler != null && this.computeIfAbsentObjectFunctionHandler.getHandler() != null) ? this.computeIfAbsentObjectFunctionHandler.getHandler().onComputeIfAbsent(arg0, arg1) : super.computeIfAbsent(arg0, arg1);
+    }
+
+    @Override
+    public V computeIfPresent(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1) {
+        return (this.computeIfPresentObjectBiFunctionHandler != null && this.computeIfPresentObjectBiFunctionHandler.getHandler() != null) ? this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1) : super.computeIfPresent(arg0, arg1);
     }
 
     @Override
@@ -122,18 +135,25 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @Override
-    public java.util.Comparator<? super K> comparator() {
-        return (this.comparatorHandler != null && this.comparatorHandler.getHandler() != null) ? this.comparatorHandler.getHandler().onComparator() : super.comparator();
-    }
-
-    @Override
     public K firstKey() {
         return (this.firstKeyHandler != null && this.firstKeyHandler.getHandler() != null) ? this.firstKeyHandler.getHandler().onFirstKey() : super.firstKey();
+    }
+    @Override
+    public java.util.Map.Entry<K, V> firstEntry() {
+        return (this.firstEntryHandler != null && this.firstEntryHandler.getHandler() != null) ? this.firstEntryHandler.getHandler().onFirstEntry() : super.firstEntry();
     }
 
     @Override
     public K lastKey() {
         return (this.lastKeyHandler != null && this.lastKeyHandler.getHandler() != null) ? this.lastKeyHandler.getHandler().onLastKey() : super.lastKey();
+    }
+    @Override
+    public java.util.Map.Entry<K, V> floorEntry(K arg0) {
+        return (this.floorEntryObjectHandler != null && this.floorEntryObjectHandler.getHandler() != null) ? this.floorEntryObjectHandler.getHandler().onFloorEntry(arg0) : super.floorEntry(arg0);
+    }
+    @Override
+    public K floorKey(K arg0) {
+        return (this.floorKeyObjectHandler != null && this.floorKeyObjectHandler.getHandler() != null) ? this.floorKeyObjectHandler.getHandler().onFloorKey(arg0) : super.floorKey(arg0);
     }
 
     @Override
@@ -156,16 +176,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @Override
-    public V computeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1) {
-        return (this.computeIfAbsentObjectFunctionHandler != null && this.computeIfAbsentObjectFunctionHandler.getHandler() != null) ? this.computeIfAbsentObjectFunctionHandler.getHandler().onComputeIfAbsent(arg0, arg1) : super.computeIfAbsent(arg0, arg1);
-    }
-
-    @Override
-    public V computeIfPresent(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1) {
-        return (this.computeIfPresentObjectBiFunctionHandler != null && this.computeIfPresentObjectBiFunctionHandler.getHandler() != null) ? this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1) : super.computeIfPresent(arg0, arg1);
-    }
-
-    @Override
     public V compute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1) {
         return (this.computeObjectBiFunctionHandler != null && this.computeObjectBiFunctionHandler.getHandler() != null) ? this.computeObjectBiFunctionHandler.getHandler().onCompute(arg0, arg1) : super.compute(arg0, arg1);
     }
@@ -179,6 +189,14 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public V remove(java.lang.Object arg0) {
         return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
+    @Override
+    public java.util.Map.Entry<K, V> higherEntry(K arg0) {
+        return (this.higherEntryObjectHandler != null && this.higherEntryObjectHandler.getHandler() != null) ? this.higherEntryObjectHandler.getHandler().onHigherEntry(arg0) : super.higherEntry(arg0);
+    }
+    @Override
+    public K higherKey(K arg0) {
+        return (this.higherKeyObjectHandler != null && this.higherKeyObjectHandler.getHandler() != null) ? this.higherKeyObjectHandler.getHandler().onHigherKey(arg0) : super.higherKey(arg0);
+    }
 
     @Override
     public void clear() {
@@ -188,15 +206,14 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
             super.clear();
         }
     }
+    @Override
+    public java.util.Set<K> keySet() {
+        return (this.keySetHandler != null && this.keySetHandler.getHandler() != null) ? this.keySetHandler.getHandler().onKeySet() : super.keySet();
+    }
 
     @Override
     public java.lang.Object clone() {
         return (this.cloneHandler != null && this.cloneHandler.getHandler() != null) ? this.cloneHandler.getHandler().onClone() : super.clone();
-    }
-
-    @Override
-    public java.util.Map.Entry<K, V> firstEntry() {
-        return (this.firstEntryHandler != null && this.firstEntryHandler.getHandler() != null) ? this.firstEntryHandler.getHandler().onFirstEntry() : super.firstEntry();
     }
 
     @Override
@@ -225,16 +242,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @Override
-    public java.util.Map.Entry<K, V> floorEntry(K arg0) {
-        return (this.floorEntryObjectHandler != null && this.floorEntryObjectHandler.getHandler() != null) ? this.floorEntryObjectHandler.getHandler().onFloorEntry(arg0) : super.floorEntry(arg0);
-    }
-
-    @Override
-    public K floorKey(K arg0) {
-        return (this.floorKeyObjectHandler != null && this.floorKeyObjectHandler.getHandler() != null) ? this.floorKeyObjectHandler.getHandler().onFloorKey(arg0) : super.floorKey(arg0);
-    }
-
-    @Override
     public java.util.Map.Entry<K, V> ceilingEntry(K arg0) {
         return (this.ceilingEntryObjectHandler != null && this.ceilingEntryObjectHandler.getHandler() != null) ? this.ceilingEntryObjectHandler.getHandler().onCeilingEntry(arg0) : super.ceilingEntry(arg0);
     }
@@ -242,21 +249,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     @Override
     public K ceilingKey(K arg0) {
         return (this.ceilingKeyObjectHandler != null && this.ceilingKeyObjectHandler.getHandler() != null) ? this.ceilingKeyObjectHandler.getHandler().onCeilingKey(arg0) : super.ceilingKey(arg0);
-    }
-
-    @Override
-    public java.util.Map.Entry<K, V> higherEntry(K arg0) {
-        return (this.higherEntryObjectHandler != null && this.higherEntryObjectHandler.getHandler() != null) ? this.higherEntryObjectHandler.getHandler().onHigherEntry(arg0) : super.higherEntry(arg0);
-    }
-
-    @Override
-    public K higherKey(K arg0) {
-        return (this.higherKeyObjectHandler != null && this.higherKeyObjectHandler.getHandler() != null) ? this.higherKeyObjectHandler.getHandler().onHigherKey(arg0) : super.higherKey(arg0);
-    }
-
-    @Override
-    public java.util.Set<K> keySet() {
-        return (this.keySetHandler != null && this.keySetHandler.getHandler() != null) ? this.keySetHandler.getHandler().onKeySet() : super.keySet();
     }
 
     @Override
@@ -282,6 +274,22 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     @Override
     public java.util.NavigableMap<K, V> descendingMap() {
         return (this.descendingMapHandler != null && this.descendingMapHandler.getHandler() != null) ? this.descendingMapHandler.getHandler().onDescendingMap() : super.descendingMap();
+    }
+    @Override
+    public boolean replace(K arg0, V arg1, V arg2) {
+        return (this.replaceObjectObjectObjectHandler != null && this.replaceObjectObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectObjectHandler.getHandler().onReplace(arg0, arg1, arg2) : super.replace(arg0, arg1, arg2);
+    }
+    @Override
+    public V replace(K arg0, V arg1) {
+        return (this.replaceObjectObjectHandler != null && this.replaceObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectHandler.getHandler().onReplace(arg0, arg1) : super.replace(arg0, arg1);
+    }
+    @Override
+    public void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> arg0) {
+        if (this.replaceAllBiFunctionHandler != null && this.replaceAllBiFunctionHandler.getHandler() != null) {
+            this.replaceAllBiFunctionHandler.getHandler().onReplaceAll(arg0);
+        } else {
+            super.replaceAll(arg0);
+        }
     }
 
     @Override
@@ -315,30 +323,11 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @Override
-    public boolean replace(K arg0, V arg1, V arg2) {
-        return (this.replaceObjectObjectObjectHandler != null && this.replaceObjectObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectObjectHandler.getHandler().onReplace(arg0, arg1, arg2) : super.replace(arg0, arg1, arg2);
-    }
-
-    @Override
-    public V replace(K arg0, V arg1) {
-        return (this.replaceObjectObjectHandler != null && this.replaceObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectHandler.getHandler().onReplace(arg0, arg1) : super.replace(arg0, arg1);
-    }
-
-    @Override
     public void forEach(java.util.function.BiConsumer<? super K, ? super V> arg0) {
         if (this.forEachBiConsumerHandler != null && this.forEachBiConsumerHandler.getHandler() != null) {
             this.forEachBiConsumerHandler.getHandler().onForEach(arg0);
         } else {
             super.forEach(arg0);
-        }
-    }
-
-    @Override
-    public void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> arg0) {
-        if (this.replaceAllBiFunctionHandler != null && this.replaceAllBiFunctionHandler.getHandler() != null) {
-            this.replaceAllBiFunctionHandler.getHandler().onReplaceAll(arg0);
-        } else {
-            super.replaceAll(arg0);
         }
     }
     @FunctionalInterface

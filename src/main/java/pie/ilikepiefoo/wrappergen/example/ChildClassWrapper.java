@@ -78,8 +78,21 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
+    public java.util.Comparator<? super java.lang.String> comparator() {
+        return (this.comparatorHandler != null && this.comparatorHandler.getHandler() != null) ? this.comparatorHandler.getHandler().onComparator() : super.comparator();
+    }
+
+    @Override
     public int hashCode() {
         return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
+    }
+    @Override
+    public java.lang.String computeIfAbsent(java.lang.String arg0, java.util.function.Function<? super java.lang.String, ? extends java.lang.String> arg1) {
+        return (this.computeIfAbsentObjectFunctionHandler != null && this.computeIfAbsentObjectFunctionHandler.getHandler() != null) ? this.computeIfAbsentObjectFunctionHandler.getHandler().onComputeIfAbsent(arg0, arg1) : super.computeIfAbsent(arg0, arg1);
+    }
+    @Override
+    public java.lang.String computeIfPresent(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1) {
+        return (this.computeIfPresentObjectBiFunctionHandler != null && this.computeIfPresentObjectBiFunctionHandler.getHandler() != null) ? this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1) : super.computeIfPresent(arg0, arg1);
     }
 
     @Override
@@ -108,18 +121,26 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
-    public java.util.Comparator<? super java.lang.String> comparator() {
-        return (this.comparatorHandler != null && this.comparatorHandler.getHandler() != null) ? this.comparatorHandler.getHandler().onComparator() : super.comparator();
-    }
-
-    @Override
     public java.lang.String firstKey() {
         return (this.firstKeyHandler != null && this.firstKeyHandler.getHandler() != null) ? this.firstKeyHandler.getHandler().onFirstKey() : super.firstKey();
     }
 
     @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> firstEntry() {
+        return (this.firstEntryHandler != null && this.firstEntryHandler.getHandler() != null) ? this.firstEntryHandler.getHandler().onFirstEntry() : super.firstEntry();
+    }
+
+    @Override
     public java.lang.String lastKey() {
         return (this.lastKeyHandler != null && this.lastKeyHandler.getHandler() != null) ? this.lastKeyHandler.getHandler().onLastKey() : super.lastKey();
+    }
+    @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> floorEntry(java.lang.String arg0) {
+        return (this.floorEntryObjectHandler != null && this.floorEntryObjectHandler.getHandler() != null) ? this.floorEntryObjectHandler.getHandler().onFloorEntry(arg0) : super.floorEntry(arg0);
+    }
+    @Override
+    public java.lang.String floorKey(java.lang.String arg0) {
+        return (this.floorKeyObjectHandler != null && this.floorKeyObjectHandler.getHandler() != null) ? this.floorKeyObjectHandler.getHandler().onFloorKey(arg0) : super.floorKey(arg0);
     }
 
     @Override
@@ -142,16 +163,6 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
-    public java.lang.String computeIfAbsent(java.lang.String arg0, java.util.function.Function<? super java.lang.String, ? extends java.lang.String> arg1) {
-        return (this.computeIfAbsentObjectFunctionHandler != null && this.computeIfAbsentObjectFunctionHandler.getHandler() != null) ? this.computeIfAbsentObjectFunctionHandler.getHandler().onComputeIfAbsent(arg0, arg1) : super.computeIfAbsent(arg0, arg1);
-    }
-
-    @Override
-    public java.lang.String computeIfPresent(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1) {
-        return (this.computeIfPresentObjectBiFunctionHandler != null && this.computeIfPresentObjectBiFunctionHandler.getHandler() != null) ? this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1) : super.computeIfPresent(arg0, arg1);
-    }
-
-    @Override
     public java.lang.String compute(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1) {
         return (this.computeObjectBiFunctionHandler != null && this.computeObjectBiFunctionHandler.getHandler() != null) ? this.computeObjectBiFunctionHandler.getHandler().onCompute(arg0, arg1) : super.compute(arg0, arg1);
     }
@@ -165,6 +176,14 @@ public class ChildClassWrapper extends ChildClass {
     public java.lang.String remove(java.lang.Object arg0) {
         return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
+    @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> higherEntry(java.lang.String arg0) {
+        return (this.higherEntryObjectHandler != null && this.higherEntryObjectHandler.getHandler() != null) ? this.higherEntryObjectHandler.getHandler().onHigherEntry(arg0) : super.higherEntry(arg0);
+    }
+    @Override
+    public java.lang.String higherKey(java.lang.String arg0) {
+        return (this.higherKeyObjectHandler != null && this.higherKeyObjectHandler.getHandler() != null) ? this.higherKeyObjectHandler.getHandler().onHigherKey(arg0) : super.higherKey(arg0);
+    }
 
     @Override
     public void clear() {
@@ -174,15 +193,14 @@ public class ChildClassWrapper extends ChildClass {
             super.clear();
         }
     }
+    @Override
+    public java.util.Set<java.lang.String> keySet() {
+        return (this.keySetHandler != null && this.keySetHandler.getHandler() != null) ? this.keySetHandler.getHandler().onKeySet() : super.keySet();
+    }
 
     @Override
     public java.lang.Object clone() {
         return (this.cloneHandler != null && this.cloneHandler.getHandler() != null) ? this.cloneHandler.getHandler().onClone() : super.clone();
-    }
-
-    @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> firstEntry() {
-        return (this.firstEntryHandler != null && this.firstEntryHandler.getHandler() != null) ? this.firstEntryHandler.getHandler().onFirstEntry() : super.firstEntry();
     }
 
     @Override
@@ -211,16 +229,6 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> floorEntry(java.lang.String arg0) {
-        return (this.floorEntryObjectHandler != null && this.floorEntryObjectHandler.getHandler() != null) ? this.floorEntryObjectHandler.getHandler().onFloorEntry(arg0) : super.floorEntry(arg0);
-    }
-
-    @Override
-    public java.lang.String floorKey(java.lang.String arg0) {
-        return (this.floorKeyObjectHandler != null && this.floorKeyObjectHandler.getHandler() != null) ? this.floorKeyObjectHandler.getHandler().onFloorKey(arg0) : super.floorKey(arg0);
-    }
-
-    @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> ceilingEntry(java.lang.String arg0) {
         return (this.ceilingEntryObjectHandler != null && this.ceilingEntryObjectHandler.getHandler() != null) ? this.ceilingEntryObjectHandler.getHandler().onCeilingEntry(arg0) : super.ceilingEntry(arg0);
     }
@@ -228,21 +236,6 @@ public class ChildClassWrapper extends ChildClass {
     @Override
     public java.lang.String ceilingKey(java.lang.String arg0) {
         return (this.ceilingKeyObjectHandler != null && this.ceilingKeyObjectHandler.getHandler() != null) ? this.ceilingKeyObjectHandler.getHandler().onCeilingKey(arg0) : super.ceilingKey(arg0);
-    }
-
-    @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> higherEntry(java.lang.String arg0) {
-        return (this.higherEntryObjectHandler != null && this.higherEntryObjectHandler.getHandler() != null) ? this.higherEntryObjectHandler.getHandler().onHigherEntry(arg0) : super.higherEntry(arg0);
-    }
-
-    @Override
-    public java.lang.String higherKey(java.lang.String arg0) {
-        return (this.higherKeyObjectHandler != null && this.higherKeyObjectHandler.getHandler() != null) ? this.higherKeyObjectHandler.getHandler().onHigherKey(arg0) : super.higherKey(arg0);
-    }
-
-    @Override
-    public java.util.Set<java.lang.String> keySet() {
-        return (this.keySetHandler != null && this.keySetHandler.getHandler() != null) ? this.keySetHandler.getHandler().onKeySet() : super.keySet();
     }
 
     @Override
@@ -268,6 +261,22 @@ public class ChildClassWrapper extends ChildClass {
     @Override
     public java.util.NavigableMap<java.lang.String, java.lang.String> descendingMap() {
         return (this.descendingMapHandler != null && this.descendingMapHandler.getHandler() != null) ? this.descendingMapHandler.getHandler().onDescendingMap() : super.descendingMap();
+    }
+    @Override
+    public boolean replace(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) {
+        return (this.replaceObjectObjectObjectHandler != null && this.replaceObjectObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectObjectHandler.getHandler().onReplace(arg0, arg1, arg2) : super.replace(arg0, arg1, arg2);
+    }
+    @Override
+    public java.lang.String replace(java.lang.String arg0, java.lang.String arg1) {
+        return (this.replaceObjectObjectHandler != null && this.replaceObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectHandler.getHandler().onReplace(arg0, arg1) : super.replace(arg0, arg1);
+    }
+    @Override
+    public void replaceAll(java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg0) {
+        if (this.replaceAllBiFunctionHandler != null && this.replaceAllBiFunctionHandler.getHandler() != null) {
+            this.replaceAllBiFunctionHandler.getHandler().onReplaceAll(arg0);
+        } else {
+            super.replaceAll(arg0);
+        }
     }
 
     @Override
@@ -301,30 +310,11 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
-    public boolean replace(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) {
-        return (this.replaceObjectObjectObjectHandler != null && this.replaceObjectObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectObjectHandler.getHandler().onReplace(arg0, arg1, arg2) : super.replace(arg0, arg1, arg2);
-    }
-
-    @Override
-    public java.lang.String replace(java.lang.String arg0, java.lang.String arg1) {
-        return (this.replaceObjectObjectHandler != null && this.replaceObjectObjectHandler.getHandler() != null) ? this.replaceObjectObjectHandler.getHandler().onReplace(arg0, arg1) : super.replace(arg0, arg1);
-    }
-
-    @Override
     public void forEach(java.util.function.BiConsumer<? super java.lang.String, ? super java.lang.String> arg0) {
         if (this.forEachBiConsumerHandler != null && this.forEachBiConsumerHandler.getHandler() != null) {
             this.forEachBiConsumerHandler.getHandler().onForEach(arg0);
         } else {
             super.forEach(arg0);
-        }
-    }
-
-    @Override
-    public void replaceAll(java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg0) {
-        if (this.replaceAllBiFunctionHandler != null && this.replaceAllBiFunctionHandler.getHandler() != null) {
-            this.replaceAllBiFunctionHandler.getHandler().onReplaceAll(arg0);
-        } else {
-            super.replaceAll(arg0);
         }
     }
     @FunctionalInterface

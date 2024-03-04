@@ -28,8 +28,18 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public T getGeneric() {
-        return (this.getGenericHandler != null && this.getGenericHandler.getHandler() != null) ? this.getGenericHandler.getHandler().onGetGeneric() : super.getGeneric();
+    public int hashCode() {
+        return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object arg0) {
+        return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
     }
 
     @Override
@@ -42,17 +52,21 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public java.lang.String getName() {
-        return (this.getNameHandler != null && this.getNameHandler.getHandler() != null) ? this.getNameHandler.getHandler().onGetName() : super.getName();
-    }
-
-    @Override
     public void setName(java.lang.String arg0) {
         if (this.setNameStringHandler != null && this.setNameStringHandler.getHandler() != null) {
             this.setNameStringHandler.getHandler().onSetName(arg0);
         } else {
             super.setName(arg0);
         }
+    }
+    @Override
+    public T getGeneric() {
+        return (this.getGenericHandler != null && this.getGenericHandler.getHandler() != null) ? this.getGenericHandler.getHandler().onGetGeneric() : super.getGeneric();
+    }
+
+    @Override
+    public java.lang.String getName() {
+        return (this.getNameHandler != null && this.getNameHandler.getHandler() != null) ? this.getNameHandler.getHandler().onGetName() : super.getName();
     }
 
     @Override
@@ -97,6 +111,15 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
+    public <COMPLEX_GENERIC extends java.lang.Number> void setMixedGenerics(COMPLEX_GENERIC arg0, T arg1) {
+        if (this.setMixedGenericsNumberNavigableMapHandler != null && this.setMixedGenericsNumberNavigableMapHandler.getHandler() != null) {
+            this.setMixedGenericsNumberNavigableMapHandler.getHandler().onSetMixedGenerics(arg0, arg1);
+        } else {
+            super.setMixedGenerics(arg0, arg1);
+        }
+    }
+
+    @Override
     public <T> T varArgGenericExample(T... arg0) {
         return (this.varArgGenericExampleObjectHandler != null && this.varArgGenericExampleObjectHandler.getHandler() != null) ? this.varArgGenericExampleObjectHandler.getHandler().onVarArgGenericExample(arg0) : super.varArgGenericExample(arg0);
     }
@@ -116,32 +139,8 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public <COMPLEX_GENERIC extends java.lang.Number> void setMixedGenerics(COMPLEX_GENERIC arg0, T arg1) {
-        if (this.setMixedGenericsNumberNavigableMapHandler != null && this.setMixedGenericsNumberNavigableMapHandler.getHandler() != null) {
-            this.setMixedGenericsNumberNavigableMapHandler.getHandler().onSetMixedGenerics(arg0, arg1);
-        } else {
-            super.setMixedGenerics(arg0, arg1);
-        }
-    }
-
-    @Override
     public <L, M, N extends T> L getPITAGeneric(T arg0, L arg1) {
         return (this.getPITAGenericNavigableMapObjectHandler != null && this.getPITAGenericNavigableMapObjectHandler.getHandler() != null) ? this.getPITAGenericNavigableMapObjectHandler.getHandler().onGetPITAGeneric(arg0, arg1) : super.getPITAGeneric(arg0, arg1);
-    }
-
-    @Override
-    public int hashCode() {
-        return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
-    }
-
-    @Override
-    public boolean equals(java.lang.Object arg0) {
-        return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
-    }
-
-    @Override
-    public java.lang.String toString() {
-        return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
     }
     @FunctionalInterface
     public interface CalculateGenericObjectHandler {
