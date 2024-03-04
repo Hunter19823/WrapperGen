@@ -1,8 +1,8 @@
 package pie.ilikepiefoo.wrappergen.util;
 
 import pie.ilikepiefoo.wrappergen.builder.ConstructorBuilder;
-import pie.ilikepiefoo.wrappergen.builder.FunctionalInterface;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
+import pie.ilikepiefoo.wrappergen.presets.FunctionalInterface;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

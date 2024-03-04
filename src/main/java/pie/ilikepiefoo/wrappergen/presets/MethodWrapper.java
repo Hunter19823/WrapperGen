@@ -1,9 +1,14 @@
-package pie.ilikepiefoo.wrappergen.util;
+package pie.ilikepiefoo.wrappergen.presets;
 
 import pie.ilikepiefoo.wrappergen.builder.ClassBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
-import pie.ilikepiefoo.wrappergen.builder.FunctionalInterface;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
+import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
+import pie.ilikepiefoo.wrappergen.util.MethodHandler;
+import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
+import pie.ilikepiefoo.wrappergen.util.NamingUtils;
+import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
+import pie.ilikepiefoo.wrappergen.util.TypeVariableMap;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

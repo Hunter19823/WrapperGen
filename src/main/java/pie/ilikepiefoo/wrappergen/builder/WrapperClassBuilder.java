@@ -1,7 +1,7 @@
 package pie.ilikepiefoo.wrappergen.builder;
 
+import pie.ilikepiefoo.wrappergen.presets.MethodWrapper;
 import pie.ilikepiefoo.wrappergen.util.GenerationUtils;
-import pie.ilikepiefoo.wrappergen.util.MethodWrapper;
 import pie.ilikepiefoo.wrappergen.util.NamingUtils;
 import pie.ilikepiefoo.wrappergen.util.ReflectionTools;
 import pie.ilikepiefoo.wrappergen.util.TypeVariableMap;
