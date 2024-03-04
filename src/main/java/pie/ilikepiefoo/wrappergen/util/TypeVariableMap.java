@@ -46,19 +46,22 @@ public class TypeVariableMap {
     private static void remapTypeVariables(HashMap<TypeVariable<?>, Type> typeVariableMap, ParameterizedType parameterizedType) {
         TypeVariable<?>[] typeVariables = ((Class<?>) parameterizedType.getRawType()).getTypeParameters();
         Type[] actualTypes = parameterizedType.getActualTypeArguments();
+        TYPE_LOOP:
         for (int i = 0; i < typeVariables.length; i++) {
             if (typeVariableMap.containsKey(typeVariables[i])) {
-                return;
+                continue TYPE_LOOP;
             }
             if (!(actualTypes[i] instanceof TypeVariable<?> actualType)) {
-                return;
+                typeVariableMap.put(typeVariables[i], actualTypes[i]);
+                continue TYPE_LOOP;
             }
             while (typeVariableMap.containsKey(actualType)) {
                 var tempType = typeVariableMap.get(actualType);
                 if (tempType instanceof TypeVariable<?> tempTypeVariable) {
                     actualType = tempTypeVariable;
                 } else {
-                    break;
+                    typeVariableMap.put(typeVariables[i], tempType);
+                    continue TYPE_LOOP;
                 }
             }
             typeVariableMap.put(typeVariables[i], actualType);
@@ -67,6 +70,10 @@ public class TypeVariableMap {
 
     public Type get(TypeVariable<?> typeVariable) {
         return typeVariableMap.getOrDefault(typeVariable, typeVariable);
+    }
+
+    public boolean isTypeVariable(TypeVariable<?> typeVariable) {
+        return get(typeVariable) instanceof TypeVariable<?>;
     }
 
 }

@@ -2,36 +2,29 @@ package pie.ilikepiefoo.wrappergen.util;
 
 import pie.ilikepiefoo.wrappergen.builder.ClassBuilder;
 import pie.ilikepiefoo.wrappergen.builder.FieldBuilder;
+import pie.ilikepiefoo.wrappergen.builder.FunctionalInterface;
 import pie.ilikepiefoo.wrappergen.builder.MethodBuilder;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class MethodWrapper {
     private final Method method;
     private final FieldBuilder field;
-    private final ClassBuilder wrapperType;
+    private final FunctionalInterface wrapperType;
     private final MethodBuilder overrideMethod;
     private final Set<String> requiredImports;
 
     public MethodWrapper(Method method, TypeVariableMap typeVariableMap) {
         this.method = method;
         this.wrapperType = GenerationUtils.createMethodHandler(method, typeVariableMap);
-        StringJoiner stringJoiner = new StringJoiner(", ", "<", ">");
-        for (var generic : this.wrapperType.getGenerics()) {
-            if (generic.contains(" ")) {
-                stringJoiner.add(generic.substring(0, generic.indexOf(" ")));
-            } else {
-                stringJoiner.add(generic);
-            }
-        }
-        this.field = new FieldBuilder().setName(NamingUtils.getFieldName(this.wrapperType.getName()))
+        this.field = new FieldBuilder()
+            .setName(NamingUtils.getFieldName(this.wrapperType.getName()))
             .setType("%s<%s>".formatted(
                 MethodOverrideHandler.class.getSimpleName(),
-                this.wrapperType.getName() + (this.wrapperType.getGenerics().isEmpty() ? "" : stringJoiner.toString())
+                this.wrapperType.getCanonicalName()
             ))
             .setAccessModifier("public")
             .addModifiers("final");

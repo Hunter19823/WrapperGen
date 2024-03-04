@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class ClassBuilder implements JavaFileOutput {
-    private final List<String> annotations;
-    private final List<String> modifiers;
-    private final List<String> generics;
-    private final List<String> interfaces;
-    private final List<String> body;
-    private String imports;
-    private String accessModifier;
-    private String structureType;
-    private String name;
-    private String superClass;
+    protected final List<String> annotations;
+    protected final List<String> modifiers;
+    protected final List<String> generics;
+    protected final List<String> interfaces;
+    protected final List<String> body;
+    protected String imports;
+    protected String accessModifier;
+    protected String structureType;
+    protected String name;
+    protected String superClass;
 
     public ClassBuilder() {
         this.imports = new ImportBuilder().toJavaFile(0);
