@@ -44,4 +44,8 @@ public class MethodHotSwapHandler<HANDLER> implements MethodHandler<HANDLER> {
         return this;
     }
 
+    public void setHandler(HANDLER handler) {
+        this.customHandler = handler;
+    }
+
 }
