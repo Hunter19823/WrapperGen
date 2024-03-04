@@ -3,7 +3,6 @@ package pie.ilikepiefoo.wrappergen.example;
 import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
 
 import java.util.ArrayList;
-
 public class CustomWrapper<E> extends ArrayList<E> {
     public final MethodOverrideHandler<AddAllCollectionHandler<E>> addAllCollectionHandler;
     public final MethodOverrideHandler<AddAllintCollectionHandler<E>> addAllintCollectionHandler;
@@ -262,15 +261,14 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public boolean equals(java.lang.Object arg0) {
         return this.equalsObjectHandler.getHandler().onEquals(arg0);
     }
+    @Override
+    public boolean remove(java.lang.Object arg0) {
+        return this.removeObjectHandler.getHandler().onRemove(arg0);
+    }
 
     @Override
     public int hashCode() {
         return this.hashCodeHandler.getHandler().onHashCode();
-    }
-
-    @Override
-    public boolean remove(java.lang.Object arg0) {
-        return this.removeObjectHandler.getHandler().onRemove(arg0);
     }
     @Override
     public boolean removeAll(java.util.Collection<?> arg0) {
@@ -314,7 +312,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public java.util.Iterator<E> iterator() {
         return this.iteratorHandler.getHandler().onIterator();
     }
-
     @Override
     public java.util.List<E> subList(int arg0, int arg1) {
         return this.subListintintHandler.getHandler().onSubList(arg0, arg1);
@@ -345,22 +342,22 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
     @FunctionalInterface
     public interface AddAllCollectionHandler<E> {
-        boolean onAddAll( java.util.Collection<? extends E> arg0 );
+        boolean onAddAll(java.util.Collection<? extends E> arg0);
     }
 
     @FunctionalInterface
     public interface AddAllintCollectionHandler<E> {
-        boolean onAddAll( int arg0, java.util.Collection<? extends E> arg1 );
+        boolean onAddAll(int arg0, java.util.Collection<? extends E> arg1);
     }
 
     @FunctionalInterface
     public interface AddObjectHandler<E> {
-        boolean onAdd( E arg0 );
+        boolean onAdd(E arg0);
     }
 
     @FunctionalInterface
     public interface AddintObjectHandler<E> {
-        void onAdd( int arg0, E arg1 );
+        void onAdd(int arg0, E arg1);
     }
 
     @FunctionalInterface
@@ -375,32 +372,32 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface ContainsAllCollectionHandler {
-        boolean onContainsAll( java.util.Collection<?> arg0 );
+        boolean onContainsAll(java.util.Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface ContainsObjectHandler {
-        boolean onContains( java.lang.Object arg0 );
+        boolean onContains(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface EnsureCapacityintHandler {
-        void onEnsureCapacity( int arg0 );
+        void onEnsureCapacity(int arg0);
     }
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals( java.lang.Object arg0 );
+        boolean onEquals(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface ForEachConsumerHandler<E> {
-        void onForEach( java.util.function.Consumer<? super E> arg0 );
+        void onForEach(java.util.function.Consumer<? super E> arg0);
     }
 
     @FunctionalInterface
     public interface GetintHandler<E> {
-        E onGet( int arg0 );
+        E onGet(int arg0);
     }
 
     @FunctionalInterface
@@ -410,7 +407,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface IndexOfObjectHandler {
-        int onIndexOf( java.lang.Object arg0 );
+        int onIndexOf(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -425,7 +422,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface LastIndexOfObjectHandler {
-        int onLastIndexOf( java.lang.Object arg0 );
+        int onLastIndexOf(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -435,7 +432,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface ListIteratorintHandler<E> {
-        java.util.ListIterator<E> onListIterator( int arg0 );
+        java.util.ListIterator<E> onListIterator(int arg0);
     }
 
     @FunctionalInterface
@@ -445,37 +442,37 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface RemoveAllCollectionHandler {
-        boolean onRemoveAll( java.util.Collection<?> arg0 );
+        boolean onRemoveAll(java.util.Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface RemoveIfPredicateHandler<E> {
-        boolean onRemoveIf( java.util.function.Predicate<? super E> arg0 );
+        boolean onRemoveIf(java.util.function.Predicate<? super E> arg0);
     }
 
     @FunctionalInterface
     public interface RemoveObjectHandler {
-        boolean onRemove( java.lang.Object arg0 );
+        boolean onRemove(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface RemoveintHandler<E> {
-        E onRemove( int arg0 );
+        E onRemove(int arg0);
     }
 
     @FunctionalInterface
     public interface ReplaceAllUnaryOperatorHandler<E> {
-        void onReplaceAll( java.util.function.UnaryOperator<E> arg0 );
+        void onReplaceAll(java.util.function.UnaryOperator<E> arg0);
     }
 
     @FunctionalInterface
     public interface RetainAllCollectionHandler {
-        boolean onRetainAll( java.util.Collection<?> arg0 );
+        boolean onRetainAll(java.util.Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface SetintObjectHandler<E> {
-        E onSet( int arg0, E arg1 );
+        E onSet(int arg0, E arg1);
     }
 
     @FunctionalInterface
@@ -485,7 +482,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface SortComparatorHandler<E> {
-        void onSort( java.util.Comparator<? super E> arg0 );
+        void onSort(java.util.Comparator<? super E> arg0);
     }
 
     @FunctionalInterface
@@ -500,7 +497,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface SubListintintHandler<E> {
-        java.util.List<E> onSubList( int arg0, int arg1 );
+        java.util.List<E> onSubList(int arg0, int arg1);
     }
 
     @FunctionalInterface
@@ -510,12 +507,12 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface ToArrayIntFunctionHandler {
-        <T> T[] onToArray( java.util.function.IntFunction<T[]> arg0 );
+        <T> T[] onToArray(java.util.function.IntFunction<T[]> arg0);
     }
 
     @FunctionalInterface
     public interface ToArrayObjectHandler {
-        <T> T[] onToArray( T[] arg0 );
+        <T> T[] onToArray(T[] arg0);
     }
 
     @FunctionalInterface

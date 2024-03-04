@@ -15,33 +15,29 @@ public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> exte
     }
 
     @Override
+    public boolean equals(java.lang.Object arg0) {
+        return this.equalsObjectHandler.getHandler().onEquals(arg0);
+    }
+    @Override
     public <N extends T> N getPerfectlyNormalResult(N arg0) {
         return this.getPerfectlyNormalResultNumberHandler.getHandler().onGetPerfectlyNormalResult(arg0);
     }
-
     @Override
     public int hashCode() {
         return this.hashCodeHandler.getHandler().onHashCode();
     }
-
-    @Override
-    public boolean equals(java.lang.Object arg0) {
-        return this.equalsObjectHandler.getHandler().onEquals(arg0);
-    }
-
     @Override
     public java.lang.String toString() {
         return this.toStringHandler.getHandler().onToString();
     }
-
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals( java.lang.Object arg0 );
+        boolean onEquals(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface GetPerfectlyNormalResultNumberHandler<T extends java.lang.Number> {
-        <N extends T> N onGetPerfectlyNormalResult( N arg0 );
+        <N extends T> N onGetPerfectlyNormalResult(N arg0);
     }
 
     @FunctionalInterface

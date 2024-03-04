@@ -3,7 +3,6 @@ package pie.ilikepiefoo.wrappergen.example;
 import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
 
 import java.util.TreeMap;
-
 public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public final MethodOverrideHandler<CeilingEntryObjectHandler<K, V>> ceilingEntryObjectHandler;
     public final MethodOverrideHandler<CeilingKeyObjectHandler<K>> ceilingKeyObjectHandler;
@@ -312,20 +311,18 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public V computeIfPresent(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1) {
         return this.computeIfPresentObjectBiFunctionHandler.getHandler().onComputeIfPresent(arg0, arg1);
     }
-
-    @Override
-    public int size() {
-        return this.sizeHandler.getHandler().onSize();
-    }
-
     @Override
     public boolean containsKey(java.lang.Object arg0) {
         return this.containsKeyObjectHandler.getHandler().onContainsKey(arg0);
     }
-
     @Override
     public boolean containsValue(java.lang.Object arg0) {
         return this.containsValueObjectHandler.getHandler().onContainsValue(arg0);
+    }
+
+    @Override
+    public int size() {
+        return this.sizeHandler.getHandler().onSize();
     }
 
     @Override
@@ -406,7 +403,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public java.util.Set<K> keySet() {
         return this.keySetHandler.getHandler().onKeySet();
     }
-
     @Override
     public java.util.Map.Entry<K, V> lastEntry() {
         return this.lastEntryHandler.getHandler().onLastEntry();
@@ -416,20 +412,22 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public java.util.Map.Entry<K, V> pollFirstEntry() {
         return this.pollFirstEntryHandler.getHandler().onPollFirstEntry();
     }
+    @Override
+    public java.util.Map.Entry<K, V> lowerEntry(K arg0) {
+        return this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0);
+    }
+    @Override
+    public K lowerKey(K arg0) {
+        return this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0);
+    }
 
     @Override
     public java.util.Map.Entry<K, V> pollLastEntry() {
         return this.pollLastEntryHandler.getHandler().onPollLastEntry();
     }
-
     @Override
-    public java.util.Map.Entry<K, V> lowerEntry(K arg0) {
-        return this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0);
-    }
-
-    @Override
-    public K lowerKey(K arg0) {
-        return this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0);
+    public java.util.NavigableSet<K> navigableKeySet() {
+        return this.navigableKeySetHandler.getHandler().onNavigableKeySet();
     }
 
     @Override
@@ -440,11 +438,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     @Override
     public K ceilingKey(K arg0) {
         return this.ceilingKeyObjectHandler.getHandler().onCeilingKey(arg0);
-    }
-
-    @Override
-    public java.util.NavigableSet<K> navigableKeySet() {
-        return this.navigableKeySetHandler.getHandler().onNavigableKeySet();
     }
 
     @Override
@@ -488,25 +481,23 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public java.util.NavigableMap<K, V> headMap(K arg0, boolean arg1) {
         return this.headMapObjectbooleanHandler.getHandler().onHeadMap(arg0, arg1);
     }
-
-    @Override
-    public java.util.NavigableMap<K, V> tailMap(K arg0, boolean arg1) {
-        return this.tailMapObjectbooleanHandler.getHandler().onTailMap(arg0, arg1);
-    }
-
     @Override
     public java.util.SortedMap<K, V> subMap(K arg0, K arg1) {
         return this.subMapObjectObjectHandler.getHandler().onSubMap(arg0, arg1);
     }
 
     @Override
-    public java.util.SortedMap<K, V> headMap(K arg0) {
-        return this.headMapObjectHandler.getHandler().onHeadMap(arg0);
+    public java.util.NavigableMap<K, V> tailMap(K arg0, boolean arg1) {
+        return this.tailMapObjectbooleanHandler.getHandler().onTailMap(arg0, arg1);
     }
-
     @Override
     public java.util.SortedMap<K, V> tailMap(K arg0) {
         return this.tailMapObjectHandler.getHandler().onTailMap(arg0);
+    }
+
+    @Override
+    public java.util.SortedMap<K, V> headMap(K arg0) {
+        return this.headMapObjectHandler.getHandler().onHeadMap(arg0);
     }
     @Override
     public java.lang.String toString() {
@@ -519,12 +510,12 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
     @FunctionalInterface
     public interface CeilingEntryObjectHandler<K, V> {
-        java.util.Map.Entry<K, V> onCeilingEntry( K arg0 );
+        java.util.Map.Entry<K, V> onCeilingEntry(K arg0);
     }
 
     @FunctionalInterface
     public interface CeilingKeyObjectHandler<K> {
-        K onCeilingKey( K arg0 );
+        K onCeilingKey(K arg0);
     }
 
     @FunctionalInterface
@@ -544,30 +535,27 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface ComputeIfAbsentObjectFunctionHandler<K, V> {
-        V onComputeIfAbsent( K arg0, java.util.function.Function<? super K,? extends V> arg1 );
+        V onComputeIfAbsent(K arg0, java.util.function.Function<? super K, ? extends V> arg1);
     }
 
     @FunctionalInterface
     public interface ComputeIfPresentObjectBiFunctionHandler<K, V> {
-        V onComputeIfPresent(
-            K arg0,
-            java.util.function.BiFunction<? super K,? super V,? extends V> arg1
-        );
+        V onComputeIfPresent(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1);
     }
 
     @FunctionalInterface
     public interface ComputeObjectBiFunctionHandler<K, V> {
-        V onCompute( K arg0, java.util.function.BiFunction<? super K,? super V,? extends V> arg1 );
+        V onCompute(K arg0, java.util.function.BiFunction<? super K, ? super V, ? extends V> arg1);
     }
 
     @FunctionalInterface
     public interface ContainsKeyObjectHandler {
-        boolean onContainsKey( java.lang.Object arg0 );
+        boolean onContainsKey(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface ContainsValueObjectHandler {
-        boolean onContainsValue( java.lang.Object arg0 );
+        boolean onContainsValue(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -587,7 +575,7 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals( java.lang.Object arg0 );
+        boolean onEquals(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -602,27 +590,27 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface FloorEntryObjectHandler<K, V> {
-        java.util.Map.Entry<K, V> onFloorEntry( K arg0 );
+        java.util.Map.Entry<K, V> onFloorEntry(K arg0);
     }
 
     @FunctionalInterface
     public interface FloorKeyObjectHandler<K> {
-        K onFloorKey( K arg0 );
+        K onFloorKey(K arg0);
     }
 
     @FunctionalInterface
     public interface ForEachBiConsumerHandler<V, K> {
-        void onForEach( java.util.function.BiConsumer<? super K,? super V> arg0 );
+        void onForEach(java.util.function.BiConsumer<? super K, ? super V> arg0);
     }
 
     @FunctionalInterface
     public interface GetObjectHandler<V> {
-        V onGet( java.lang.Object arg0 );
+        V onGet(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface GetOrDefaultObjectObjectHandler<V> {
-        V onGetOrDefault( java.lang.Object arg0, V arg1 );
+        V onGetOrDefault(java.lang.Object arg0, V arg1);
     }
 
     @FunctionalInterface
@@ -632,22 +620,22 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface HeadMapObjectHandler<K, V> {
-        java.util.SortedMap<K, V> onHeadMap( K arg0 );
+        java.util.SortedMap<K, V> onHeadMap(K arg0);
     }
 
     @FunctionalInterface
     public interface HeadMapObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onHeadMap( K arg0, boolean arg1 );
+        java.util.NavigableMap<K, V> onHeadMap(K arg0, boolean arg1);
     }
 
     @FunctionalInterface
     public interface HigherEntryObjectHandler<K, V> {
-        java.util.Map.Entry<K, V> onHigherEntry( K arg0 );
+        java.util.Map.Entry<K, V> onHigherEntry(K arg0);
     }
 
     @FunctionalInterface
     public interface HigherKeyObjectHandler<K> {
-        K onHigherKey( K arg0 );
+        K onHigherKey(K arg0);
     }
 
     @FunctionalInterface
@@ -672,21 +660,17 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface LowerEntryObjectHandler<K, V> {
-        java.util.Map.Entry<K, V> onLowerEntry( K arg0 );
+        java.util.Map.Entry<K, V> onLowerEntry(K arg0);
     }
 
     @FunctionalInterface
     public interface LowerKeyObjectHandler<K> {
-        K onLowerKey( K arg0 );
+        K onLowerKey(K arg0);
     }
 
     @FunctionalInterface
     public interface MergeObjectObjectBiFunctionHandler<K, V> {
-        V onMerge(
-            K arg0,
-            V arg1,
-            java.util.function.BiFunction<? super V,? super V,? extends V> arg2
-        );
+        V onMerge(K arg0, V arg1, java.util.function.BiFunction<? super V, ? super V, ? extends V> arg2);
     }
 
     @FunctionalInterface
@@ -706,42 +690,42 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface PutAllMapHandler<V, K> {
-        void onPutAll( java.util.Map<? extends K,? extends V> arg0 );
+        void onPutAll(java.util.Map<? extends K, ? extends V> arg0);
     }
 
     @FunctionalInterface
     public interface PutIfAbsentObjectObjectHandler<K, V> {
-        V onPutIfAbsent( K arg0, V arg1 );
+        V onPutIfAbsent(K arg0, V arg1);
     }
 
     @FunctionalInterface
     public interface PutObjectObjectHandler<K, V> {
-        V onPut( K arg0, V arg1 );
+        V onPut(K arg0, V arg1);
     }
 
     @FunctionalInterface
     public interface RemoveObjectHandler<V> {
-        V onRemove( java.lang.Object arg0 );
+        V onRemove(java.lang.Object arg0);
     }
 
     @FunctionalInterface
     public interface RemoveObjectObjectHandler {
-        boolean onRemove( java.lang.Object arg0, java.lang.Object arg1 );
+        boolean onRemove(java.lang.Object arg0, java.lang.Object arg1);
     }
 
     @FunctionalInterface
     public interface ReplaceAllBiFunctionHandler<V, K> {
-        void onReplaceAll( java.util.function.BiFunction<? super K,? super V,? extends V> arg0 );
+        void onReplaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> arg0);
     }
 
     @FunctionalInterface
     public interface ReplaceObjectObjectHandler<K, V> {
-        V onReplace( K arg0, V arg1 );
+        V onReplace(K arg0, V arg1);
     }
 
     @FunctionalInterface
     public interface ReplaceObjectObjectObjectHandler<K, V> {
-        boolean onReplace( K arg0, V arg1, V arg2 );
+        boolean onReplace(K arg0, V arg1, V arg2);
     }
 
     @FunctionalInterface
@@ -751,22 +735,22 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @FunctionalInterface
     public interface SubMapObjectObjectHandler<K, V> {
-        java.util.SortedMap<K, V> onSubMap( K arg0, K arg1 );
+        java.util.SortedMap<K, V> onSubMap(K arg0, K arg1);
     }
 
     @FunctionalInterface
     public interface SubMapObjectbooleanObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onSubMap( K arg0, boolean arg1, K arg2, boolean arg3 );
+        java.util.NavigableMap<K, V> onSubMap(K arg0, boolean arg1, K arg2, boolean arg3);
     }
 
     @FunctionalInterface
     public interface TailMapObjectHandler<K, V> {
-        java.util.SortedMap<K, V> onTailMap( K arg0 );
+        java.util.SortedMap<K, V> onTailMap(K arg0);
     }
 
     @FunctionalInterface
     public interface TailMapObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onTailMap( K arg0, boolean arg1 );
+        java.util.NavigableMap<K, V> onTailMap(K arg0, boolean arg1);
     }
 
     @FunctionalInterface
