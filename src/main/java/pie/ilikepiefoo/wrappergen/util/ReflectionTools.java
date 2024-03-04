@@ -52,7 +52,7 @@ public class ReflectionTools {
             type = typeVariableMap.get(variable);
         }
         if (type instanceof Class<?> clazz) {
-            return clazz.getCanonicalName();
+            return clazz.getSimpleName();
         }
         if (type instanceof TypeVariable<?> variable) {
             if (isDefiningTypeVariable) {

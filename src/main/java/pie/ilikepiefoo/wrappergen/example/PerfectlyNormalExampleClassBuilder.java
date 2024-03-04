@@ -1,6 +1,6 @@
 package pie.ilikepiefoo.wrappergen.example;
 
-public class PerfectlyNormalExampleClassBuilder<T extends java.lang.Number> {
+public class PerfectlyNormalExampleClassBuilder<T extends Number> {
     public EqualsObjectHandler equalsObjectHandler;
     public GetPerfectlyNormalResultNumberHandler<T> getPerfectlyNormalResultNumberHandler;
     public HashCodeHandler hashCodeHandler;
@@ -26,11 +26,11 @@ public class PerfectlyNormalExampleClassBuilder<T extends java.lang.Number> {
     }
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
-    public interface GetPerfectlyNormalResultNumberHandler<T extends java.lang.Number> {
+    public interface GetPerfectlyNormalResultNumberHandler<T extends Number> {
         <N extends T> N onGetPerfectlyNormalResult(N arg0);
     }
 
@@ -41,7 +41,7 @@ public class PerfectlyNormalExampleClassBuilder<T extends java.lang.Number> {
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
 }

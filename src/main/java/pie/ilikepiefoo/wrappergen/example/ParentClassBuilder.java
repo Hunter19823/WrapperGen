@@ -1,5 +1,16 @@
 package pie.ilikepiefoo.wrappergen.example;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 public class ParentClassBuilder {
     public CeilingEntryObjectHandler ceilingEntryObjectHandler;
     public CeilingKeyObjectHandler ceilingKeyObjectHandler;
@@ -261,12 +272,12 @@ public class ParentClassBuilder {
     }
     @FunctionalInterface
     public interface CeilingEntryObjectHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onCeilingEntry(java.lang.String arg0);
+        Entry<String, String> onCeilingEntry(String arg0);
     }
 
     @FunctionalInterface
     public interface CeilingKeyObjectHandler {
-        java.lang.String onCeilingKey(java.lang.String arg0);
+        String onCeilingKey(String arg0);
     }
 
     @FunctionalInterface
@@ -276,92 +287,92 @@ public class ParentClassBuilder {
 
     @FunctionalInterface
     public interface CloneHandler {
-        java.lang.Object onClone();
+        Object onClone();
     }
 
     @FunctionalInterface
     public interface ComparatorHandler {
-        java.util.Comparator<? super java.lang.String> onComparator();
+        Comparator<? super String> onComparator();
     }
 
     @FunctionalInterface
     public interface ComputeIfAbsentObjectFunctionHandler {
-        java.lang.String onComputeIfAbsent(java.lang.String arg0, java.util.function.Function<? super java.lang.String, ? extends java.lang.String> arg1);
+        String onComputeIfAbsent(String arg0, Function<? super String, ? extends String> arg1);
     }
 
     @FunctionalInterface
     public interface ComputeIfPresentObjectBiFunctionHandler {
-        java.lang.String onComputeIfPresent(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1);
+        String onComputeIfPresent(String arg0, BiFunction<? super String, ? super String, ? extends String> arg1);
     }
 
     @FunctionalInterface
     public interface ComputeObjectBiFunctionHandler {
-        java.lang.String onCompute(java.lang.String arg0, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg1);
+        String onCompute(String arg0, BiFunction<? super String, ? super String, ? extends String> arg1);
     }
 
     @FunctionalInterface
     public interface ContainsKeyObjectHandler {
-        boolean onContainsKey(java.lang.Object arg0);
+        boolean onContainsKey(Object arg0);
     }
 
     @FunctionalInterface
     public interface ContainsValueObjectHandler {
-        boolean onContainsValue(java.lang.Object arg0);
+        boolean onContainsValue(Object arg0);
     }
 
     @FunctionalInterface
     public interface DescendingKeySetHandler {
-        java.util.NavigableSet<java.lang.String> onDescendingKeySet();
+        NavigableSet<String> onDescendingKeySet();
     }
 
     @FunctionalInterface
     public interface DescendingMapHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onDescendingMap();
+        NavigableMap<String, String> onDescendingMap();
     }
 
     @FunctionalInterface
     public interface EntrySetHandler {
-        java.util.Set<java.util.Map.Entry<java.lang.String, java.lang.String>> onEntrySet();
+        Set<Entry<String, String>> onEntrySet();
     }
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
     public interface FirstEntryHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onFirstEntry();
+        Entry<String, String> onFirstEntry();
     }
 
     @FunctionalInterface
     public interface FirstKeyHandler {
-        java.lang.String onFirstKey();
+        String onFirstKey();
     }
 
     @FunctionalInterface
     public interface FloorEntryObjectHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onFloorEntry(java.lang.String arg0);
+        Entry<String, String> onFloorEntry(String arg0);
     }
 
     @FunctionalInterface
     public interface FloorKeyObjectHandler {
-        java.lang.String onFloorKey(java.lang.String arg0);
+        String onFloorKey(String arg0);
     }
 
     @FunctionalInterface
     public interface ForEachBiConsumerHandler {
-        void onForEach(java.util.function.BiConsumer<? super java.lang.String, ? super java.lang.String> arg0);
+        void onForEach(BiConsumer<? super String, ? super String> arg0);
     }
 
     @FunctionalInterface
     public interface GetObjectHandler {
-        java.lang.String onGet(java.lang.Object arg0);
+        String onGet(Object arg0);
     }
 
     @FunctionalInterface
     public interface GetOrDefaultObjectObjectHandler {
-        java.lang.String onGetOrDefault(java.lang.Object arg0, java.lang.String arg1);
+        String onGetOrDefault(Object arg0, String arg1);
     }
 
     @FunctionalInterface
@@ -371,22 +382,22 @@ public class ParentClassBuilder {
 
     @FunctionalInterface
     public interface HeadMapObjectBooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0, boolean arg1);
+        NavigableMap<String, String> onHeadMap(String arg0, boolean arg1);
     }
 
     @FunctionalInterface
     public interface HeadMapObjectHandler {
-        java.util.SortedMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0);
+        SortedMap<String, String> onHeadMap(String arg0);
     }
 
     @FunctionalInterface
     public interface HigherEntryObjectHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onHigherEntry(java.lang.String arg0);
+        Entry<String, String> onHigherEntry(String arg0);
     }
 
     @FunctionalInterface
     public interface HigherKeyObjectHandler {
-        java.lang.String onHigherKey(java.lang.String arg0);
+        String onHigherKey(String arg0);
     }
 
     @FunctionalInterface
@@ -396,87 +407,87 @@ public class ParentClassBuilder {
 
     @FunctionalInterface
     public interface KeySetHandler {
-        java.util.Set<java.lang.String> onKeySet();
+        Set<String> onKeySet();
     }
 
     @FunctionalInterface
     public interface LastEntryHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onLastEntry();
+        Entry<String, String> onLastEntry();
     }
 
     @FunctionalInterface
     public interface LastKeyHandler {
-        java.lang.String onLastKey();
+        String onLastKey();
     }
 
     @FunctionalInterface
     public interface LowerEntryObjectHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onLowerEntry(java.lang.String arg0);
+        Entry<String, String> onLowerEntry(String arg0);
     }
 
     @FunctionalInterface
     public interface LowerKeyObjectHandler {
-        java.lang.String onLowerKey(java.lang.String arg0);
+        String onLowerKey(String arg0);
     }
 
     @FunctionalInterface
     public interface MergeObjectObjectBiFunctionHandler {
-        java.lang.String onMerge(java.lang.String arg0, java.lang.String arg1, java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg2);
+        String onMerge(String arg0, String arg1, BiFunction<? super String, ? super String, ? extends String> arg2);
     }
 
     @FunctionalInterface
     public interface NavigableKeySetHandler {
-        java.util.NavigableSet<java.lang.String> onNavigableKeySet();
+        NavigableSet<String> onNavigableKeySet();
     }
 
     @FunctionalInterface
     public interface PollFirstEntryHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onPollFirstEntry();
+        Entry<String, String> onPollFirstEntry();
     }
 
     @FunctionalInterface
     public interface PollLastEntryHandler {
-        java.util.Map.Entry<java.lang.String, java.lang.String> onPollLastEntry();
+        Entry<String, String> onPollLastEntry();
     }
 
     @FunctionalInterface
     public interface PutAllMapHandler {
-        void onPutAll(java.util.Map<? extends java.lang.String, ? extends java.lang.String> arg0);
+        void onPutAll(Map<? extends String, ? extends String> arg0);
     }
 
     @FunctionalInterface
     public interface PutIfAbsentObjectObjectHandler {
-        java.lang.String onPutIfAbsent(java.lang.String arg0, java.lang.String arg1);
+        String onPutIfAbsent(String arg0, String arg1);
     }
 
     @FunctionalInterface
     public interface PutObjectObjectHandler {
-        java.lang.String onPut(java.lang.String arg0, java.lang.String arg1);
+        String onPut(String arg0, String arg1);
     }
 
     @FunctionalInterface
     public interface RemoveObjectHandler {
-        java.lang.String onRemove(java.lang.Object arg0);
+        String onRemove(Object arg0);
     }
 
     @FunctionalInterface
     public interface RemoveObjectObjectHandler {
-        boolean onRemove(java.lang.Object arg0, java.lang.Object arg1);
+        boolean onRemove(Object arg0, Object arg1);
     }
 
     @FunctionalInterface
     public interface ReplaceAllBiFunctionHandler {
-        void onReplaceAll(java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg0);
+        void onReplaceAll(BiFunction<? super String, ? super String, ? extends String> arg0);
     }
 
     @FunctionalInterface
     public interface ReplaceObjectObjectHandler {
-        java.lang.String onReplace(java.lang.String arg0, java.lang.String arg1);
+        String onReplace(String arg0, String arg1);
     }
 
     @FunctionalInterface
     public interface ReplaceObjectObjectObjectHandler {
-        boolean onReplace(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2);
+        boolean onReplace(String arg0, String arg1, String arg2);
     }
 
     @FunctionalInterface
@@ -486,32 +497,32 @@ public class ParentClassBuilder {
 
     @FunctionalInterface
     public interface SubMapObjectBooleanObjectBooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onSubMap(java.lang.String arg0, boolean arg1, java.lang.String arg2, boolean arg3);
+        NavigableMap<String, String> onSubMap(String arg0, boolean arg1, String arg2, boolean arg3);
     }
 
     @FunctionalInterface
     public interface SubMapObjectObjectHandler {
-        java.util.SortedMap<java.lang.String, java.lang.String> onSubMap(java.lang.String arg0, java.lang.String arg1);
+        SortedMap<String, String> onSubMap(String arg0, String arg1);
     }
 
     @FunctionalInterface
     public interface TailMapObjectBooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onTailMap(java.lang.String arg0, boolean arg1);
+        NavigableMap<String, String> onTailMap(String arg0, boolean arg1);
     }
 
     @FunctionalInterface
     public interface TailMapObjectHandler {
-        java.util.SortedMap<java.lang.String, java.lang.String> onTailMap(java.lang.String arg0);
+        SortedMap<String, String> onTailMap(String arg0);
     }
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
     @FunctionalInterface
     public interface ValuesHandler {
-        java.util.Collection<java.lang.String> onValues();
+        Collection<String> onValues();
     }
 
 }

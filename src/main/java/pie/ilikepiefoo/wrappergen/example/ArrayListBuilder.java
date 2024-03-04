@@ -1,5 +1,16 @@
 package pie.ilikepiefoo.wrappergen.example;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 public class ArrayListBuilder<E> {
     public AddAllCollectionHandler<E> addAllCollectionHandler;
     public AddAllIntCollectionHandler<E> addAllIntCollectionHandler;
@@ -191,12 +202,12 @@ public class ArrayListBuilder<E> {
     }
     @FunctionalInterface
     public interface AddAllCollectionHandler<E> {
-        boolean onAddAll(java.util.Collection<? extends E> arg0);
+        boolean onAddAll(Collection<? extends E> arg0);
     }
 
     @FunctionalInterface
     public interface AddAllIntCollectionHandler<E> {
-        boolean onAddAll(int arg0, java.util.Collection<? extends E> arg1);
+        boolean onAddAll(int arg0, Collection<? extends E> arg1);
     }
 
     @FunctionalInterface
@@ -216,17 +227,17 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface CloneHandler {
-        java.lang.Object onClone();
+        Object onClone();
     }
 
     @FunctionalInterface
     public interface ContainsAllCollectionHandler {
-        boolean onContainsAll(java.util.Collection<?> arg0);
+        boolean onContainsAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface ContainsObjectHandler {
-        boolean onContains(java.lang.Object arg0);
+        boolean onContains(Object arg0);
     }
 
     @FunctionalInterface
@@ -236,12 +247,12 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
     public interface ForEachConsumerHandler<E> {
-        void onForEach(java.util.function.Consumer<? super E> arg0);
+        void onForEach(Consumer<? super E> arg0);
     }
 
     @FunctionalInterface
@@ -256,7 +267,7 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface IndexOfObjectHandler {
-        int onIndexOf(java.lang.Object arg0);
+        int onIndexOf(Object arg0);
     }
 
     @FunctionalInterface
@@ -266,37 +277,37 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface IteratorHandler<E> {
-        java.util.Iterator<E> onIterator();
+        Iterator<E> onIterator();
     }
 
     @FunctionalInterface
     public interface LastIndexOfObjectHandler {
-        int onLastIndexOf(java.lang.Object arg0);
+        int onLastIndexOf(Object arg0);
     }
 
     @FunctionalInterface
     public interface ListIteratorHandler<E> {
-        java.util.ListIterator<E> onListIterator();
+        ListIterator<E> onListIterator();
     }
 
     @FunctionalInterface
     public interface ListIteratorIntHandler<E> {
-        java.util.ListIterator<E> onListIterator(int arg0);
+        ListIterator<E> onListIterator(int arg0);
     }
 
     @FunctionalInterface
     public interface ParallelStreamHandler<E> {
-        java.util.stream.Stream<E> onParallelStream();
+        Stream<E> onParallelStream();
     }
 
     @FunctionalInterface
     public interface RemoveAllCollectionHandler {
-        boolean onRemoveAll(java.util.Collection<?> arg0);
+        boolean onRemoveAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface RemoveIfPredicateHandler<E> {
-        boolean onRemoveIf(java.util.function.Predicate<? super E> arg0);
+        boolean onRemoveIf(Predicate<? super E> arg0);
     }
 
     @FunctionalInterface
@@ -306,17 +317,17 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface RemoveObjectHandler {
-        boolean onRemove(java.lang.Object arg0);
+        boolean onRemove(Object arg0);
     }
 
     @FunctionalInterface
     public interface ReplaceAllUnaryOperatorHandler<E> {
-        void onReplaceAll(java.util.function.UnaryOperator<E> arg0);
+        void onReplaceAll(UnaryOperator<E> arg0);
     }
 
     @FunctionalInterface
     public interface RetainAllCollectionHandler {
-        boolean onRetainAll(java.util.Collection<?> arg0);
+        boolean onRetainAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
@@ -331,32 +342,32 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface SortComparatorHandler<E> {
-        void onSort(java.util.Comparator<? super E> arg0);
+        void onSort(Comparator<? super E> arg0);
     }
 
     @FunctionalInterface
     public interface SpliteratorHandler<E> {
-        java.util.Spliterator<E> onSpliterator();
+        Spliterator<E> onSpliterator();
     }
 
     @FunctionalInterface
     public interface StreamHandler<E> {
-        java.util.stream.Stream<E> onStream();
+        Stream<E> onStream();
     }
 
     @FunctionalInterface
     public interface SubListIntIntHandler<E> {
-        java.util.List<E> onSubList(int arg0, int arg1);
+        List<E> onSubList(int arg0, int arg1);
     }
 
     @FunctionalInterface
     public interface ToArrayHandler {
-        java.lang.Object[] onToArray();
+        Object[] onToArray();
     }
 
     @FunctionalInterface
     public interface ToArrayIntFunctionHandler {
-        <T> T[] onToArray(java.util.function.IntFunction<T[]> arg0);
+        <T> T[] onToArray(IntFunction<T[]> arg0);
     }
 
     @FunctionalInterface
@@ -366,7 +377,7 @@ public class ArrayListBuilder<E> {
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
     @FunctionalInterface

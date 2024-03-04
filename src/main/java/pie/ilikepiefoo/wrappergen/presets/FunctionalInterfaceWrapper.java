@@ -22,6 +22,7 @@ public class FunctionalInterfaceWrapper extends ClassBuilder {
     protected Method method;
     protected TypeVariableMap typeVariableMap;
     protected MethodBuilder methodBuilder;
+    protected Set<String> imports = new HashSet<>();
     protected List<String> genericNames = new ArrayList<>();
 
     public FunctionalInterfaceWrapper(Method method, TypeVariableMap typeVariableMap) {
@@ -52,6 +53,13 @@ public class FunctionalInterfaceWrapper extends ClassBuilder {
                 .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
                 .filter(typeVariableMap::isTypeVariable)
                 .forEachOrdered(genericTypes::add);
+            ReflectionTools.getDependencies(parameterType)
+                .stream()
+                .filter((type) -> type instanceof Class<?>)
+                .map((type) -> (Class<?>) type)
+                .filter((type) -> !type.isPrimitive() && !type.isArray())
+                .map(Class::getCanonicalName)
+                .forEach(imports::add);
         }
         ReflectionTools
             .getDependencies(method.getGenericReturnType())
@@ -61,6 +69,13 @@ public class FunctionalInterfaceWrapper extends ClassBuilder {
             .filter((type) -> !METHOD_TYPE_PARAMETERS.contains(type))
             .filter(typeVariableMap::isTypeVariable)
             .forEachOrdered(genericTypes::add);
+        ReflectionTools.getDependencies(method.getGenericReturnType())
+            .stream()
+            .filter((type) -> type instanceof Class<?>)
+            .map((type) -> (Class<?>) type)
+            .filter((type) -> !type.isPrimitive() && !type.isArray())
+            .map(Class::getCanonicalName)
+            .forEach(imports::add);
         Set<TypeVariable<?>> seen = new HashSet<>();
         for (TypeVariable<?> typeVariable : genericTypes) {
             // filter out duplicates.
@@ -73,6 +88,10 @@ public class FunctionalInterfaceWrapper extends ClassBuilder {
         }
 
         this.addBody(methodBuilder.toJavaFile(2));
+    }
+
+    public Set<String> getRequiredImports() {
+        return imports;
     }
 
     public MethodBuilder getMethodBuilder() {

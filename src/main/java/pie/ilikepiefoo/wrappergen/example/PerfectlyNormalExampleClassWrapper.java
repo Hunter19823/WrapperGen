@@ -2,7 +2,8 @@ package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodHandler;
 import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
-public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> extends PerfectlyNormalExampleClass<T> {
+
+public class PerfectlyNormalExampleClassWrapper<T extends Number> extends PerfectlyNormalExampleClass<T> {
     public MethodHandler<EqualsObjectHandler> equalsObjectHandler = new MethodHotSwapHandler<>(super::equals);
     public MethodHandler<GetPerfectlyNormalResultNumberHandler<T>> getPerfectlyNormalResultNumberHandler = new MethodHotSwapHandler<>(super::getPerfectlyNormalResult);
     public MethodHandler<HashCodeHandler> hashCodeHandler = new MethodHotSwapHandler<>(super::hashCode);
@@ -12,7 +13,7 @@ public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> exte
     }
 
     @Override
-    public boolean equals(java.lang.Object arg0) {
+    public boolean equals(Object arg0) {
         return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
     @Override
@@ -24,16 +25,16 @@ public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> exte
         return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
     }
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
     }
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
-    public interface GetPerfectlyNormalResultNumberHandler<T extends java.lang.Number> {
+    public interface GetPerfectlyNormalResultNumberHandler<T extends Number> {
         <N extends T> N onGetPerfectlyNormalResult(N arg0);
     }
 
@@ -44,7 +45,7 @@ public class PerfectlyNormalExampleClassWrapper<T extends java.lang.Number> exte
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
 }

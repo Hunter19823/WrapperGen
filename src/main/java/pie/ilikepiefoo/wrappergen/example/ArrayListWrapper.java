@@ -4,6 +4,17 @@ import pie.ilikepiefoo.wrappergen.util.MethodHandler;
 import pie.ilikepiefoo.wrappergen.util.MethodHotSwapHandler;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 public class ArrayListWrapper<E> extends ArrayList<E> {
     public MethodHandler<AddAllCollectionHandler<E>> addAllCollectionHandler = new MethodHotSwapHandler<>(super::addAll);
     public MethodHandler<AddAllIntCollectionHandler<E>> addAllIntCollectionHandler = new MethodHotSwapHandler<>(super::addAll);
@@ -42,7 +53,8 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     public MethodHandler<ToArrayObjectHandler> toArrayObjectHandler = new MethodHotSwapHandler<>(super::toArray);
     public MethodHandler<ToStringHandler> toStringHandler = new MethodHotSwapHandler<>(super::toString);
     public MethodHandler<TrimToSizeHandler> trimToSizeHandler = new MethodHotSwapHandler<>(super::trimToSize);
-    public ArrayListWrapper(java.util.Collection<? extends E> arg0) {
+
+    public ArrayListWrapper(Collection<? extends E> arg0) {
         super(arg0);
     }
 
@@ -55,27 +67,27 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean containsAll(java.util.Collection<?> arg0) {
+    public boolean containsAll(Collection<?> arg0) {
         return (this.containsAllCollectionHandler != null && this.containsAllCollectionHandler.getHandler() != null) ? this.containsAllCollectionHandler.getHandler().onContainsAll(arg0) : super.containsAll(arg0);
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return (this.toStringHandler != null && this.toStringHandler.getHandler() != null) ? this.toStringHandler.getHandler().onToString() : super.toString();
     }
 
     @Override
-    public <T> T[] toArray(java.util.function.IntFunction<T[]> arg0) {
+    public <T> T[] toArray(IntFunction<T[]> arg0) {
         return (this.toArrayIntFunctionHandler != null && this.toArrayIntFunctionHandler.getHandler() != null) ? this.toArrayIntFunctionHandler.getHandler().onToArray(arg0) : super.toArray(arg0);
     }
 
     @Override
-    public java.util.stream.Stream<E> stream() {
+    public Stream<E> stream() {
         return (this.streamHandler != null && this.streamHandler.getHandler() != null) ? this.streamHandler.getHandler().onStream() : super.stream();
     }
 
     @Override
-    public java.util.stream.Stream<E> parallelStream() {
+    public Stream<E> parallelStream() {
         return (this.parallelStreamHandler != null && this.parallelStreamHandler.getHandler() != null) ? this.parallelStreamHandler.getHandler().onParallelStream() : super.parallelStream();
     }
 
@@ -87,14 +99,15 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
             super.trimToSize();
         }
     }
-    @Override
-    public boolean contains(java.lang.Object arg0) {
-        return (this.containsObjectHandler != null && this.containsObjectHandler.getHandler() != null) ? this.containsObjectHandler.getHandler().onContains(arg0) : super.contains(arg0);
-    }
 
     @Override
     public int size() {
         return (this.sizeHandler != null && this.sizeHandler.getHandler() != null) ? this.sizeHandler.getHandler().onSize() : super.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return (this.isEmptyHandler != null && this.isEmptyHandler.getHandler() != null) ? this.isEmptyHandler.getHandler().onIsEmpty() : super.isEmpty();
     }
     @Override
     public void ensureCapacity(int arg0) {
@@ -106,12 +119,12 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return (this.isEmptyHandler != null && this.isEmptyHandler.getHandler() != null) ? this.isEmptyHandler.getHandler().onIsEmpty() : super.isEmpty();
+    public boolean contains(Object arg0) {
+        return (this.containsObjectHandler != null && this.containsObjectHandler.getHandler() != null) ? this.containsObjectHandler.getHandler().onContains(arg0) : super.contains(arg0);
     }
 
     @Override
-    public int indexOf(java.lang.Object arg0) {
+    public int indexOf(Object arg0) {
         return (this.indexOfObjectHandler != null && this.indexOfObjectHandler.getHandler() != null) ? this.indexOfObjectHandler.getHandler().onIndexOf(arg0) : super.indexOf(arg0);
     }
     @Override
@@ -120,17 +133,17 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public int lastIndexOf(java.lang.Object arg0) {
+    public int lastIndexOf(Object arg0) {
         return (this.lastIndexOfObjectHandler != null && this.lastIndexOfObjectHandler.getHandler() != null) ? this.lastIndexOfObjectHandler.getHandler().onLastIndexOf(arg0) : super.lastIndexOf(arg0);
     }
 
     @Override
-    public java.lang.Object clone() {
+    public Object clone() {
         return (this.cloneHandler != null && this.cloneHandler.getHandler() != null) ? this.cloneHandler.getHandler().onClone() : super.clone();
     }
 
     @Override
-    public java.lang.Object[] toArray() {
+    public Object[] toArray() {
         return (this.toArrayHandler != null && this.toArrayHandler.getHandler() != null) ? this.toArrayHandler.getHandler().onToArray() : super.toArray();
     }
 
@@ -162,19 +175,20 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     public E remove(int arg0) {
         return (this.removeIntHandler != null && this.removeIntHandler.getHandler() != null) ? this.removeIntHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
-    @Override
-    public boolean remove(java.lang.Object arg0) {
-        return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
-    }
 
     @Override
-    public boolean equals(java.lang.Object arg0) {
+    public boolean equals(Object arg0) {
         return (this.equalsObjectHandler != null && this.equalsObjectHandler.getHandler() != null) ? this.equalsObjectHandler.getHandler().onEquals(arg0) : super.equals(arg0);
     }
 
     @Override
     public int hashCode() {
         return (this.hashCodeHandler != null && this.hashCodeHandler.getHandler() != null) ? this.hashCodeHandler.getHandler().onHashCode() : super.hashCode();
+    }
+
+    @Override
+    public boolean remove(Object arg0) {
+        return (this.removeObjectHandler != null && this.removeObjectHandler.getHandler() != null) ? this.removeObjectHandler.getHandler().onRemove(arg0) : super.remove(arg0);
     }
 
     @Override
@@ -187,45 +201,47 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean addAll(java.util.Collection<? extends E> arg0) {
+    public boolean addAll(Collection<? extends E> arg0) {
         return (this.addAllCollectionHandler != null && this.addAllCollectionHandler.getHandler() != null) ? this.addAllCollectionHandler.getHandler().onAddAll(arg0) : super.addAll(arg0);
-    }
-    @Override
-    public boolean retainAll(java.util.Collection<?> arg0) {
-        return (this.retainAllCollectionHandler != null && this.retainAllCollectionHandler.getHandler() != null) ? this.retainAllCollectionHandler.getHandler().onRetainAll(arg0) : super.retainAll(arg0);
     }
 
     @Override
-    public boolean addAll(int arg0, java.util.Collection<? extends E> arg1) {
+    public boolean addAll(int arg0, Collection<? extends E> arg1) {
         return (this.addAllIntCollectionHandler != null && this.addAllIntCollectionHandler.getHandler() != null) ? this.addAllIntCollectionHandler.getHandler().onAddAll(arg0, arg1) : super.addAll(arg0, arg1);
     }
 
     @Override
-    public boolean removeAll(java.util.Collection<?> arg0) {
+    public boolean removeAll(Collection<?> arg0) {
         return (this.removeAllCollectionHandler != null && this.removeAllCollectionHandler.getHandler() != null) ? this.removeAllCollectionHandler.getHandler().onRemoveAll(arg0) : super.removeAll(arg0);
     }
 
     @Override
-    public java.util.ListIterator<E> listIterator(int arg0) {
+    public boolean retainAll(Collection<?> arg0) {
+        return (this.retainAllCollectionHandler != null && this.retainAllCollectionHandler.getHandler() != null) ? this.retainAllCollectionHandler.getHandler().onRetainAll(arg0) : super.retainAll(arg0);
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int arg0) {
         return (this.listIteratorIntHandler != null && this.listIteratorIntHandler.getHandler() != null) ? this.listIteratorIntHandler.getHandler().onListIterator(arg0) : super.listIterator(arg0);
     }
 
     @Override
-    public java.util.ListIterator<E> listIterator() {
+    public ListIterator<E> listIterator() {
         return (this.listIteratorHandler != null && this.listIteratorHandler.getHandler() != null) ? this.listIteratorHandler.getHandler().onListIterator() : super.listIterator();
     }
 
     @Override
-    public java.util.Iterator<E> iterator() {
+    public Iterator<E> iterator() {
         return (this.iteratorHandler != null && this.iteratorHandler.getHandler() != null) ? this.iteratorHandler.getHandler().onIterator() : super.iterator();
     }
+
     @Override
-    public java.util.List<E> subList(int arg0, int arg1) {
+    public List<E> subList(int arg0, int arg1) {
         return (this.subListIntIntHandler != null && this.subListIntIntHandler.getHandler() != null) ? this.subListIntIntHandler.getHandler().onSubList(arg0, arg1) : super.subList(arg0, arg1);
     }
 
     @Override
-    public void forEach(java.util.function.Consumer<? super E> arg0) {
+    public void forEach(Consumer<? super E> arg0) {
         if (this.forEachConsumerHandler != null && this.forEachConsumerHandler.getHandler() != null) {
             this.forEachConsumerHandler.getHandler().onForEach(arg0);
         } else {
@@ -234,17 +250,17 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public java.util.Spliterator<E> spliterator() {
+    public Spliterator<E> spliterator() {
         return (this.spliteratorHandler != null && this.spliteratorHandler.getHandler() != null) ? this.spliteratorHandler.getHandler().onSpliterator() : super.spliterator();
     }
 
     @Override
-    public boolean removeIf(java.util.function.Predicate<? super E> arg0) {
+    public boolean removeIf(Predicate<? super E> arg0) {
         return (this.removeIfPredicateHandler != null && this.removeIfPredicateHandler.getHandler() != null) ? this.removeIfPredicateHandler.getHandler().onRemoveIf(arg0) : super.removeIf(arg0);
     }
 
     @Override
-    public void replaceAll(java.util.function.UnaryOperator<E> arg0) {
+    public void replaceAll(UnaryOperator<E> arg0) {
         if (this.replaceAllUnaryOperatorHandler != null && this.replaceAllUnaryOperatorHandler.getHandler() != null) {
             this.replaceAllUnaryOperatorHandler.getHandler().onReplaceAll(arg0);
         } else {
@@ -253,7 +269,7 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
 
     @Override
-    public void sort(java.util.Comparator<? super E> arg0) {
+    public void sort(Comparator<? super E> arg0) {
         if (this.sortComparatorHandler != null && this.sortComparatorHandler.getHandler() != null) {
             this.sortComparatorHandler.getHandler().onSort(arg0);
         } else {
@@ -262,12 +278,12 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
     }
     @FunctionalInterface
     public interface AddAllCollectionHandler<E> {
-        boolean onAddAll(java.util.Collection<? extends E> arg0);
+        boolean onAddAll(Collection<? extends E> arg0);
     }
 
     @FunctionalInterface
     public interface AddAllIntCollectionHandler<E> {
-        boolean onAddAll(int arg0, java.util.Collection<? extends E> arg1);
+        boolean onAddAll(int arg0, Collection<? extends E> arg1);
     }
 
     @FunctionalInterface
@@ -287,17 +303,17 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface CloneHandler {
-        java.lang.Object onClone();
+        Object onClone();
     }
 
     @FunctionalInterface
     public interface ContainsAllCollectionHandler {
-        boolean onContainsAll(java.util.Collection<?> arg0);
+        boolean onContainsAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface ContainsObjectHandler {
-        boolean onContains(java.lang.Object arg0);
+        boolean onContains(Object arg0);
     }
 
     @FunctionalInterface
@@ -307,12 +323,12 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
     public interface ForEachConsumerHandler<E> {
-        void onForEach(java.util.function.Consumer<? super E> arg0);
+        void onForEach(Consumer<? super E> arg0);
     }
 
     @FunctionalInterface
@@ -327,7 +343,7 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface IndexOfObjectHandler {
-        int onIndexOf(java.lang.Object arg0);
+        int onIndexOf(Object arg0);
     }
 
     @FunctionalInterface
@@ -337,37 +353,37 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface IteratorHandler<E> {
-        java.util.Iterator<E> onIterator();
+        Iterator<E> onIterator();
     }
 
     @FunctionalInterface
     public interface LastIndexOfObjectHandler {
-        int onLastIndexOf(java.lang.Object arg0);
+        int onLastIndexOf(Object arg0);
     }
 
     @FunctionalInterface
     public interface ListIteratorHandler<E> {
-        java.util.ListIterator<E> onListIterator();
+        ListIterator<E> onListIterator();
     }
 
     @FunctionalInterface
     public interface ListIteratorIntHandler<E> {
-        java.util.ListIterator<E> onListIterator(int arg0);
+        ListIterator<E> onListIterator(int arg0);
     }
 
     @FunctionalInterface
     public interface ParallelStreamHandler<E> {
-        java.util.stream.Stream<E> onParallelStream();
+        Stream<E> onParallelStream();
     }
 
     @FunctionalInterface
     public interface RemoveAllCollectionHandler {
-        boolean onRemoveAll(java.util.Collection<?> arg0);
+        boolean onRemoveAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
     public interface RemoveIfPredicateHandler<E> {
-        boolean onRemoveIf(java.util.function.Predicate<? super E> arg0);
+        boolean onRemoveIf(Predicate<? super E> arg0);
     }
 
     @FunctionalInterface
@@ -377,17 +393,17 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface RemoveObjectHandler {
-        boolean onRemove(java.lang.Object arg0);
+        boolean onRemove(Object arg0);
     }
 
     @FunctionalInterface
     public interface ReplaceAllUnaryOperatorHandler<E> {
-        void onReplaceAll(java.util.function.UnaryOperator<E> arg0);
+        void onReplaceAll(UnaryOperator<E> arg0);
     }
 
     @FunctionalInterface
     public interface RetainAllCollectionHandler {
-        boolean onRetainAll(java.util.Collection<?> arg0);
+        boolean onRetainAll(Collection<?> arg0);
     }
 
     @FunctionalInterface
@@ -402,32 +418,32 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface SortComparatorHandler<E> {
-        void onSort(java.util.Comparator<? super E> arg0);
+        void onSort(Comparator<? super E> arg0);
     }
 
     @FunctionalInterface
     public interface SpliteratorHandler<E> {
-        java.util.Spliterator<E> onSpliterator();
+        Spliterator<E> onSpliterator();
     }
 
     @FunctionalInterface
     public interface StreamHandler<E> {
-        java.util.stream.Stream<E> onStream();
+        Stream<E> onStream();
     }
 
     @FunctionalInterface
     public interface SubListIntIntHandler<E> {
-        java.util.List<E> onSubList(int arg0, int arg1);
+        List<E> onSubList(int arg0, int arg1);
     }
 
     @FunctionalInterface
     public interface ToArrayHandler {
-        java.lang.Object[] onToArray();
+        Object[] onToArray();
     }
 
     @FunctionalInterface
     public interface ToArrayIntFunctionHandler {
-        <T> T[] onToArray(java.util.function.IntFunction<T[]> arg0);
+        <T> T[] onToArray(IntFunction<T[]> arg0);
     }
 
     @FunctionalInterface
@@ -437,7 +453,7 @@ public class ArrayListWrapper<E> extends ArrayList<E> {
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
     @FunctionalInterface

@@ -1,6 +1,10 @@
 package pie.ilikepiefoo.wrappergen.example;
 
-public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>, G extends T, F extends H, H extends java.util.List<F>> {
+import java.util.List;
+import java.util.NavigableMap;
+import java.util.Set;
+
+public class ExampleClassBuilder<T extends NavigableMap<String, List<Set<T>>>, G extends T, F extends H, H extends List<F>> {
     public CalculateGenericObjectHandler calculateGenericObjectHandler;
     public ComplexGenericExampleNumberHandler complexGenericExampleNumberHandler;
     public EqualsObjectHandler equalsObjectHandler;
@@ -96,12 +100,12 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
 
     @FunctionalInterface
     public interface ComplexGenericExampleNumberHandler {
-        <COMPLEX_GENERIC extends java.lang.Number> void onComplexGenericExample(COMPLEX_GENERIC arg0);
+        <COMPLEX_GENERIC extends Number> void onComplexGenericExample(COMPLEX_GENERIC arg0);
     }
 
     @FunctionalInterface
     public interface EqualsObjectHandler {
-        boolean onEquals(java.lang.Object arg0);
+        boolean onEquals(Object arg0);
     }
 
     @FunctionalInterface
@@ -111,21 +115,21 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
 
     @FunctionalInterface
     public interface GetComplexGenericHandler {
-        <COMPLEX_GENERIC extends java.lang.Number> COMPLEX_GENERIC onGetComplexGeneric();
+        <COMPLEX_GENERIC extends Number> COMPLEX_GENERIC onGetComplexGeneric();
     }
 
     @FunctionalInterface
-    public interface GetGenericHandler<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>> {
+    public interface GetGenericHandler<T extends NavigableMap<String, List<Set<T>>>> {
         T onGetGeneric();
     }
 
     @FunctionalInterface
     public interface GetNameHandler {
-        java.lang.String onGetName();
+        String onGetName();
     }
 
     @FunctionalInterface
-    public interface GetPITAGenericNavigableMapObjectHandler<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>> {
+    public interface GetPITAGenericNavigableMapObjectHandler<T extends NavigableMap<String, List<Set<T>>>> {
         <L, M, N extends T> L onGetPITAGeneric(T arg0, L arg1);
     }
 
@@ -145,23 +149,23 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @FunctionalInterface
-    public interface SetGenericNavigableMapHandler<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>> {
+    public interface SetGenericNavigableMapHandler<T extends NavigableMap<String, List<Set<T>>>> {
         void onSetGeneric(T arg0);
     }
 
     @FunctionalInterface
-    public interface SetMixedGenericsNumberNavigableMapHandler<T extends java.util.NavigableMap<java.lang.String, java.util.List<java.util.Set<T>>>> {
-        <COMPLEX_GENERIC extends java.lang.Number> void onSetMixedGenerics(COMPLEX_GENERIC arg0, T arg1);
+    public interface SetMixedGenericsNumberNavigableMapHandler<T extends NavigableMap<String, List<Set<T>>>> {
+        <COMPLEX_GENERIC extends Number> void onSetMixedGenerics(COMPLEX_GENERIC arg0, T arg1);
     }
 
     @FunctionalInterface
     public interface SetNameStringHandler {
-        void onSetName(java.lang.String arg0);
+        void onSetName(String arg0);
     }
 
     @FunctionalInterface
     public interface ToStringHandler {
-        java.lang.String onToString();
+        String onToString();
     }
 
     @FunctionalInterface
@@ -171,7 +175,7 @@ public class ExampleClassBuilder<T extends java.util.NavigableMap<java.lang.Stri
 
     @FunctionalInterface
     public interface VarArgsExampleStringHandler {
-        void onVarArgsExample(java.lang.String... arg0);
+        void onVarArgsExample(String... arg0);
     }
 
 }
