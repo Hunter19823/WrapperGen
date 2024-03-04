@@ -1,7 +1,6 @@
 package pie.ilikepiefoo.wrappergen.example;
 
 import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
-
 public class ChildClassWrapper extends ChildClass {
     public final MethodOverrideHandler<CeilingEntryObjectHandler> ceilingEntryObjectHandler;
     public final MethodOverrideHandler<CeilingKeyObjectHandler> ceilingKeyObjectHandler;
@@ -25,8 +24,8 @@ public class ChildClassWrapper extends ChildClass {
     public final MethodOverrideHandler<GetObjectHandler> getObjectHandler;
     public final MethodOverrideHandler<GetOrDefaultObjectObjectHandler> getOrDefaultObjectObjectHandler;
     public final MethodOverrideHandler<HashCodeHandler> hashCodeHandler;
+    public final MethodOverrideHandler<HeadMapObjectBooleanHandler> headMapObjectBooleanHandler;
     public final MethodOverrideHandler<HeadMapObjectHandler> headMapObjectHandler;
-    public final MethodOverrideHandler<HeadMapObjectbooleanHandler> headMapObjectbooleanHandler;
     public final MethodOverrideHandler<HigherEntryObjectHandler> higherEntryObjectHandler;
     public final MethodOverrideHandler<HigherKeyObjectHandler> higherKeyObjectHandler;
     public final MethodOverrideHandler<IsEmptyHandler> isEmptyHandler;
@@ -48,13 +47,12 @@ public class ChildClassWrapper extends ChildClass {
     public final MethodOverrideHandler<ReplaceObjectObjectHandler> replaceObjectObjectHandler;
     public final MethodOverrideHandler<ReplaceObjectObjectObjectHandler> replaceObjectObjectObjectHandler;
     public final MethodOverrideHandler<SizeHandler> sizeHandler;
+    public final MethodOverrideHandler<SubMapObjectBooleanObjectBooleanHandler> subMapObjectBooleanObjectBooleanHandler;
     public final MethodOverrideHandler<SubMapObjectObjectHandler> subMapObjectObjectHandler;
-    public final MethodOverrideHandler<SubMapObjectbooleanObjectbooleanHandler> subMapObjectbooleanObjectbooleanHandler;
+    public final MethodOverrideHandler<TailMapObjectBooleanHandler> tailMapObjectBooleanHandler;
     public final MethodOverrideHandler<TailMapObjectHandler> tailMapObjectHandler;
-    public final MethodOverrideHandler<TailMapObjectbooleanHandler> tailMapObjectbooleanHandler;
     public final MethodOverrideHandler<ToStringHandler> toStringHandler;
     public final MethodOverrideHandler<ValuesHandler> valuesHandler;
-
     public ChildClassWrapper() {
         super();
         this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
@@ -96,11 +94,11 @@ public class ChildClassWrapper extends ChildClass {
         this.navigableKeySetHandler = new MethodOverrideHandler<>(super::navigableKeySet);
         this.descendingKeySetHandler = new MethodOverrideHandler<>(super::descendingKeySet);
         this.subMapObjectObjectHandler = new MethodOverrideHandler<>(super::subMap);
-        this.subMapObjectbooleanObjectbooleanHandler = new MethodOverrideHandler<>(super::subMap);
-        this.headMapObjectbooleanHandler = new MethodOverrideHandler<>(super::headMap);
+        this.subMapObjectBooleanObjectBooleanHandler = new MethodOverrideHandler<>(super::subMap);
+        this.headMapObjectBooleanHandler = new MethodOverrideHandler<>(super::headMap);
         this.headMapObjectHandler = new MethodOverrideHandler<>(super::headMap);
         this.tailMapObjectHandler = new MethodOverrideHandler<>(super::tailMap);
-        this.tailMapObjectbooleanHandler = new MethodOverrideHandler<>(super::tailMap);
+        this.tailMapObjectBooleanHandler = new MethodOverrideHandler<>(super::tailMap);
         this.lastKeyHandler = new MethodOverrideHandler<>(super::lastKey);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
@@ -146,28 +144,21 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
+    public java.lang.String get(java.lang.Object arg0) {
+        return this.getObjectHandler.getHandler().onGet(arg0);
+    }
+    @Override
     public boolean containsKey(java.lang.Object arg0) {
         return this.containsKeyObjectHandler.getHandler().onContainsKey(arg0);
     }
-
     @Override
     public boolean containsValue(java.lang.Object arg0) {
         return this.containsValueObjectHandler.getHandler().onContainsValue(arg0);
     }
 
     @Override
-    public java.lang.String get(java.lang.Object arg0) {
-        return this.getObjectHandler.getHandler().onGet(arg0);
-    }
-
-    @Override
     public java.util.Comparator<? super java.lang.String> comparator() {
         return this.comparatorHandler.getHandler().onComparator();
-    }
-
-    @Override
-    public java.lang.String firstKey() {
-        return this.firstKeyHandler.getHandler().onFirstKey();
     }
 
     @Override
@@ -188,6 +179,10 @@ public class ChildClassWrapper extends ChildClass {
     @Override
     public java.lang.String putIfAbsent(java.lang.String arg0, java.lang.String arg1) {
         return this.putIfAbsentObjectObjectHandler.getHandler().onPutIfAbsent(arg0, arg1);
+    }
+    @Override
+    public java.lang.String firstKey() {
+        return this.firstKeyHandler.getHandler().onFirstKey();
     }
 
     @Override
@@ -231,11 +226,6 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> lastEntry() {
-        return this.lastEntryHandler.getHandler().onLastEntry();
-    }
-
-    @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> pollFirstEntry() {
         return this.pollFirstEntryHandler.getHandler().onPollFirstEntry();
     }
@@ -243,16 +233,6 @@ public class ChildClassWrapper extends ChildClass {
     @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> pollLastEntry() {
         return this.pollLastEntryHandler.getHandler().onPollLastEntry();
-    }
-
-    @Override
-    public java.util.Map.Entry<java.lang.String, java.lang.String> lowerEntry(java.lang.String arg0) {
-        return this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0);
-    }
-
-    @Override
-    public java.lang.String lowerKey(java.lang.String arg0) {
-        return this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0);
     }
 
     @Override
@@ -264,10 +244,22 @@ public class ChildClassWrapper extends ChildClass {
     public java.lang.String floorKey(java.lang.String arg0) {
         return this.floorKeyObjectHandler.getHandler().onFloorKey(arg0);
     }
+    @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> lastEntry() {
+        return this.lastEntryHandler.getHandler().onLastEntry();
+    }
 
     @Override
     public java.util.Map.Entry<java.lang.String, java.lang.String> ceilingEntry(java.lang.String arg0) {
         return this.ceilingEntryObjectHandler.getHandler().onCeilingEntry(arg0);
+    }
+    @Override
+    public java.util.Map.Entry<java.lang.String, java.lang.String> lowerEntry(java.lang.String arg0) {
+        return this.lowerEntryObjectHandler.getHandler().onLowerEntry(arg0);
+    }
+    @Override
+    public java.lang.String lowerKey(java.lang.String arg0) {
+        return this.lowerKeyObjectHandler.getHandler().onLowerKey(arg0);
     }
 
     @Override
@@ -317,37 +309,35 @@ public class ChildClassWrapper extends ChildClass {
 
     @Override
     public java.util.NavigableMap<java.lang.String, java.lang.String> subMap(java.lang.String arg0, boolean arg1, java.lang.String arg2, boolean arg3) {
-        return this.subMapObjectbooleanObjectbooleanHandler.getHandler().onSubMap(arg0, arg1, arg2, arg3);
+        return this.subMapObjectBooleanObjectBooleanHandler.getHandler().onSubMap(arg0, arg1, arg2, arg3);
     }
 
     @Override
     public java.util.NavigableMap<java.lang.String, java.lang.String> headMap(java.lang.String arg0, boolean arg1) {
-        return this.headMapObjectbooleanHandler.getHandler().onHeadMap(arg0, arg1);
+        return this.headMapObjectBooleanHandler.getHandler().onHeadMap(arg0, arg1);
     }
 
     @Override
     public java.util.NavigableMap<java.lang.String, java.lang.String> tailMap(java.lang.String arg0, boolean arg1) {
-        return this.tailMapObjectbooleanHandler.getHandler().onTailMap(arg0, arg1);
-    }
-
-    @Override
-    public java.util.SortedMap<java.lang.String, java.lang.String> subMap(java.lang.String arg0, java.lang.String arg1) {
-        return this.subMapObjectObjectHandler.getHandler().onSubMap(arg0, arg1);
+        return this.tailMapObjectBooleanHandler.getHandler().onTailMap(arg0, arg1);
     }
 
     @Override
     public java.util.SortedMap<java.lang.String, java.lang.String> headMap(java.lang.String arg0) {
         return this.headMapObjectHandler.getHandler().onHeadMap(arg0);
     }
-
     @Override
-    public java.util.SortedMap<java.lang.String, java.lang.String> tailMap(java.lang.String arg0) {
-        return this.tailMapObjectHandler.getHandler().onTailMap(arg0);
+    public java.util.SortedMap<java.lang.String, java.lang.String> subMap(java.lang.String arg0, java.lang.String arg1) {
+        return this.subMapObjectObjectHandler.getHandler().onSubMap(arg0, arg1);
     }
 
     @Override
     public boolean replace(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) {
         return this.replaceObjectObjectObjectHandler.getHandler().onReplace(arg0, arg1, arg2);
+    }
+    @Override
+    public java.util.SortedMap<java.lang.String, java.lang.String> tailMap(java.lang.String arg0) {
+        return this.tailMapObjectHandler.getHandler().onTailMap(arg0);
     }
 
     @Override
@@ -364,7 +354,6 @@ public class ChildClassWrapper extends ChildClass {
     public void replaceAll(java.util.function.BiFunction<? super java.lang.String, ? super java.lang.String, ? extends java.lang.String> arg0) {
         this.replaceAllBiFunctionHandler.getHandler().onReplaceAll(arg0);
     }
-
     @FunctionalInterface
     public interface CeilingEntryObjectHandler {
         java.util.Map.Entry<java.lang.String, java.lang.String> onCeilingEntry(java.lang.String arg0);
@@ -476,13 +465,13 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @FunctionalInterface
-    public interface HeadMapObjectHandler {
-        java.util.SortedMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0);
+    public interface HeadMapObjectBooleanHandler {
+        java.util.NavigableMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0, boolean arg1);
     }
 
     @FunctionalInterface
-    public interface HeadMapObjectbooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0, boolean arg1);
+    public interface HeadMapObjectHandler {
+        java.util.SortedMap<java.lang.String, java.lang.String> onHeadMap(java.lang.String arg0);
     }
 
     @FunctionalInterface
@@ -591,23 +580,23 @@ public class ChildClassWrapper extends ChildClass {
     }
 
     @FunctionalInterface
+    public interface SubMapObjectBooleanObjectBooleanHandler {
+        java.util.NavigableMap<java.lang.String, java.lang.String> onSubMap(java.lang.String arg0, boolean arg1, java.lang.String arg2, boolean arg3);
+    }
+
+    @FunctionalInterface
     public interface SubMapObjectObjectHandler {
         java.util.SortedMap<java.lang.String, java.lang.String> onSubMap(java.lang.String arg0, java.lang.String arg1);
     }
 
     @FunctionalInterface
-    public interface SubMapObjectbooleanObjectbooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onSubMap(java.lang.String arg0, boolean arg1, java.lang.String arg2, boolean arg3);
+    public interface TailMapObjectBooleanHandler {
+        java.util.NavigableMap<java.lang.String, java.lang.String> onTailMap(java.lang.String arg0, boolean arg1);
     }
 
     @FunctionalInterface
     public interface TailMapObjectHandler {
         java.util.SortedMap<java.lang.String, java.lang.String> onTailMap(java.lang.String arg0);
-    }
-
-    @FunctionalInterface
-    public interface TailMapObjectbooleanHandler {
-        java.util.NavigableMap<java.lang.String, java.lang.String> onTailMap(java.lang.String arg0, boolean arg1);
     }
 
     @FunctionalInterface

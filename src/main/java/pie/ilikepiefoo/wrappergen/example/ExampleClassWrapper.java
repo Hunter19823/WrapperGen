@@ -11,51 +11,52 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     public final MethodOverrideHandler<GetNameHandler> getNameHandler;
     public final MethodOverrideHandler<GetPITAGenericNavigableMapObjectHandler<T>> getPITAGenericNavigableMapObjectHandler;
     public final MethodOverrideHandler<HashCodeHandler> hashCodeHandler;
-    public final MethodOverrideHandler<SetAgedoubleHandler> setAgedoubleHandler;
-    public final MethodOverrideHandler<SetAgeintHandler> setAgeintHandler;
+    public final MethodOverrideHandler<SetAgeDoubleHandler> setAgeDoubleHandler;
+    public final MethodOverrideHandler<SetAgeIntHandler> setAgeIntHandler;
     public final MethodOverrideHandler<SetGenericNavigableMapHandler<T>> setGenericNavigableMapHandler;
     public final MethodOverrideHandler<SetMixedGenericsNumberNavigableMapHandler<T>> setMixedGenericsNumberNavigableMapHandler;
     public final MethodOverrideHandler<SetNameStringHandler> setNameStringHandler;
     public final MethodOverrideHandler<ToStringHandler> toStringHandler;
     public final MethodOverrideHandler<VarArgGenericExampleObjectHandler> varArgGenericExampleObjectHandler;
     public final MethodOverrideHandler<VarArgsExampleStringHandler> varArgsExampleStringHandler;
-    public ExampleClassWrapper(java.lang.String arg0, int arg1, T arg2) {
-        super(arg0, arg1, arg2);
-        this.varArgGenericExampleObjectHandler = new MethodOverrideHandler<>(super::varArgGenericExample);
-        this.complexGenericExampleNumberHandler = new MethodOverrideHandler<>(super::complexGenericExample);
-        this.getAgeHandler = new MethodOverrideHandler<>(super::getAge);
-        this.setMixedGenericsNumberNavigableMapHandler = new MethodOverrideHandler<>(super::setMixedGenerics);
-        this.setAgedoubleHandler = new MethodOverrideHandler<>(super::setAge);
-        this.setAgeintHandler = new MethodOverrideHandler<>(super::setAge);
-        this.getPITAGenericNavigableMapObjectHandler = new MethodOverrideHandler<>(super::getPITAGeneric);
-        this.setGenericNavigableMapHandler = new MethodOverrideHandler<>(super::setGeneric);
-        this.varArgsExampleStringHandler = new MethodOverrideHandler<>(super::varArgsExample);
-        this.getComplexGenericHandler = new MethodOverrideHandler<>(super::getComplexGeneric);
-        this.getGenericHandler = new MethodOverrideHandler<>(super::getGeneric);
-        this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
+
+    public ExampleClassWrapper(java.lang.String arg0, int arg1) {
+        super(arg0, arg1);
         this.getNameHandler = new MethodOverrideHandler<>(super::getName);
         this.setNameStringHandler = new MethodOverrideHandler<>(super::setName);
+        this.varArgGenericExampleObjectHandler = new MethodOverrideHandler<>(super::varArgGenericExample);
+        this.complexGenericExampleNumberHandler = new MethodOverrideHandler<>(super::complexGenericExample);
+        this.setGenericNavigableMapHandler = new MethodOverrideHandler<>(super::setGeneric);
+        this.setMixedGenericsNumberNavigableMapHandler = new MethodOverrideHandler<>(super::setMixedGenerics);
+        this.getPITAGenericNavigableMapObjectHandler = new MethodOverrideHandler<>(super::getPITAGeneric);
+        this.getAgeHandler = new MethodOverrideHandler<>(super::getAge);
+        this.getComplexGenericHandler = new MethodOverrideHandler<>(super::getComplexGeneric);
+        this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
+        this.getGenericHandler = new MethodOverrideHandler<>(super::getGeneric);
+        this.varArgsExampleStringHandler = new MethodOverrideHandler<>(super::varArgsExample);
+        this.setAgeDoubleHandler = new MethodOverrideHandler<>(super::setAge);
+        this.setAgeIntHandler = new MethodOverrideHandler<>(super::setAge);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
         this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
     }
 
-    public ExampleClassWrapper(java.lang.String arg0, int arg1) {
-        super(arg0, arg1);
-        this.varArgGenericExampleObjectHandler = new MethodOverrideHandler<>(super::varArgGenericExample);
-        this.complexGenericExampleNumberHandler = new MethodOverrideHandler<>(super::complexGenericExample);
-        this.getAgeHandler = new MethodOverrideHandler<>(super::getAge);
-        this.setMixedGenericsNumberNavigableMapHandler = new MethodOverrideHandler<>(super::setMixedGenerics);
-        this.setAgedoubleHandler = new MethodOverrideHandler<>(super::setAge);
-        this.setAgeintHandler = new MethodOverrideHandler<>(super::setAge);
-        this.getPITAGenericNavigableMapObjectHandler = new MethodOverrideHandler<>(super::getPITAGeneric);
-        this.setGenericNavigableMapHandler = new MethodOverrideHandler<>(super::setGeneric);
-        this.varArgsExampleStringHandler = new MethodOverrideHandler<>(super::varArgsExample);
-        this.getComplexGenericHandler = new MethodOverrideHandler<>(super::getComplexGeneric);
-        this.getGenericHandler = new MethodOverrideHandler<>(super::getGeneric);
-        this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
+    public ExampleClassWrapper(java.lang.String arg0, int arg1, T arg2) {
+        super(arg0, arg1, arg2);
         this.getNameHandler = new MethodOverrideHandler<>(super::getName);
         this.setNameStringHandler = new MethodOverrideHandler<>(super::setName);
+        this.varArgGenericExampleObjectHandler = new MethodOverrideHandler<>(super::varArgGenericExample);
+        this.complexGenericExampleNumberHandler = new MethodOverrideHandler<>(super::complexGenericExample);
+        this.setGenericNavigableMapHandler = new MethodOverrideHandler<>(super::setGeneric);
+        this.setMixedGenericsNumberNavigableMapHandler = new MethodOverrideHandler<>(super::setMixedGenerics);
+        this.getPITAGenericNavigableMapObjectHandler = new MethodOverrideHandler<>(super::getPITAGeneric);
+        this.getAgeHandler = new MethodOverrideHandler<>(super::getAge);
+        this.getComplexGenericHandler = new MethodOverrideHandler<>(super::getComplexGeneric);
+        this.calculateGenericObjectHandler = new MethodOverrideHandler<>(super::calculateGeneric);
+        this.getGenericHandler = new MethodOverrideHandler<>(super::getGeneric);
+        this.varArgsExampleStringHandler = new MethodOverrideHandler<>(super::varArgsExample);
+        this.setAgeDoubleHandler = new MethodOverrideHandler<>(super::setAge);
+        this.setAgeIntHandler = new MethodOverrideHandler<>(super::setAge);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
         this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
@@ -90,12 +91,17 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @Override
-    public void setAge(double arg0) {
-        this.setAgedoubleHandler.getHandler().onSetAge(arg0);
+    public void setAge(int arg0) {
+        this.setAgeIntHandler.getHandler().onSetAge(arg0);
     }
     @Override
     public <L, M, N extends T> L getPITAGeneric(T arg0, L arg1) {
         return this.getPITAGenericNavigableMapObjectHandler.getHandler().onGetPITAGeneric(arg0, arg1);
+    }
+
+    @Override
+    public void setAge(double arg0) {
+        this.setAgeDoubleHandler.getHandler().onSetAge(arg0);
     }
 
     @Override
@@ -107,24 +113,19 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     public void varArgsExample(java.lang.String... arg0) {
         this.varArgsExampleStringHandler.getHandler().onVarArgsExample(arg0);
     }
-    @Override
-    public void setAge(int arg0) {
-        this.setAgeintHandler.getHandler().onSetAge(arg0);
-    }
 
     @Override
     public <T> T varArgGenericExample(T... arg0) {
         return this.varArgGenericExampleObjectHandler.getHandler().onVarArgGenericExample(arg0);
     }
+    @Override
+    public <COMPLEX_GENERIC extends java.lang.Number> void setMixedGenerics(COMPLEX_GENERIC arg0, T arg1) {
+        this.setMixedGenericsNumberNavigableMapHandler.getHandler().onSetMixedGenerics(arg0, arg1);
+    }
 
     @Override
     public <COMPLEX_GENERIC extends java.lang.Number> void complexGenericExample(COMPLEX_GENERIC arg0) {
         this.complexGenericExampleNumberHandler.getHandler().onComplexGenericExample(arg0);
-    }
-
-    @Override
-    public <COMPLEX_GENERIC extends java.lang.Number> void setMixedGenerics(COMPLEX_GENERIC arg0, T arg1) {
-        this.setMixedGenericsNumberNavigableMapHandler.getHandler().onSetMixedGenerics(arg0, arg1);
     }
     @Override
     public java.lang.String toString() {
@@ -186,12 +187,12 @@ public class ExampleClassWrapper<T extends java.util.NavigableMap<java.lang.Stri
     }
 
     @FunctionalInterface
-    public interface SetAgedoubleHandler {
+    public interface SetAgeDoubleHandler {
         void onSetAge(double arg0);
     }
 
     @FunctionalInterface
-    public interface SetAgeintHandler {
+    public interface SetAgeIntHandler {
         void onSetAge(int arg0);
     }
 

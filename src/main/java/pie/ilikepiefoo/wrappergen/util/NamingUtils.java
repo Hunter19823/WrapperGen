@@ -16,15 +16,18 @@ public class NamingUtils {
     public static String getUniqueName(Parameter[] parameters) {
         StringBuilder name = new StringBuilder();
         for (var parameter : parameters) {
-            name.append(parameter.getType().getSimpleName());
+            name.append(CamelCase(parameter.getType().getSimpleName()));
         }
         return name.toString().replaceAll("[^a-zA-Z0-9]", "");
     }
 
+    public static String CamelCase(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
+
     public static String getHandlerMethodName(Method method) {
         return "on" +
-            method.getName().substring(0, 1).toUpperCase() +
-            method.getName().substring(1);
+            CamelCase(method.getName());
     }
 
     public static String getArgumentCall(List<String> args) {

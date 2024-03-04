@@ -5,37 +5,37 @@ import pie.ilikepiefoo.wrappergen.util.MethodOverrideHandler;
 import java.util.ArrayList;
 public class CustomWrapper<E> extends ArrayList<E> {
     public final MethodOverrideHandler<AddAllCollectionHandler<E>> addAllCollectionHandler;
-    public final MethodOverrideHandler<AddAllintCollectionHandler<E>> addAllintCollectionHandler;
+    public final MethodOverrideHandler<AddAllIntCollectionHandler<E>> addAllIntCollectionHandler;
+    public final MethodOverrideHandler<AddIntObjectHandler<E>> addIntObjectHandler;
     public final MethodOverrideHandler<AddObjectHandler<E>> addObjectHandler;
-    public final MethodOverrideHandler<AddintObjectHandler<E>> addintObjectHandler;
     public final MethodOverrideHandler<ClearHandler> clearHandler;
     public final MethodOverrideHandler<CloneHandler> cloneHandler;
     public final MethodOverrideHandler<ContainsAllCollectionHandler> containsAllCollectionHandler;
     public final MethodOverrideHandler<ContainsObjectHandler> containsObjectHandler;
-    public final MethodOverrideHandler<EnsureCapacityintHandler> ensureCapacityintHandler;
+    public final MethodOverrideHandler<EnsureCapacityIntHandler> ensureCapacityIntHandler;
     public final MethodOverrideHandler<EqualsObjectHandler> equalsObjectHandler;
     public final MethodOverrideHandler<ForEachConsumerHandler<E>> forEachConsumerHandler;
-    public final MethodOverrideHandler<GetintHandler<E>> getintHandler;
+    public final MethodOverrideHandler<GetIntHandler<E>> getIntHandler;
     public final MethodOverrideHandler<HashCodeHandler> hashCodeHandler;
     public final MethodOverrideHandler<IndexOfObjectHandler> indexOfObjectHandler;
     public final MethodOverrideHandler<IsEmptyHandler> isEmptyHandler;
     public final MethodOverrideHandler<IteratorHandler<E>> iteratorHandler;
     public final MethodOverrideHandler<LastIndexOfObjectHandler> lastIndexOfObjectHandler;
     public final MethodOverrideHandler<ListIteratorHandler<E>> listIteratorHandler;
-    public final MethodOverrideHandler<ListIteratorintHandler<E>> listIteratorintHandler;
+    public final MethodOverrideHandler<ListIteratorIntHandler<E>> listIteratorIntHandler;
     public final MethodOverrideHandler<ParallelStreamHandler<E>> parallelStreamHandler;
     public final MethodOverrideHandler<RemoveAllCollectionHandler> removeAllCollectionHandler;
     public final MethodOverrideHandler<RemoveIfPredicateHandler<E>> removeIfPredicateHandler;
+    public final MethodOverrideHandler<RemoveIntHandler<E>> removeIntHandler;
     public final MethodOverrideHandler<RemoveObjectHandler> removeObjectHandler;
-    public final MethodOverrideHandler<RemoveintHandler<E>> removeintHandler;
     public final MethodOverrideHandler<ReplaceAllUnaryOperatorHandler<E>> replaceAllUnaryOperatorHandler;
     public final MethodOverrideHandler<RetainAllCollectionHandler> retainAllCollectionHandler;
-    public final MethodOverrideHandler<SetintObjectHandler<E>> setintObjectHandler;
+    public final MethodOverrideHandler<SetIntObjectHandler<E>> setIntObjectHandler;
     public final MethodOverrideHandler<SizeHandler> sizeHandler;
     public final MethodOverrideHandler<SortComparatorHandler<E>> sortComparatorHandler;
     public final MethodOverrideHandler<SpliteratorHandler<E>> spliteratorHandler;
     public final MethodOverrideHandler<StreamHandler<E>> streamHandler;
-    public final MethodOverrideHandler<SubListintintHandler<E>> subListintintHandler;
+    public final MethodOverrideHandler<SubListIntIntHandler<E>> subListIntIntHandler;
     public final MethodOverrideHandler<ToArrayHandler> toArrayHandler;
     public final MethodOverrideHandler<ToArrayIntFunctionHandler> toArrayIntFunctionHandler;
     public final MethodOverrideHandler<ToArrayObjectHandler> toArrayObjectHandler;
@@ -44,10 +44,10 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public CustomWrapper(java.util.Collection<? extends E> arg0) {
         super(arg0);
         this.addObjectHandler = new MethodOverrideHandler<>(super::add);
-        this.addintObjectHandler = new MethodOverrideHandler<>(super::add);
+        this.addIntObjectHandler = new MethodOverrideHandler<>(super::add);
         this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
-        this.removeintHandler = new MethodOverrideHandler<>(super::remove);
-        this.getintHandler = new MethodOverrideHandler<>(super::get);
+        this.removeIntHandler = new MethodOverrideHandler<>(super::remove);
+        this.getIntHandler = new MethodOverrideHandler<>(super::get);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
         this.cloneHandler = new MethodOverrideHandler<>(super::clone);
@@ -57,116 +57,29 @@ public class CustomWrapper<E> extends ArrayList<E> {
         this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
         this.replaceAllUnaryOperatorHandler = new MethodOverrideHandler<>(super::replaceAll);
         this.sizeHandler = new MethodOverrideHandler<>(super::size);
-        this.subListintintHandler = new MethodOverrideHandler<>(super::subList);
+        this.subListIntIntHandler = new MethodOverrideHandler<>(super::subList);
         this.toArrayObjectHandler = new MethodOverrideHandler<>(super::toArray);
         this.toArrayHandler = new MethodOverrideHandler<>(super::toArray);
         this.iteratorHandler = new MethodOverrideHandler<>(super::iterator);
         this.containsObjectHandler = new MethodOverrideHandler<>(super::contains);
         this.spliteratorHandler = new MethodOverrideHandler<>(super::spliterator);
         this.addAllCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.addAllintCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.setintObjectHandler = new MethodOverrideHandler<>(super::set);
+        this.addAllIntCollectionHandler = new MethodOverrideHandler<>(super::addAll);
+        this.setIntObjectHandler = new MethodOverrideHandler<>(super::set);
         this.forEachConsumerHandler = new MethodOverrideHandler<>(super::forEach);
-        this.ensureCapacityintHandler = new MethodOverrideHandler<>(super::ensureCapacity);
+        this.ensureCapacityIntHandler = new MethodOverrideHandler<>(super::ensureCapacity);
         this.trimToSizeHandler = new MethodOverrideHandler<>(super::trimToSize);
         this.removeIfPredicateHandler = new MethodOverrideHandler<>(super::removeIf);
         this.sortComparatorHandler = new MethodOverrideHandler<>(super::sort);
         this.removeAllCollectionHandler = new MethodOverrideHandler<>(super::removeAll);
         this.retainAllCollectionHandler = new MethodOverrideHandler<>(super::retainAll);
         this.listIteratorHandler = new MethodOverrideHandler<>(super::listIterator);
-        this.listIteratorintHandler = new MethodOverrideHandler<>(super::listIterator);
+        this.listIteratorIntHandler = new MethodOverrideHandler<>(super::listIterator);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
         this.containsAllCollectionHandler = new MethodOverrideHandler<>(super::containsAll);
         this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
         this.streamHandler = new MethodOverrideHandler<>(this::stream);
         this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
-    }
-
-    public CustomWrapper() {
-        super();
-        this.addObjectHandler = new MethodOverrideHandler<>(super::add);
-        this.addintObjectHandler = new MethodOverrideHandler<>(super::add);
-        this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
-        this.removeintHandler = new MethodOverrideHandler<>(super::remove);
-        this.getintHandler = new MethodOverrideHandler<>(super::get);
-        this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
-        this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
-        this.cloneHandler = new MethodOverrideHandler<>(super::clone);
-        this.indexOfObjectHandler = new MethodOverrideHandler<>(super::indexOf);
-        this.clearHandler = new MethodOverrideHandler<>(super::clear);
-        this.lastIndexOfObjectHandler = new MethodOverrideHandler<>(super::lastIndexOf);
-        this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
-        this.replaceAllUnaryOperatorHandler = new MethodOverrideHandler<>(super::replaceAll);
-        this.sizeHandler = new MethodOverrideHandler<>(super::size);
-        this.subListintintHandler = new MethodOverrideHandler<>(super::subList);
-        this.toArrayObjectHandler = new MethodOverrideHandler<>(super::toArray);
-        this.toArrayHandler = new MethodOverrideHandler<>(super::toArray);
-        this.iteratorHandler = new MethodOverrideHandler<>(super::iterator);
-        this.containsObjectHandler = new MethodOverrideHandler<>(super::contains);
-        this.spliteratorHandler = new MethodOverrideHandler<>(super::spliterator);
-        this.addAllCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.addAllintCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.setintObjectHandler = new MethodOverrideHandler<>(super::set);
-        this.forEachConsumerHandler = new MethodOverrideHandler<>(super::forEach);
-        this.ensureCapacityintHandler = new MethodOverrideHandler<>(super::ensureCapacity);
-        this.trimToSizeHandler = new MethodOverrideHandler<>(super::trimToSize);
-        this.removeIfPredicateHandler = new MethodOverrideHandler<>(super::removeIf);
-        this.sortComparatorHandler = new MethodOverrideHandler<>(super::sort);
-        this.removeAllCollectionHandler = new MethodOverrideHandler<>(super::removeAll);
-        this.retainAllCollectionHandler = new MethodOverrideHandler<>(super::retainAll);
-        this.listIteratorHandler = new MethodOverrideHandler<>(super::listIterator);
-        this.listIteratorintHandler = new MethodOverrideHandler<>(super::listIterator);
-        this.toStringHandler = new MethodOverrideHandler<>(super::toString);
-        this.containsAllCollectionHandler = new MethodOverrideHandler<>(super::containsAll);
-        this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
-        this.streamHandler = new MethodOverrideHandler<>(this::stream);
-        this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
-    }
-
-    public CustomWrapper(int arg0) {
-        super(arg0);
-        this.addObjectHandler = new MethodOverrideHandler<>(super::add);
-        this.addintObjectHandler = new MethodOverrideHandler<>(super::add);
-        this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
-        this.removeintHandler = new MethodOverrideHandler<>(super::remove);
-        this.getintHandler = new MethodOverrideHandler<>(super::get);
-        this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
-        this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
-        this.cloneHandler = new MethodOverrideHandler<>(super::clone);
-        this.indexOfObjectHandler = new MethodOverrideHandler<>(super::indexOf);
-        this.clearHandler = new MethodOverrideHandler<>(super::clear);
-        this.lastIndexOfObjectHandler = new MethodOverrideHandler<>(super::lastIndexOf);
-        this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
-        this.replaceAllUnaryOperatorHandler = new MethodOverrideHandler<>(super::replaceAll);
-        this.sizeHandler = new MethodOverrideHandler<>(super::size);
-        this.subListintintHandler = new MethodOverrideHandler<>(super::subList);
-        this.toArrayObjectHandler = new MethodOverrideHandler<>(super::toArray);
-        this.toArrayHandler = new MethodOverrideHandler<>(super::toArray);
-        this.iteratorHandler = new MethodOverrideHandler<>(super::iterator);
-        this.containsObjectHandler = new MethodOverrideHandler<>(super::contains);
-        this.spliteratorHandler = new MethodOverrideHandler<>(super::spliterator);
-        this.addAllCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.addAllintCollectionHandler = new MethodOverrideHandler<>(super::addAll);
-        this.setintObjectHandler = new MethodOverrideHandler<>(super::set);
-        this.forEachConsumerHandler = new MethodOverrideHandler<>(super::forEach);
-        this.ensureCapacityintHandler = new MethodOverrideHandler<>(super::ensureCapacity);
-        this.trimToSizeHandler = new MethodOverrideHandler<>(super::trimToSize);
-        this.removeIfPredicateHandler = new MethodOverrideHandler<>(super::removeIf);
-        this.sortComparatorHandler = new MethodOverrideHandler<>(super::sort);
-        this.removeAllCollectionHandler = new MethodOverrideHandler<>(super::removeAll);
-        this.retainAllCollectionHandler = new MethodOverrideHandler<>(super::retainAll);
-        this.listIteratorHandler = new MethodOverrideHandler<>(super::listIterator);
-        this.listIteratorintHandler = new MethodOverrideHandler<>(super::listIterator);
-        this.toStringHandler = new MethodOverrideHandler<>(super::toString);
-        this.containsAllCollectionHandler = new MethodOverrideHandler<>(super::containsAll);
-        this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
-        this.streamHandler = new MethodOverrideHandler<>(this::stream);
-        this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
-    }
-
-    @Override
-    public boolean containsAll(java.util.Collection<?> arg0) {
-        return this.containsAllCollectionHandler.getHandler().onContainsAll(arg0);
     }
 
     @Override
@@ -183,6 +96,91 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public java.util.stream.Stream<E> parallelStream() {
         return this.parallelStreamHandler.getHandler().onParallelStream();
     }
+    public CustomWrapper() {
+        super();
+        this.addObjectHandler = new MethodOverrideHandler<>(super::add);
+        this.addIntObjectHandler = new MethodOverrideHandler<>(super::add);
+        this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
+        this.removeIntHandler = new MethodOverrideHandler<>(super::remove);
+        this.getIntHandler = new MethodOverrideHandler<>(super::get);
+        this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
+        this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
+        this.cloneHandler = new MethodOverrideHandler<>(super::clone);
+        this.indexOfObjectHandler = new MethodOverrideHandler<>(super::indexOf);
+        this.clearHandler = new MethodOverrideHandler<>(super::clear);
+        this.lastIndexOfObjectHandler = new MethodOverrideHandler<>(super::lastIndexOf);
+        this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
+        this.replaceAllUnaryOperatorHandler = new MethodOverrideHandler<>(super::replaceAll);
+        this.sizeHandler = new MethodOverrideHandler<>(super::size);
+        this.subListIntIntHandler = new MethodOverrideHandler<>(super::subList);
+        this.toArrayObjectHandler = new MethodOverrideHandler<>(super::toArray);
+        this.toArrayHandler = new MethodOverrideHandler<>(super::toArray);
+        this.iteratorHandler = new MethodOverrideHandler<>(super::iterator);
+        this.containsObjectHandler = new MethodOverrideHandler<>(super::contains);
+        this.spliteratorHandler = new MethodOverrideHandler<>(super::spliterator);
+        this.addAllCollectionHandler = new MethodOverrideHandler<>(super::addAll);
+        this.addAllIntCollectionHandler = new MethodOverrideHandler<>(super::addAll);
+        this.setIntObjectHandler = new MethodOverrideHandler<>(super::set);
+        this.forEachConsumerHandler = new MethodOverrideHandler<>(super::forEach);
+        this.ensureCapacityIntHandler = new MethodOverrideHandler<>(super::ensureCapacity);
+        this.trimToSizeHandler = new MethodOverrideHandler<>(super::trimToSize);
+        this.removeIfPredicateHandler = new MethodOverrideHandler<>(super::removeIf);
+        this.sortComparatorHandler = new MethodOverrideHandler<>(super::sort);
+        this.removeAllCollectionHandler = new MethodOverrideHandler<>(super::removeAll);
+        this.retainAllCollectionHandler = new MethodOverrideHandler<>(super::retainAll);
+        this.listIteratorHandler = new MethodOverrideHandler<>(super::listIterator);
+        this.listIteratorIntHandler = new MethodOverrideHandler<>(super::listIterator);
+        this.toStringHandler = new MethodOverrideHandler<>(super::toString);
+        this.containsAllCollectionHandler = new MethodOverrideHandler<>(super::containsAll);
+        this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
+        this.streamHandler = new MethodOverrideHandler<>(this::stream);
+        this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
+    }
+    public CustomWrapper(int arg0) {
+        super(arg0);
+        this.addObjectHandler = new MethodOverrideHandler<>(super::add);
+        this.addIntObjectHandler = new MethodOverrideHandler<>(super::add);
+        this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
+        this.removeIntHandler = new MethodOverrideHandler<>(super::remove);
+        this.getIntHandler = new MethodOverrideHandler<>(super::get);
+        this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
+        this.hashCodeHandler = new MethodOverrideHandler<>(super::hashCode);
+        this.cloneHandler = new MethodOverrideHandler<>(super::clone);
+        this.indexOfObjectHandler = new MethodOverrideHandler<>(super::indexOf);
+        this.clearHandler = new MethodOverrideHandler<>(super::clear);
+        this.lastIndexOfObjectHandler = new MethodOverrideHandler<>(super::lastIndexOf);
+        this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
+        this.replaceAllUnaryOperatorHandler = new MethodOverrideHandler<>(super::replaceAll);
+        this.sizeHandler = new MethodOverrideHandler<>(super::size);
+        this.subListIntIntHandler = new MethodOverrideHandler<>(super::subList);
+        this.toArrayObjectHandler = new MethodOverrideHandler<>(super::toArray);
+        this.toArrayHandler = new MethodOverrideHandler<>(super::toArray);
+        this.iteratorHandler = new MethodOverrideHandler<>(super::iterator);
+        this.containsObjectHandler = new MethodOverrideHandler<>(super::contains);
+        this.spliteratorHandler = new MethodOverrideHandler<>(super::spliterator);
+        this.addAllCollectionHandler = new MethodOverrideHandler<>(super::addAll);
+        this.addAllIntCollectionHandler = new MethodOverrideHandler<>(super::addAll);
+        this.setIntObjectHandler = new MethodOverrideHandler<>(super::set);
+        this.forEachConsumerHandler = new MethodOverrideHandler<>(super::forEach);
+        this.ensureCapacityIntHandler = new MethodOverrideHandler<>(super::ensureCapacity);
+        this.trimToSizeHandler = new MethodOverrideHandler<>(super::trimToSize);
+        this.removeIfPredicateHandler = new MethodOverrideHandler<>(super::removeIf);
+        this.sortComparatorHandler = new MethodOverrideHandler<>(super::sort);
+        this.removeAllCollectionHandler = new MethodOverrideHandler<>(super::removeAll);
+        this.retainAllCollectionHandler = new MethodOverrideHandler<>(super::retainAll);
+        this.listIteratorHandler = new MethodOverrideHandler<>(super::listIterator);
+        this.listIteratorIntHandler = new MethodOverrideHandler<>(super::listIterator);
+        this.toStringHandler = new MethodOverrideHandler<>(super::toString);
+        this.containsAllCollectionHandler = new MethodOverrideHandler<>(super::containsAll);
+        this.toArrayIntFunctionHandler = new MethodOverrideHandler<>(this::toArray);
+        this.streamHandler = new MethodOverrideHandler<>(this::stream);
+        this.parallelStreamHandler = new MethodOverrideHandler<>(this::parallelStream);
+    }
+
+    @Override
+    public boolean containsAll(java.util.Collection<?> arg0) {
+        return this.containsAllCollectionHandler.getHandler().onContainsAll(arg0);
+    }
 
     @Override
     public void trimToSize() {
@@ -191,7 +189,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @Override
     public void ensureCapacity(int arg0) {
-        this.ensureCapacityintHandler.getHandler().onEnsureCapacity(arg0);
+        this.ensureCapacityIntHandler.getHandler().onEnsureCapacity(arg0);
     }
     @Override
     public boolean contains(java.lang.Object arg0) {
@@ -217,10 +215,6 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public int lastIndexOf(java.lang.Object arg0) {
         return this.lastIndexOfObjectHandler.getHandler().onLastIndexOf(arg0);
     }
-    @Override
-    public E get(int arg0) {
-        return this.getintHandler.getHandler().onGet(arg0);
-    }
 
     @Override
     public java.lang.Object clone() {
@@ -238,8 +232,13 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @Override
+    public E get(int arg0) {
+        return this.getIntHandler.getHandler().onGet(arg0);
+    }
+
+    @Override
     public E set(int arg0, E arg1) {
-        return this.setintObjectHandler.getHandler().onSet(arg0, arg1);
+        return this.setIntObjectHandler.getHandler().onSet(arg0, arg1);
     }
 
     @Override
@@ -249,12 +248,12 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @Override
     public void add(int arg0, E arg1) {
-        this.addintObjectHandler.getHandler().onAdd(arg0, arg1);
+        this.addIntObjectHandler.getHandler().onAdd(arg0, arg1);
     }
 
     @Override
     public E remove(int arg0) {
-        return this.removeintHandler.getHandler().onRemove(arg0);
+        return this.removeIntHandler.getHandler().onRemove(arg0);
     }
 
     @Override
@@ -291,12 +290,12 @@ public class CustomWrapper<E> extends ArrayList<E> {
 
     @Override
     public boolean addAll(int arg0, java.util.Collection<? extends E> arg1) {
-        return this.addAllintCollectionHandler.getHandler().onAddAll(arg0, arg1);
+        return this.addAllIntCollectionHandler.getHandler().onAddAll(arg0, arg1);
     }
 
     @Override
     public java.util.ListIterator<E> listIterator(int arg0) {
-        return this.listIteratorintHandler.getHandler().onListIterator(arg0);
+        return this.listIteratorIntHandler.getHandler().onListIterator(arg0);
     }
 
     @Override
@@ -312,9 +311,10 @@ public class CustomWrapper<E> extends ArrayList<E> {
     public java.util.Iterator<E> iterator() {
         return this.iteratorHandler.getHandler().onIterator();
     }
+
     @Override
     public java.util.List<E> subList(int arg0, int arg1) {
-        return this.subListintintHandler.getHandler().onSubList(arg0, arg1);
+        return this.subListIntIntHandler.getHandler().onSubList(arg0, arg1);
     }
 
     @Override
@@ -346,18 +346,18 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface AddAllintCollectionHandler<E> {
+    public interface AddAllIntCollectionHandler<E> {
         boolean onAddAll(int arg0, java.util.Collection<? extends E> arg1);
+    }
+
+    @FunctionalInterface
+    public interface AddIntObjectHandler<E> {
+        void onAdd(int arg0, E arg1);
     }
 
     @FunctionalInterface
     public interface AddObjectHandler<E> {
         boolean onAdd(E arg0);
-    }
-
-    @FunctionalInterface
-    public interface AddintObjectHandler<E> {
-        void onAdd(int arg0, E arg1);
     }
 
     @FunctionalInterface
@@ -381,7 +381,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface EnsureCapacityintHandler {
+    public interface EnsureCapacityIntHandler {
         void onEnsureCapacity(int arg0);
     }
 
@@ -396,7 +396,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface GetintHandler<E> {
+    public interface GetIntHandler<E> {
         E onGet(int arg0);
     }
 
@@ -431,7 +431,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface ListIteratorintHandler<E> {
+    public interface ListIteratorIntHandler<E> {
         java.util.ListIterator<E> onListIterator(int arg0);
     }
 
@@ -451,13 +451,13 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface RemoveObjectHandler {
-        boolean onRemove(java.lang.Object arg0);
+    public interface RemoveIntHandler<E> {
+        E onRemove(int arg0);
     }
 
     @FunctionalInterface
-    public interface RemoveintHandler<E> {
-        E onRemove(int arg0);
+    public interface RemoveObjectHandler {
+        boolean onRemove(java.lang.Object arg0);
     }
 
     @FunctionalInterface
@@ -471,7 +471,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface SetintObjectHandler<E> {
+    public interface SetIntObjectHandler<E> {
         E onSet(int arg0, E arg1);
     }
 
@@ -496,7 +496,7 @@ public class CustomWrapper<E> extends ArrayList<E> {
     }
 
     @FunctionalInterface
-    public interface SubListintintHandler<E> {
+    public interface SubListIntIntHandler<E> {
         java.util.List<E> onSubList(int arg0, int arg1);
     }
 

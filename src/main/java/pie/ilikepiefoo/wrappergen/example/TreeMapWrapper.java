@@ -26,8 +26,8 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public final MethodOverrideHandler<GetObjectHandler<V>> getObjectHandler;
     public final MethodOverrideHandler<GetOrDefaultObjectObjectHandler<V>> getOrDefaultObjectObjectHandler;
     public final MethodOverrideHandler<HashCodeHandler> hashCodeHandler;
+    public final MethodOverrideHandler<HeadMapObjectBooleanHandler<K, V>> headMapObjectBooleanHandler;
     public final MethodOverrideHandler<HeadMapObjectHandler<K, V>> headMapObjectHandler;
-    public final MethodOverrideHandler<HeadMapObjectbooleanHandler<K, V>> headMapObjectbooleanHandler;
     public final MethodOverrideHandler<HigherEntryObjectHandler<K, V>> higherEntryObjectHandler;
     public final MethodOverrideHandler<HigherKeyObjectHandler<K>> higherKeyObjectHandler;
     public final MethodOverrideHandler<IsEmptyHandler> isEmptyHandler;
@@ -49,10 +49,10 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     public final MethodOverrideHandler<ReplaceObjectObjectHandler<K, V>> replaceObjectObjectHandler;
     public final MethodOverrideHandler<ReplaceObjectObjectObjectHandler<K, V>> replaceObjectObjectObjectHandler;
     public final MethodOverrideHandler<SizeHandler> sizeHandler;
+    public final MethodOverrideHandler<SubMapObjectBooleanObjectBooleanHandler<K, V>> subMapObjectBooleanObjectBooleanHandler;
     public final MethodOverrideHandler<SubMapObjectObjectHandler<K, V>> subMapObjectObjectHandler;
-    public final MethodOverrideHandler<SubMapObjectbooleanObjectbooleanHandler<K, V>> subMapObjectbooleanObjectbooleanHandler;
+    public final MethodOverrideHandler<TailMapObjectBooleanHandler<K, V>> tailMapObjectBooleanHandler;
     public final MethodOverrideHandler<TailMapObjectHandler<K, V>> tailMapObjectHandler;
-    public final MethodOverrideHandler<TailMapObjectbooleanHandler<K, V>> tailMapObjectbooleanHandler;
     public final MethodOverrideHandler<ToStringHandler> toStringHandler;
     public final MethodOverrideHandler<ValuesHandler<V>> valuesHandler;
     public TreeMapWrapper(java.util.SortedMap<K, ? extends V> arg0) {
@@ -96,11 +96,11 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.navigableKeySetHandler = new MethodOverrideHandler<>(super::navigableKeySet);
         this.descendingKeySetHandler = new MethodOverrideHandler<>(super::descendingKeySet);
         this.subMapObjectObjectHandler = new MethodOverrideHandler<>(super::subMap);
-        this.subMapObjectbooleanObjectbooleanHandler = new MethodOverrideHandler<>(super::subMap);
-        this.headMapObjectbooleanHandler = new MethodOverrideHandler<>(super::headMap);
+        this.subMapObjectBooleanObjectBooleanHandler = new MethodOverrideHandler<>(super::subMap);
+        this.headMapObjectBooleanHandler = new MethodOverrideHandler<>(super::headMap);
         this.headMapObjectHandler = new MethodOverrideHandler<>(super::headMap);
         this.tailMapObjectHandler = new MethodOverrideHandler<>(super::tailMap);
-        this.tailMapObjectbooleanHandler = new MethodOverrideHandler<>(super::tailMap);
+        this.tailMapObjectBooleanHandler = new MethodOverrideHandler<>(super::tailMap);
         this.lastKeyHandler = new MethodOverrideHandler<>(super::lastKey);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
@@ -108,6 +108,16 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
         this.removeObjectObjectHandler = new MethodOverrideHandler<>(this::remove);
         this.getOrDefaultObjectObjectHandler = new MethodOverrideHandler<>(this::getOrDefault);
+    }
+
+    @Override
+    public V getOrDefault(java.lang.Object arg0, V arg1) {
+        return this.getOrDefaultObjectObjectHandler.getHandler().onGetOrDefault(arg0, arg1);
+    }
+
+    @Override
+    public boolean remove(java.lang.Object arg0, java.lang.Object arg1) {
+        return this.removeObjectObjectHandler.getHandler().onRemove(arg0, arg1);
     }
 
     public TreeMapWrapper(java.util.Map<? extends K, ? extends V> arg0) {
@@ -151,11 +161,11 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.navigableKeySetHandler = new MethodOverrideHandler<>(super::navigableKeySet);
         this.descendingKeySetHandler = new MethodOverrideHandler<>(super::descendingKeySet);
         this.subMapObjectObjectHandler = new MethodOverrideHandler<>(super::subMap);
-        this.subMapObjectbooleanObjectbooleanHandler = new MethodOverrideHandler<>(super::subMap);
-        this.headMapObjectbooleanHandler = new MethodOverrideHandler<>(super::headMap);
+        this.subMapObjectBooleanObjectBooleanHandler = new MethodOverrideHandler<>(super::subMap);
+        this.headMapObjectBooleanHandler = new MethodOverrideHandler<>(super::headMap);
         this.headMapObjectHandler = new MethodOverrideHandler<>(super::headMap);
         this.tailMapObjectHandler = new MethodOverrideHandler<>(super::tailMap);
-        this.tailMapObjectbooleanHandler = new MethodOverrideHandler<>(super::tailMap);
+        this.tailMapObjectBooleanHandler = new MethodOverrideHandler<>(super::tailMap);
         this.lastKeyHandler = new MethodOverrideHandler<>(super::lastKey);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
@@ -206,11 +216,11 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.navigableKeySetHandler = new MethodOverrideHandler<>(super::navigableKeySet);
         this.descendingKeySetHandler = new MethodOverrideHandler<>(super::descendingKeySet);
         this.subMapObjectObjectHandler = new MethodOverrideHandler<>(super::subMap);
-        this.subMapObjectbooleanObjectbooleanHandler = new MethodOverrideHandler<>(super::subMap);
-        this.headMapObjectbooleanHandler = new MethodOverrideHandler<>(super::headMap);
+        this.subMapObjectBooleanObjectBooleanHandler = new MethodOverrideHandler<>(super::subMap);
+        this.headMapObjectBooleanHandler = new MethodOverrideHandler<>(super::headMap);
         this.headMapObjectHandler = new MethodOverrideHandler<>(super::headMap);
         this.tailMapObjectHandler = new MethodOverrideHandler<>(super::tailMap);
-        this.tailMapObjectbooleanHandler = new MethodOverrideHandler<>(super::tailMap);
+        this.tailMapObjectBooleanHandler = new MethodOverrideHandler<>(super::tailMap);
         this.lastKeyHandler = new MethodOverrideHandler<>(super::lastKey);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
@@ -219,7 +229,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.removeObjectObjectHandler = new MethodOverrideHandler<>(this::remove);
         this.getOrDefaultObjectObjectHandler = new MethodOverrideHandler<>(this::getOrDefault);
     }
-
     public TreeMapWrapper() {
         super();
         this.removeObjectHandler = new MethodOverrideHandler<>(super::remove);
@@ -261,11 +270,11 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.navigableKeySetHandler = new MethodOverrideHandler<>(super::navigableKeySet);
         this.descendingKeySetHandler = new MethodOverrideHandler<>(super::descendingKeySet);
         this.subMapObjectObjectHandler = new MethodOverrideHandler<>(super::subMap);
-        this.subMapObjectbooleanObjectbooleanHandler = new MethodOverrideHandler<>(super::subMap);
-        this.headMapObjectbooleanHandler = new MethodOverrideHandler<>(super::headMap);
+        this.subMapObjectBooleanObjectBooleanHandler = new MethodOverrideHandler<>(super::subMap);
+        this.headMapObjectBooleanHandler = new MethodOverrideHandler<>(super::headMap);
         this.headMapObjectHandler = new MethodOverrideHandler<>(super::headMap);
         this.tailMapObjectHandler = new MethodOverrideHandler<>(super::tailMap);
-        this.tailMapObjectbooleanHandler = new MethodOverrideHandler<>(super::tailMap);
+        this.tailMapObjectBooleanHandler = new MethodOverrideHandler<>(super::tailMap);
         this.lastKeyHandler = new MethodOverrideHandler<>(super::lastKey);
         this.equalsObjectHandler = new MethodOverrideHandler<>(super::equals);
         this.toStringHandler = new MethodOverrideHandler<>(super::toString);
@@ -273,16 +282,6 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
         this.isEmptyHandler = new MethodOverrideHandler<>(super::isEmpty);
         this.removeObjectObjectHandler = new MethodOverrideHandler<>(this::remove);
         this.getOrDefaultObjectObjectHandler = new MethodOverrideHandler<>(this::getOrDefault);
-    }
-
-    @Override
-    public V getOrDefault(java.lang.Object arg0, V arg1) {
-        return this.getOrDefaultObjectObjectHandler.getHandler().onGetOrDefault(arg0, arg1);
-    }
-
-    @Override
-    public boolean remove(java.lang.Object arg0, java.lang.Object arg1) {
-        return this.removeObjectObjectHandler.getHandler().onRemove(arg0, arg1);
     }
 
     @Override
@@ -462,7 +461,7 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @Override
     public java.util.NavigableMap<K, V> subMap(K arg0, boolean arg1, K arg2, boolean arg3) {
-        return this.subMapObjectbooleanObjectbooleanHandler.getHandler().onSubMap(arg0, arg1, arg2, arg3);
+        return this.subMapObjectBooleanObjectBooleanHandler.getHandler().onSubMap(arg0, arg1, arg2, arg3);
     }
     @Override
     public boolean replace(K arg0, V arg1, V arg2) {
@@ -479,7 +478,7 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @Override
     public java.util.NavigableMap<K, V> headMap(K arg0, boolean arg1) {
-        return this.headMapObjectbooleanHandler.getHandler().onHeadMap(arg0, arg1);
+        return this.headMapObjectBooleanHandler.getHandler().onHeadMap(arg0, arg1);
     }
     @Override
     public java.util.SortedMap<K, V> subMap(K arg0, K arg1) {
@@ -488,7 +487,7 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
 
     @Override
     public java.util.NavigableMap<K, V> tailMap(K arg0, boolean arg1) {
-        return this.tailMapObjectbooleanHandler.getHandler().onTailMap(arg0, arg1);
+        return this.tailMapObjectBooleanHandler.getHandler().onTailMap(arg0, arg1);
     }
     @Override
     public java.util.SortedMap<K, V> tailMap(K arg0) {
@@ -619,13 +618,13 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @FunctionalInterface
-    public interface HeadMapObjectHandler<K, V> {
-        java.util.SortedMap<K, V> onHeadMap(K arg0);
+    public interface HeadMapObjectBooleanHandler<K, V> {
+        java.util.NavigableMap<K, V> onHeadMap(K arg0, boolean arg1);
     }
 
     @FunctionalInterface
-    public interface HeadMapObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onHeadMap(K arg0, boolean arg1);
+    public interface HeadMapObjectHandler<K, V> {
+        java.util.SortedMap<K, V> onHeadMap(K arg0);
     }
 
     @FunctionalInterface
@@ -734,23 +733,23 @@ public class TreeMapWrapper<K, V> extends TreeMap<K, V> {
     }
 
     @FunctionalInterface
+    public interface SubMapObjectBooleanObjectBooleanHandler<K, V> {
+        java.util.NavigableMap<K, V> onSubMap(K arg0, boolean arg1, K arg2, boolean arg3);
+    }
+
+    @FunctionalInterface
     public interface SubMapObjectObjectHandler<K, V> {
         java.util.SortedMap<K, V> onSubMap(K arg0, K arg1);
     }
 
     @FunctionalInterface
-    public interface SubMapObjectbooleanObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onSubMap(K arg0, boolean arg1, K arg2, boolean arg3);
+    public interface TailMapObjectBooleanHandler<K, V> {
+        java.util.NavigableMap<K, V> onTailMap(K arg0, boolean arg1);
     }
 
     @FunctionalInterface
     public interface TailMapObjectHandler<K, V> {
         java.util.SortedMap<K, V> onTailMap(K arg0);
-    }
-
-    @FunctionalInterface
-    public interface TailMapObjectbooleanHandler<K, V> {
-        java.util.NavigableMap<K, V> onTailMap(K arg0, boolean arg1);
     }
 
     @FunctionalInterface
