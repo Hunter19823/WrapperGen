@@ -17,13 +17,13 @@ import java.util.StringJoiner;
 import java.util.TreeMap;
 
 public class WrapperClassBuilder implements JavaFileOutput {
-    private final ClassBuilder classBuilder;
-    private final ImportBuilder importBuilder;
-    private final SortedMap<String, FieldBuilder> fieldBuilders;
-    private final List<ConstructorBuilder> constructorBuilders;
-    private final List<MethodBuilder> methodBuilders;
-    private final SortedMap<String, ClassBuilder> innerClassBuilders;
-    private final List<String> constructorDeclarations;
+    protected final ClassBuilder classBuilder;
+    protected final ImportBuilder importBuilder;
+    protected final SortedMap<String, FieldBuilder> fieldBuilders;
+    protected final List<ConstructorBuilder> constructorBuilders;
+    protected final List<MethodBuilder> methodBuilders;
+    protected final SortedMap<String, ClassBuilder> innerClassBuilders;
+    protected final List<String> constructorDeclarations;
 
     public WrapperClassBuilder(String name) {
         this.importBuilder = new ImportBuilder();
